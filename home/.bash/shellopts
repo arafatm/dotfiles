@@ -1,0 +1,62 @@
+#!/bin/bash
+
+#export DISPLAY=:0.0
+export EDITOR=vim
+set -o vi
+set -o notify    # Don't wait for job termination notification
+set -o ignoreeof # Don't use ^D to exit
+shopt -s nocaseglob # Use case-insensitive filename globbing
+shopt -s histappend # Make bash append rather than overwrite the history on disk
+shopt -s cdspell # When changing directory small typos can be ignored by bash
+#umask 0077
+
+export HISTCONTROL="ignoredups" # Don't put duplicate lines in the history.
+export HISTIGNORE="[   ]*:&:bg:fg:exit" # Ignore some controlling instructions
+export PROMPT_COMMAND="history -a" # Whenever displaying the prompt, write the previous line to disk
+
+export HOSTFILE=$HOME/.hosts
+
+#export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$PATH"
+export PATH=$HOME/bin:/usr/local/homebrew/bin:$PATH # Add my scripts
+
+# ------------------------------------------------------------------
+# PROMPT
+
+#PS1='\[\033[01;32m\]\h:\w \$\[\033[00m\] '
+if [ "`whoami`" = "root" ]; then
+  PS1="\[$bldred\]\u@\h \[$txtylw\]\w\[$txtpur\]\$(__git_ps1)\[$txtwht\] "
+else
+  PS1="\[$txtcyn\]\u\[$txtwht\]@\[$txtgrn\]\h \[$txtylw\]\w\[$txtpur\]\$(__git_ps1)\[$txtwht\] "
+fi
+
+# ------------------------------------------------------------------
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+  xterm*|rxvt*)
+  PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+  ;;
+  *)
+  ;;
+esac
+
+
+#PS1='\[\e[1;32m\][\u\[\e[m\]@\[\e[1;33m\]\h\[\e[1;34m\] \w]\[\e[1;36m\] \$\[\e[1;37m\] '
+
+
+# ------------------------------------------------------------------
+# enable programmable completion features 
+if [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+  . $HOME/.bash_completion.d/hub.bash_completion.sh
+  . $HOME/.bash_completion.d/todo_completer.sh
+fi
+complete -F _todo_sh -o default t
+export TODO_DIR='/home/$USER/todo'
+
+#export SHELL='/bin/bash'
+
+[ ! -t 0 ] && setxkbmap -option caps:escape
+
+if [ -f $HOME/.bash.work ]; then
+  source $HOME/.bash.work
+fi

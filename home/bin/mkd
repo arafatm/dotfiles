@@ -1,0 +1,111 @@
+#!/usr/bin/ruby
+
+if ARGV.length < 1
+  puts "Please provide the input and output file names"
+end
+
+input = ARGV[0]
+
+if ARGV.length > 1
+  output = ARGV[1]
+else
+  file = input.split(".")
+  output = file[0] + ".html"
+end
+
+puts "Converting #{input} to #{output}\n\n"
+
+markdown =  `markdown #{input}`
+
+head = <<HEAD 
+<html>
+<head>
+<style type="text/css">
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {margin: 0em; padding 0em;}
+body { 
+  font-size: 1em;
+}
+
+h1 {
+  font-size: 1em; 
+  margin: 1em 0em; 
+  padding: 0px; 
+  clear: both;
+} 
+h2 {
+  font-size: 0.8em; 
+  margin: 1em 0.8em; 
+  padding: 0px; 
+  float: left; 
+  width: 10em; 
+  clear: left;
+}
+ul {
+  font-size: 0.8em;
+  margin: 0em; 
+  margin: 1em 1em 1em 10em; 
+  overflow: auto;
+  padding: 1em;
+  list-style-type: disc;
+}
+p { clear: both; }
+</style>
+</head>
+<body>
+HEAD
+
+tail = "</body>\n</html>"
+
+File.open(output, 'w') {|f| f.write(head + markdown + tail)}
+

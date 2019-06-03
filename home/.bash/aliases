@@ -1,0 +1,183 @@
+#! /usr/bin/bash
+if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
+  alias grep='grep --color'       # show differences in colour
+fi
+
+
+alias ag='alias | grep'
+alias swp='setxkbmap -option caps:swapescape'
+
+type -P nvim &>/dev/null \
+  && alias :e='nvim' \
+  && alias vi='nvim' \
+  && alias vim='nvim'
+
+alias camera='sudo killall VDCAssistant' # reset osx camera 
+
+alias apts='apt search'
+alias apti='sudo apt install'
+alias aptu='sudo apt update'
+alias aptd='sudo apt dist-upgrade'
+alias aptm='sudo apt-cache madison'
+alias c='cat'
+alias cp='cp -i'
+alias df='df -h'
+alias dud='du -hs * | sort -h'
+alias du='du -h'
+alias dus='du -ah --max-depth=1 | sort'
+alias less='less -r'                          # raw control characters
+alias main='screen -xS main'
+alias mdcat="pandoc -f markdown -t plain"     # markdown
+alias more='less'
+alias mv='mv -i'
+alias pandora='pianobar'
+alias rebash='exec $SHELL'
+alias rm='rm -i'
+alias scl='screen -ls'
+alias scm='cd;screen -c ~/.screenrcmain'
+alias scr='screen -S `basename $PWD`'
+alias scs='screen -S'
+alias scx='screen -x `basename $PWD`'
+alias src='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.bashrc; popd'
+alias sudid='sudo -E !!'
+alias sudo='sudo -E'
+
+# tmux
+alias tma='tmux attach -t'
+alias tml='tmux list-sessions'
+alias tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+alias tmx='tmux a -t `basename $PWD`'
+alias tms='tmux split-window -c $PWD'
+alias tmn='tmux new-window -c $PWD'
+alias tmm='tmux new-session -A -s main'
+alias whence='type -a'                        # where, of a sort
+
+# ls
+
+#if [ "$(uname)" == "Darwin"  ]; then
+#  alias ls='ls -hFG'                          # BSD ls has no color=auto
+#else
+#  alias dir='ls --color=auto --format=vertical'
+#  alias ls='ls -hF --color=tty'                 # classify files in colour
+#  alias vdir='ls --color=auto --format=long'
+#fi
+
+#alias ls='ls -G'
+#alias la='ls -A'                              # all but . and ..
+#alias lla='ls -alh'                              # long list
+#alias ll='ls -l'                              # long list
+#alias l='ls -CF'                              #
+#alias llt='ls -lt'
+#alias lt='ls -t'
+
+alias standby='sudo /etc/acpi/sleep.sh'
+
+# ssh
+alias proxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
+alias skodi='ssh -oServerAliveInterval=60 kodi@192.168.1.22'
+alias dynds='ssh -oServerAliveInterval=60 $USER@$USER.dyndns.org'
+
+# firefox
+alias firedev='firefox -P dev -no-remote'
+alias firemisc='firefox -P misc -no-remote'
+
+# todo
+#alias t='todo.sh -d ~/.todo'
+#alias tdpr='todo.sh -d ~/.todo pri'
+#alias tdl='todo.sh -d ~/.todo ls'
+#alias tdp='todo.sh -d ~/.todo view project'
+#alias tdc='todo.sh -d ~/.todo view context'
+#alias tvi='vi ~/todo/todo.txt'
+
+black() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
+red() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
+green() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
+yellow() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
+blue() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
+magenta() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
+cyan() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
+white() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
+
+duds(){
+  du -hs *|sort -hr
+}
+
+alias t='grep " \[ ] " *'
+alias to='grep " \[ ] " * | sort'
+alias tr='grep " \[ ] " * | sort -r'
+
+function todos() {
+  local input="notes.mkd"
+
+  local all=true
+  local a=false
+  local b=false
+  local c=false
+
+  local args=" $@"
+
+  if [[ $@ =~ "-" ]]; then all=false; fi
+
+  OPTIND=1
+  while getopts ":abc" opt; do
+    case $opt in
+      a)
+        a=true
+        ;;
+      b)
+        b=true
+        ;;
+      c)
+        c=true
+        ;;
+    esac
+  done
+  shift $((OPTIND-1))
+
+  if [[ -n "$1" ]]; then input="$1"; fi
+
+  while IFS= read -r line
+  do
+    if [[ $line =~ "- [ ]" ]]; then
+      if [[ $line =~ " :a: " && ( $a == true || $all == true ) ]]; then
+        magenta "$line"
+      elif [[ $line =~ " :b: " && ( $b == true || $all == true ) ]]; then
+        yellow "$line"
+      elif [[ $line =~ " :c: " && ( $c == true || $all == true ) ]]; then
+        blue $line
+      elif [[ $all == true ]]; then
+        white "$line"
+      fi
+    fi
+  done < "$input"
+}
+alias ta='t -a' 
+alias tb='t -b' 
+
+function secure_chromium {
+port=1234
+chromium --proxy-server="socks://localhost:$port" &
+exit
+}
+
+# Pick a random mwod from starett
+alias starrett="ruby -e 'puts 230 + rand(165)'" 
+
+function fuckingcygwin() 
+{
+  if [[ -n "$1" ]]; then
+    chown arafatm:Users $1
+    chmod 600 $1
+  else
+    chown -R arafatm:Users *
+    find . -maxdepth 1 -type f -exec chmod 600 {} \; 
+    find . -maxdepth 1 -type d -exec chmod 700 {} \;
+  fi
+}
+
+# Clean old kernel images and headers
+
+function cleankernels()
+{
+  echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
+}

@@ -1,0 +1,20 @@
+[core]
+	precomposeunicode = true
+	quotepath = false
+	pager = less -x2
+
+[user]
+	name = momo
+	email = mo-watanabe@dip-net.co.jp
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[push]
+	default = simple
+
+[alias]
+	co = checkout
+	cm = commit -m

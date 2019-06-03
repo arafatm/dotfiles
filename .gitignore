@@ -1,0 +1,5 @@
+home/.npmrc
+.netrwhist
+*DS_Store
+/.nvim/plugged/*
+home/.ssh/*

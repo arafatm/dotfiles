@@ -1,0 +1,451 @@
+#! /usr/bin/bash
+if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
+  alias grep='grep --color'       # show differences in colour
+fi
+
+alias z="source $HOME/.zshrc"
+
+alias ag='alias | grep'
+alias swp='setxkbmap -option caps:swapescape'
+
+if nvim --version >/dev/null 2>&1; then
+  alias :e='nvim'
+  alias vi='nvim'
+  alias vim='nvim'
+fi
+
+alias camera='sudo killall VDCAssistant' # reset osx camera 
+
+alias apt='apt search'
+alias apti='sudo apt install'
+alias aptu='sudo apt update'
+alias aptd='sudo apt dist-upgrade'
+alias aptm='sudo apt-cache madison'
+alias c='cat'
+alias cp='cp -i'
+alias dok='docker'
+alias dos='docker_shell'
+alias dcp="docker-compose"
+alias df='df -h -x aufs -x tmpfs -x udev'
+alias dud='du -hs * | sort -h'
+alias du='du -h'
+alias dus='du -ah --max-depth=1 | sort'
+alias less='less -r'                          # raw control characters
+alias main='screen -xS main'
+alias mdcat="pandoc -f markdown -t plain"     # markdown
+alias more='less'
+alias mv='mv -i'
+alias pandora='pianobar'
+alias rebash='exec $SHELL'
+alias rm='rm -i'
+alias scl='screen -ls'
+alias scm='cd;screen -c ~/.screenrcmain'
+alias scr='screen -S `basename $PWD`'
+alias scs='screen -S'
+alias scx='screen -x `basename $PWD`'
+if [[ "$SHELL" =~ zsh ]]; then
+  alias src='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
+else
+  alias src='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.bashrc; popd'
+fi
+alias sudid='sudo -E !!'
+alias sudo='sudo -E'
+
+# tmux
+alias tma='tmux attach -t'
+alias tml='tmux list-sessions'
+alias tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+alias tmx='tmux a -t `basename $PWD`'
+alias tms='tmux split-window -c $PWD'
+alias tmn='tmux new-window -c $PWD'
+alias tmm='tmux new-session -A -s main'
+alias whence='type -a'                        # where, of a sort
+
+# ls
+
+#if [ "$(uname)" == "Darwin"  ]; then
+#  alias ls='ls -hFG'                          # BSD ls has no color=auto
+#else
+#  alias dir='ls --color=auto --format=vertical'
+#  alias ls='ls -hF --color=tty'                 # classify files in colour
+#  alias vdir='ls --color=auto --format=long'
+#fi
+
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=tty'
+fi
+alias la='ls -A'                              # all but . and ..
+alias lla='ls -alh'                              # long list
+alias ll='ls -l'                              # long list
+alias l='ls -CF'                              #
+alias llt='ls -lt'
+alias lt='ls -t'
+
+alias standby='sudo /etc/acpi/sleep.sh'
+
+# ssh
+alias proxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
+alias kodi='ssh -oServerAliveInterval=60 kodi@192.168.1.100'
+alias dynds='ssh -oServerAliveInterval=60 $USER@$USER.dyndns.org'
+
+# firefox
+alias firedev='firefox -P dev -no-remote'
+alias firemisc='firefox -P misc -no-remote'
+
+# todo
+#alias t='todo.sh -d ~/.todo'
+#alias tdpr='todo.sh -d ~/.todo pri'
+#alias tdl='todo.sh -d ~/.todo ls'
+#alias tdp='todo.sh -d ~/.todo view project'
+#alias tdc='todo.sh -d ~/.todo view context'
+#alias tvi='vi ~/todo/todo.txt'
+
+black() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
+red() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
+green() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
+yellow() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
+blue() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
+magenta() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
+cyan() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
+white() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
+
+duds(){
+  du -hs *|sort -hr
+}
+
+alias t='grep " \[ ] " *'
+alias to='grep " \[ ] " * | sort'
+alias tr='grep " \[ ] " * | sort -r'
+
+function todos() {
+  local input="notes.mkd"
+
+  local all=true
+  local a=false
+  local b=false
+  local c=false
+
+  local args=" $@"
+
+  if [[ $@ =~ "-" ]]; then all=false; fi
+
+  OPTIND=1
+  while getopts ":abc" opt; do
+    case $opt in
+      a)
+        a=true
+        ;;
+      b)
+        b=true
+        ;;
+      c)
+        c=true
+        ;;
+    esac
+  done
+  shift $((OPTIND-1))
+
+  if [[ -n "$1" ]]; then input="$1"; fi
+
+  while IFS= read -r line
+  do
+    if [[ $line =~ "- [ ]" ]]; then
+      if [[ $line =~ " :a: " && ( $a == true || $all == true ) ]]; then
+        magenta "$line"
+      elif [[ $line =~ " :b: " && ( $b == true || $all == true ) ]]; then
+        yellow "$line"
+      elif [[ $line =~ " :c: " && ( $c == true || $all == true ) ]]; then
+        blue $line
+      elif [[ $all == true ]]; then
+        white "$line"
+      fi
+    fi
+  done < "$input"
+}
+alias ta='t -a' 
+alias tb='t -b' 
+
+function secure_chromium {
+port=1234
+chromium --proxy-server="socks://localhost:$port" &
+exit
+}
+
+# Pick a random mwod from starett
+alias starrett="ruby -e 'puts 230 + rand(165)'" 
+
+function fuckingcygwin() 
+{
+  if [[ -n "$1" ]]; then
+    chown arafatm:Users $1
+    chmod 600 $1
+  else
+    chown -R arafatm:Users *
+    find . -maxdepth 1 -type f -exec chmod 600 {} \; 
+    find . -maxdepth 1 -type d -exec chmod 700 {} \;
+  fi
+}
+
+# Clean old kernel images and headers
+
+function cleankernels()
+{
+  echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
+}
+
+##############################
+# Dev Aliases
+##############################
+
+alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+# postgres
+alias pgsql='sudo -u postgres psql'
+
+# furaha
+alias furahadev='ssh arafatm@dev.furahasoftware.com'
+
+# brew/cask
+alias brew='brew'
+alias cask='brew cask'
+
+# Vendor everything still applies
+alias b="bundle"
+alias be="bundle exec"
+
+alias bu="bundle update"
+alias binit="bundle_init"
+
+alias rk="bundle exec rake"
+alias rkaliases="alias |grep ' rk'"
+alias rkmigrate='rk db:migrate && rk db:migrate RAILS_ENV=test'
+alias rkfixtures='rk db:fixtures:load'
+alias rkdbreload='rk db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+alias rkseed='rk db:seed'
+alias rktest='rk test'
+
+alias rl="bundle exec rails"
+alias rlaliases="alias |grep ' rl'"
+alias rlconsole='rl console'
+alias rlcontroller='rl generate controller'
+alias rlmodel='rl generate model'
+alias rlscaffold='rl generate --skip scaffold'
+alias rlserver='rl s -b 0.0.0.0'
+
+
+# git shit
+#if [ "$(expr substr $(uname -s) 1 13)" == "CYGWIN_NT-6.1" ]; then  
+#fi 
+alias rg='git_and_readme'
+alias rgc='git_command_and_readme'
+alias rgn='git_note_and_readme'
+alias galiases='alias |grep git'
+alias gaddcommit='git_add_and_commit_all'
+alias gca='git_commit_all'
+alias gcommitall='git commit -a'
+alias gbranch='git branch --color'
+alias gbranchclean='git branch --merged master | grep -v "master" | xargs -n 1 git branch -d'
+alias gbranchtrack='git_branch_and_track'
+alias gcheckout='git checkout'
+alias gcheckoutremote='git_checkout_remote'
+alias gcommitlastcommand='git_commit_last_command'
+alias gcommitwithdefaultmessage='git_commit'
+alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;'
+alias gdiff='git diff HEAD .'
+alias gheroku='git pull; git push; git push heroku master'
+alias ghubclone='github_clone'
+alias glg='git log --oneline --decorate'
+alias glog='git log --decorate'
+alias glogall='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+alias gloglist='git log --graph --decorate --pretty=oneline --abbrev-commit'
+alias gls='git ls-files'
+alias gmerge='git merge'
+alias gmergemaster='git merge master'
+alias gmkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
+alias gnote='git commit --allow-empty --cleanup=whitespace'
+alias gst='git status'
+alias gsync='( git pull && git push ) &'
+alias gtree='git log --oneline --decorate --all --graph'
+
+# Vagrant
+alias vag='vagrant'
+alias vagd='time vag destroy -f'
+alias vagp='time vag provision'
+alias vagr='time vag reload'
+alias vags='time vag ssh'
+alias vagsc='time vag ssh -c'
+alias vagu='time vag up'
+
+bundle_init()
+{
+  bundle install --path vendor
+  bundle package
+  if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then
+    echo 'vendor/ruby' >> .gitignore
+  fi
+}
+
+git_add_and_commit_all()
+{
+  git add . && git commit . -m "$*"
+  git push &
+}
+
+readme_append_git_commit()
+{
+  url=$(git config --get remote.origin.url)
+  url=${url:15:-4}
+  url="https://github.com/$url"
+
+  commit=$(git log --oneline -n 1) 
+  sha=${commit:0:7}
+  msg=${commit:8}
+  
+  url="$url/commit/$sha"
+
+  msg="[:ship: $sha]($url)\n$msg"
+
+  gitroot=$(git rev-parse --show-toplevel) && \
+    gsed -i "s#xxx#$msg\n\nxxx#g" $gitroot/readme.md && \
+    git commit -a -m "readme.md" && \
+    git push &
+}
+
+# Git commit &&
+# Replace "xxx" in readme.md with the git commit text 
+git_and_readme()
+{
+  echo "commit and append to readme\n" & \
+    git add .  && \
+    git commit -a -m  "$*" && \
+    readme_append_git_commit
+}
+
+# Git commit the last run command &&
+# Replace "xxx" in readme.md with the git commit text 
+git_command_and_readme()
+{
+  echo "commit last command and append to readme\n" && \
+    lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//') && \
+    git add .  && \
+    git commit -a -m  "\`\$ $lastcommand\` \# $*" && \
+    readme_append_git_commit
+}
+
+# Add git note && append to readme.md
+git_note_and_readme()
+{
+  git commit --allow-empty --cleanup=whitespace -m "$*" && \
+    readme_append_git_commit
+}
+
+git_commit_last_command()
+{
+  HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//')
+  git add . && git commit . -m "\$ $HIS"
+  # ( git push ) &
+}
+
+git_commit_all()
+{
+  git add . && \
+    git commit -a -m "$*"
+}
+
+git_commit()
+{
+  array=( $@ )
+  len=${#array[@]}
+  _file=${array[0]}
+  _args=${array[@]:1:$len-1}
+  echo "adding $_file"
+  echo "commit msg $_args"
+
+  git add $_file
+  git commit $_file -m "$_args"
+}
+
+# rbenv/chruby 
+if [ -d /usr/local/share/chruby ]; then
+  source /usr/local/share/chruby/chruby.sh
+  if [[ -f ./.ruby_version ]]; then
+    chruby `cat ./.ruby_version`
+  else
+    chruby `chruby | head -n 1 | cut -c4-`
+  fi
+elif [ -d $HOME/.rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+# heroku
+if [ -d /usr/local/heroku ]; then
+  export PATH="/usr/local/heroku/bin:$PATH" # Add Heroku Toolbelt
+fi
+
+# Docker
+docker_shell() {
+  docker exec -it $1 bash
+}
+
+# nvm/node/npm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+github_clone() {
+  git clone git@github.com:$1
+}
+
+git_branch_and_track() {
+  git branch $1
+  git push origin $1:$1
+  git co $1
+  git branch --set-upstream-to=origin/$1 $1
+}
+
+
+git_checkout_remote() {
+  git checkout --track -b $1 origin/$1
+}
+
+herbr() {
+  if [ -z "$1" ]; then
+    echo "Please provide the name of the heroku app"
+  else
+    BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+    echo "Deploying branch $BRANCH to $1" 
+    read -p "Are you sure? " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      git pull
+      git merge origin/master
+      git push
+      git push heroku $BRANCH:master
+      heroku pg:reset DATABASE_URL --confirm $1
+      heroku run rake db:schema:load
+      heroku run rake db:seed
+    fi
+  fi
+
+}
+
+em() {
+  emacs $1 &
+}
+
+rdt() { # Echo a string into readme.md
+  echo "" >> readme.md
+  echo "$*" >> readme.md
+}
+
+rdc() { # Echo a string into readme.md as a code block
+  echo "" >> readme.md
+  echo -e "\`$*\`" >> readme.md
+}
+
+rdcl() { # Echo the last command into readme.md as a code block
+  HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//')
+  echo "" >> readme.md
+  echo -e "\`$HIS\`" >> readme.md
+}
