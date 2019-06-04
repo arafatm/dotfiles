@@ -101,3 +101,4 @@ quote
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source $HOME/.alias
 
+set -o vi
