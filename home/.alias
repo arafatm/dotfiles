@@ -3,7 +3,7 @@ if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
   alias grep='grep --color'       # show differences in colour
 fi
 
-alias z="source $HOME/.zshrc"
+alias z="unalias -a; source $HOME/.zshrc"
 
 alias ag='alias | grep'
 alias swp='setxkbmap -option caps:swapescape'
@@ -164,8 +164,8 @@ function todos() {
     fi
   done < "$input"
 }
-alias ta='t -a' 
-alias tb='t -b' 
+alias tda='t -a' 
+alias tdb='t -b' 
 
 function secure_chromium {
 port=1234

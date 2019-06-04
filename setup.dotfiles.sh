@@ -3,6 +3,13 @@ set -e
 
 DOTFILES=$HOME/dotfiles
 
+if [ -x "$(command -v zsh)" ]; then
+  echo "*** oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+  echo "*** zsh not installed"
+fi
+
 echo "*** Setup dotfiles"
 
 for f in `ls -A $DOTFILES/home`; do
@@ -10,7 +17,6 @@ for f in `ls -A $DOTFILES/home`; do
   ln -s $DOTFILES/home/$f $HOME/
 done
 echo '- installed dotfiles'
-
 
 if [ ! -d "$HOME/tmp" ]; then
   mkdir $HOME/tmp
@@ -37,15 +43,10 @@ if [ "$(expr substr $(uname -s) 1 13)" == "CYGWIN_NT-6.1" ]; then
 fi
 echo '- created stoopid windows'
 
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-fi
-
 unalias -a
 echo '- unalias -a'
 
-if [ ! -f "$HOME/.oh-my-zsh" ]; then
+if ! [ -f "$HOME/.oh-my-zsh" ]; then
   source $HOME/.bashrc
   echo '- source bashrc'
 fi
