@@ -37,9 +37,18 @@ if [ "$(expr substr $(uname -s) 1 13)" == "CYGWIN_NT-6.1" ]; then
 fi
 echo '- created stoopid windows'
 
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+fi
+
 unalias -a
 echo '- unalias -a'
-source $HOME/.bashrc
-echo '- source bashrc'
+
+if [ ! -f "$HOME/.oh-my-zsh" ]; then
+  source $HOME/.bashrc
+  echo '- source bashrc'
+fi
 
 echo "*** DONE Setup dotfiles"
+

@@ -1,5 +1,6 @@
 # cygwin vim is giving me errors. tired of debugging
 # NOTE: make sre to set shell=cmd and set shellcmdflag=/c in vimrc
+
 function wingvim() {
 if [ -z "$1" ] ; then
   gvim.exe &
@@ -7,13 +8,6 @@ else
   gvim.exe $1 &
 fi
 }
-
-source ~/.bash/colors
-source ~/.bash/gitprompt
-source ~/.bash/shellopts
-source ~/.bash/aliases
-source ~/.bash/aliasesdev
-source ~/.alias
 
 if [ -f ~/.ghtoken ]; then source ~/.ghtoken; fi 
 
@@ -47,6 +41,17 @@ function dotupdate()
 #  export TERM=xterm-256color
 #  unset COLORTERM
 #fi
+
+if [ -x "$(command -v zsh)" ]; then
+  exec zsh
+else
+  source ~/.bash/colors
+  source ~/.bash/gitprompt
+  source ~/.bash/shellopts
+  source ~/.bash/aliases
+  source ~/.bash/aliasesdev
+  source ~/.alias
+fi
 
 # added by travis gem
 [ -f /Users/arafatm/.travis/travis.sh ] && source /Users/arafatm/.travis/travis.sh
