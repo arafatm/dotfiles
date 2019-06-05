@@ -1,1 +1,0 @@
-_zsh_tmux_plugin_run
