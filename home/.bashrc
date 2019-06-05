@@ -42,9 +42,7 @@ function dotupdate()
 #  unset COLORTERM
 #fi
 
-if [ -x "$(command -v zsh)" ]; then
-  exec zsh
-else
+if ! [ -x "$(command -v zsh)" ]; then
   source ~/.bash/colors
   source ~/.bash/gitprompt
   source ~/.bash/shellopts
