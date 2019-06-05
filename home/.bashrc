@@ -43,7 +43,7 @@ function dotupdate()
 #fi
 
 if [ -x "$(command -v zsh)" ]; then
-  #exec zsh
+  exec zsh
 else
   source ~/.bash/colors
   source ~/.bash/gitprompt

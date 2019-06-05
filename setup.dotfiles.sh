@@ -3,7 +3,7 @@ set -e
 
 DOTFILES=$HOME/dotfiles
 
-if [ -x "$(command -v zsh)" ]; then
+if ! [ -x "$(command -v zsh)" ]; then
   echo "*** oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 else
