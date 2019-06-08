@@ -71,11 +71,10 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 
 ZSH_TMUX_AUTOSTART=true
-plugins=(git rand-quote ssh-agent tmux)
+plugins=(git ssh-agent tmux)
 
 source $ZSH/oh-my-zsh.sh
 
-quote
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,3 +103,6 @@ quote
 source $HOME/.alias
 
 set -o vi
+
+quote=$(shuf -n 2 $HOME/code/arafatm/notes/quotes.mkd| grep -v -e '^$'|head -n 1)
+print -P "%F{5}${quote}%f"
