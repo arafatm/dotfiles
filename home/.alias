@@ -4,7 +4,6 @@ if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
 fi
 
 alias z="unalias -a; source $HOME/.zshrc"
-alias q="quote"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 
 alias ag='alias | grep'

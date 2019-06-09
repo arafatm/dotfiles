@@ -104,5 +104,11 @@ source $HOME/.alias
 
 set -o vi
 
-quote=$(shuf -n 2 $HOME/code/arafatm/notes/quotes.mkd| grep -v -e '^$'|head -n 1)
-print -P "%F{5}${quote}%f"
+function quote() {
+  quote=$(shuf -n 1 $HOME/code/arafatm/notes/quotes.mkd | sed 's/\> //')
+  print -P "\n%F{5}${quote}%f\n"
+
+}; quote 
+
+
+
