@@ -105,7 +105,7 @@ source $HOME/.alias
 set -o vi
 
 function quote() {
-  quote=$(shuf -n 1 $HOME/code/arafatm/notes/quotes.mkd | sed 's/\> //')
+  quote=$(shuf -n 1 $HOME/code/arafatm/notes/quotes.mkd)
   print -P "\n%F{5}${quote}%f\n"
 
 }; quote 
