@@ -310,7 +310,7 @@ readme_append_git_commit()
   
   url="$url/commit/$sha"
 
-  msg="[:ship: $sha]($url)\n$msg"
+  msg="[:ship: $sha]($url) $msg"
 
   gitroot=$(git rev-parse --show-toplevel) && \
     gsed -i "s#xxx#$msg\n\nxxx#g" $gitroot/readme.md && \
@@ -335,7 +335,7 @@ git_command_and_readme()
   echo "commit last command and append to readme\n" && \
     lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//') && \
     git add .  && \
-    git commit -a -m  "\`\$ $lastcommand\` \# $*" && \
+    git commit -a -m  "$*\n\`\`\`bash\n$lastcommand\n\`\`\`" && \
     readme_append_git_commit
 }
 
