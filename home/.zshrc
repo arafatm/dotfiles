@@ -71,12 +71,15 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 
 ZSH_TMUX_AUTOSTART=true
+<<<<<<< HEAD
 ZSH_TMUX_AUTOQUIT=false
 plugins=(git rand-quote ssh-agent tmux)
+=======
+plugins=(git ssh-agent tmux)
+>>>>>>> 6ec8340659f3d531832737ebc1e026599cc9b33d
 
 source $ZSH/oh-my-zsh.sh
 
-quote
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -102,7 +105,15 @@ quote
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+function myquote() {
+  quote=$(shuf -n 1 $HOME/code/arafatm/notes/quotes.mkd)
+  print -P "\n%F{5}${quote}%f\n"
+
+}; 
+
 source $HOME/.alias
+export TERM=xterm-256color
 set -o vi
 
-export TERM=xterm-256color
+myquote
