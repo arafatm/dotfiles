@@ -5,6 +5,9 @@ fi
 
 alias z="unalias -a; source $HOME/.zshrc"
 
+alias jc="journalctl -n 100 -f"
+alias jcu="jc -u"
+
 alias ag='alias | grep'
 alias swp='setxkbmap -option caps:swapescape'
 

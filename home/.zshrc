@@ -71,6 +71,7 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 
 ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOQUIT=false
 plugins=(git rand-quote ssh-agent tmux)
 
 source $ZSH/oh-my-zsh.sh
@@ -102,5 +103,6 @@ quote
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source $HOME/.alias
-
 set -o vi
+
+export TERM=xterm-256color
