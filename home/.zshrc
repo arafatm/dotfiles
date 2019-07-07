@@ -107,6 +107,9 @@ function myquote() {
 
 }; 
 
+# Add postgress.app path
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
 source $HOME/.alias
 export TERM=xterm-256color
 set -o vi
