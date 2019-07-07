@@ -70,13 +70,8 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-ZSH_TMUX_AUTOSTART=true
-<<<<<<< HEAD
 ZSH_TMUX_AUTOQUIT=false
-plugins=(git rand-quote ssh-agent tmux)
-=======
 plugins=(git ssh-agent tmux)
->>>>>>> 6ec8340659f3d531832737ebc1e026599cc9b33d
 
 source $ZSH/oh-my-zsh.sh
 
