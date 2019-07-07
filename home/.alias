@@ -5,6 +5,7 @@ fi
 
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
+alias q='myquote'
 
 alias ag='alias | grep'
 alias swp='setxkbmap -option caps:swapescape'

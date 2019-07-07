@@ -100,15 +100,19 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source $HOME/.alias
-
-set -o vi
-
-function quote() {
+#
+function myquote() {
   quote=$(shuf -n 1 $HOME/code/arafatm/notes/quotes.mkd)
   print -P "\n%F{5}${quote}%f\n"
 
-}; quote 
+}; 
+
+source $HOME/.alias
+
+myquote
+
+set -o vi
+
 
 
 
