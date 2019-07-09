@@ -25,10 +25,9 @@ echo '- created ~/tmp'
 
 # NeoVim
 for f in `ls -A $DOTFILES/nvim`; do
-  NVIM=$HOME/.config/nvim
-  mkdir -p $NVIM
-  rm -rf $NVIM/$f
-  ln -s $DOTFILES/nvim/$f $NVIM/
+  rm -rf $HOME/.config/nvim
+  mkdir -p $HOME/.config
+  ln -s $DOTFILES/nvim $HOME/.config/nvim
 done
 echo '- created neovim'
 

@@ -1,4 +1,8 @@
+echo "yermom"
 set nonumber
+GitGutterDisable
+set shiftwidth=2
+set expandtab
 
 " plasticboy/vim-markdown settings
 let g:vim_markdown_folding_style_pythonic = 1
