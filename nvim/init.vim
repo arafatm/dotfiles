@@ -259,21 +259,28 @@ map <Leader><Leader>9 :set foldlevel=9<cr>
 " weird cursor char on lxterminal
 set guicursor=
 
+" git push
+command! Gpush !git push 
+
 " git commit with message
 command! Gstatus !git status 
 command! -nargs=+ Gcommitall :call Git_commit_all(<q-args>)
 
-
 function! Git_commit_all(message)
   echo system('git commit -a -m "' . a:message . '"')
+  echo system('git push')
   "call jobstart('git pull; git push')
 endfunction
 
 function! Git_commit(message)
-  echo system('git commit . -m "' . a:message . '"')
+  echomsg a:message
+  echo system('git commit ' . expand("%t") . ' -m "' . a:message . '"')
+  echo system('git push')
   "call jobstart('git pull; git push')
 endfunction
 
 " open file at last location
 au BufWinLeave * mkview
 au BufWinEnter * silent loadview
+
+set expandtab

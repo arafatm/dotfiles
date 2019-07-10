@@ -1,4 +1,3 @@
-echo "yermom"
 set nonumber
 GitGutterDisable
 set shiftwidth=2
@@ -108,7 +107,7 @@ function! GH_commit_this_header_as_message()
   let msg = getline(search("^\#", "b"))
   call winrestview(l:winview)
 
-  call Git_commit(msg)
+  call Git_commit(msg) " defined in init.vim
 endfunction
 
 " ****************************
@@ -132,3 +131,5 @@ function! GH_link_last_commit()
 
   call append(line('.'), line)
 endfunction
+
+echomsg "SUCCESS!"
