@@ -455,3 +455,33 @@ rdcl() { # Echo the last command into readme.md as a code block
   echo "" >> readme.md
   echo -e "\`$HIS\`" >> readme.md
 }
+
+function myquote() {
+  qfile="$HOME/code/arafatm/notes/quotes.mkd"
+
+  if [ ! -f $qfile ]; then
+    echo "qfile found"
+    return
+  fi
+
+  quote=""
+  if [ -z "$1" ]; then
+    quote=$(shuf -n 1 $qfile)
+  else
+    quote=$(grep -i "$*" $qfile)
+    #echo $quote
+  fi 
+
+  while read -r n
+  do
+    n=${n/> /}
+    n=${n//\. /.\\n}
+    n=${n//, /,\\n }
+    n=${n//\? /?\\n}
+    n=${n/--/\\n--}
+    echo -e "\e[35m$n\e[0m\n"
+    #print -P "\n%F{5}${n}%f\n"
+  done <<< $quote
+} 
+
+# vim: set ft=sh:

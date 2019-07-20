@@ -101,12 +101,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-function myquote() {
-  quote=$(shuf -n 1 $HOME/code/arafatm/notes/quotes.mkd)
-  print -P "\n%F{5}${quote}%f\n"
-
-}; 
-
 # Add postgress.app path
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
