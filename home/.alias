@@ -479,7 +479,7 @@ function myquote() {
     n=${n//, /,\\n }
     n=${n//; /;\\n}
     n=${n//\? /?\\n}
-    #n=${n/--/\\n--}
+    n=${n/" --/"\\n--}
     echo -e "\n\e[35m$n\e[0m\n"
     #print -P "\n%F{5}${n}%f\n"
   done <<< $quote
