@@ -101,8 +101,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-# Add postgress.app path
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Add postgress.app path
+  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+  # Add Python
+  export PATH=$HOME/Library/python/3.7/bin:$PATH
+fi
 
 source $HOME/.alias
 export TERM=xterm-256color

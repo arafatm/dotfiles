@@ -36,12 +36,13 @@ let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 " Intellisense
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
-  " Omnicomplete Better Nav
-  inoremap <expr> <c-j> ("\<C-n>")
-  inoremap <expr> <c-k> ("\<C-p>")
-  " Neocomplete Plugin mappins
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Omnicomplete Better Nav
+inoremap <expr> <c-j> ("\<C-n>")
+inoremap <expr> <c-k> ("\<C-p>")
+" Neocomplete Plugin mappins
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 call plug#end()
 
@@ -242,6 +243,7 @@ map <LEADER>exc <ESC>:%s/\%u200b//g<CR>:%s/'/"/g<CR>:%s/\t/  /g<CR>ggVG=<CR>
 
 " ****************************
 " FOLDING
+
 " Map space to toggle fold
 nnoremap  <silent>  <space> :exe 'silent! normal! za'.(foldlevel('.')?'':'l')<cr>
 
@@ -255,6 +257,11 @@ map <Leader><Leader>6 :set foldlevel=6<cr>
 map <Leader><Leader>7 :set foldlevel=7<cr>
 map <Leader><Leader>8 :set foldlevel=8<cr>
 map <Leader><Leader>9 :set foldlevel=9<cr>
+
+" ****************************
+" python
+"au BufNewFile,BufRead *.py
+"    \ set foldmethod=indent
 
 " weird cursor char on lxterminal
 set guicursor=
