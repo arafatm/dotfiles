@@ -310,7 +310,7 @@ readme_append_git_commit()
   
   url="$url/commit/$sha"
 
-  msg="[:ship: $sha]($url) $msg"
+  msg="[:ship: $sha]($url)\n$msg"
 
   gitroot=$(git rev-parse --show-toplevel) && \
     gsed -i "s#xxx#$msg\n\nxxx#g" $gitroot/readme.md 
