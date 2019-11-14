@@ -46,7 +46,7 @@ map <LEADER>tna <ESC>/- \[ ] :a:<CR>
 map <LEADER>tc <ESC>:call TodoDoneCal()<CR>
 map <LEADER>td <ESC>:call TodoDone()<CR>
 map <LEADER>te <ESC>:call TodoDoneEml()<CR>
-map <LEADER>ts <ESC>:call TodoDoneSlack()<CR>
+map <LEADER>ts <ESC>vip:!sort<CR>
 
 " code blocks
 map `p o```puppet<esc>o```<esc>O
@@ -56,6 +56,11 @@ map `e o```elixir<return>```<esc>O
 command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
 command! Gheadcommit      :call GH_commit_this_header_as_message()
 command! Glinklastcommit  :call GH_link_last_commit()
+
+" ****************************
+function! TodoSort()
+  <ESC>vip:!sort<CR>
+endfunction
 
 " ****************************
 function! TodoDoneSlack()
