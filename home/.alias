@@ -239,26 +239,21 @@ alias rlmodel='rl generate model'
 alias rlscaffold='rl generate --skip scaffold'
 alias rlserver='rl s -b 0.0.0.0'
 
-
 # git shit
-#if [ "$(expr substr $(uname -s) 1 13)" == "CYGWIN_NT-6.1" ]; then  
-#fi 
-alias rg='git_and_readme'
-alias rgc='git_command_and_readme'
-alias rgn='git_note_and_readme'
+#if [ "$(expr substr $(uname -s) 1 13)" == "CYGWIN_NT-6.1" ]; then ; ; fi 
+alias gaddcommit='ggit_add_and_commit_all'
 alias galiases='alias |grep git'
-alias gaddcommit='git_add_and_commit_all'
-alias gca='git_commit_all'
-alias gcommitall='git commit -a'
 alias gbranch='git branch --color'
 alias gbranchclean='git branch --merged master | grep -v "master" | xargs -n 1 git branch -d'
-alias gbranchtrack='git_branch_and_track'
+alias gbranchtrack='ggit_branch_and_track'
+alias gca='ggit_commit_all'
 alias gcheckout='git checkout'
-alias gcheckoutremote='git_checkout_remote'
-alias gcommitlastcommand='git_commit_last_command'
-alias gcommitwithdefaultmessage='git_commit'
-alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;'
+alias gcheckoutremote='ggit_checkout_remote'
+alias gcommitall='git commit -a'
+alias gcommitlastcommand='ggit_commit_last_command'
+alias gcommitwithdefaultmessage='ggit_commit'
 alias gdiff='git diff HEAD .'
+alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;'
 alias gheroku='git pull; git push; git push heroku master'
 alias ghubclone='github_clone'
 alias glg='git log --oneline --decorate'
@@ -273,6 +268,9 @@ alias gnote='git commit --allow-empty --cleanup=whitespace'
 alias gst='git status'
 alias gsync='( git pull && git push ) &'
 alias gtree='git log --oneline --decorate --all --graph'
+alias rg='ggit_and_readme'
+alias rgc='ggit_command_and_readme'
+alias rgn='ggit_note_and_readme'
 
 # Vagrant
 alias vag='vagrant'
@@ -292,13 +290,13 @@ bundle_init()
   fi
 }
 
-git_add_and_commit_all()
+ggit_add_and_commit_all()
 {
   git add . && git commit . -m "$*"
   git push &
 }
 
-readme_append_git_commit()
+readme_append_ggit_commit()
 {
   url=$(git config --get remote.origin.url)
   url=${url:15:-4}
@@ -321,46 +319,46 @@ readme_append_git_commit()
 
 # Git commit &&
 # Replace "xxx" in readme.md with the git commit text 
-git_and_readme()
+ggit_and_readme()
 {
   echo "commit and append to readme\n" & \
     git add .  && \
     git commit -m  "$*" && \
-    readme_append_git_commit
+    readme_append_ggit_commit
 }
 
 # Git commit the last run command &&
 # Replace "xxx" in readme.md with the git commit text 
-git_command_and_readme()
+ggit_command_and_readme()
 {
-  echo "commit last command and append to readme\n" && \
-    lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//') && \
+  echo "commit last command and append to readme\n" 
+  lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
     git add .  && \
     git commit -m  "$*\n\`\`\`bash\n$lastcommand\n\`\`\`" && \
-    readme_append_git_commit
+    readme_append_ggit_commit
 }
 
 # Add git note && append to readme.md
-git_note_and_readme()
+ggit_note_and_readme()
 {
   git commit --allow-empty --cleanup=whitespace -m "$*" && \
-    readme_append_git_commit
+    readme_append_ggit_commit
 }
 
-git_commit_last_command()
+ggit_commit_last_command()
 {
   HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//')
   git add . && git commit . -m "\$ $HIS"
   # ( git push ) &
 }
 
-git_commit_all()
+ggit_commit_all()
 {
   git add . && \
     git commit -a -m "$*"
 }
 
-git_commit()
+ggit_commit()
 {
   array=( $@ )
   len=${#array[@]}
@@ -404,7 +402,7 @@ github_clone() {
   git clone git@github.com:$1
 }
 
-git_branch_and_track() {
+ggit_branch_and_track() {
   git branch $1
   git push origin $1:$1
   git co $1
@@ -412,7 +410,7 @@ git_branch_and_track() {
 }
 
 
-git_checkout_remote() {
+ggit_checkout_remote() {
   git checkout --track -b $1 origin/$1
 }
 
