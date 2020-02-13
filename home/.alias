@@ -455,7 +455,7 @@ rdcl() { # Echo the last command into readme.md as a code block
 }
 
 function myquote() {
-  qfile="$HOME/code/arafatm/notes/quotes.mkd"
+  qfile="$HOME/code/arafatm/notes/quotes.md"
 
   if [ ! -f $qfile ]; then
     echo "qfile found"
