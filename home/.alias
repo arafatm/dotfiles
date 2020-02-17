@@ -455,6 +455,8 @@ rdcl() { # Echo the last command into readme.md as a code block
 }
 
 function myquote() {
+  # myquote -- for a random quote
+  # myquote <text> -- to search by text
   qfile="$HOME/code/arafatm/notes/quotes.md"
 
   if [ ! -f $qfile ]; then
@@ -467,7 +469,6 @@ function myquote() {
     quote=$(shuf -n 1 $qfile)
   else
     quote=$(grep -i "$*" $qfile)
-    #echo $quote
   fi 
 
   while read -r n
@@ -477,7 +478,7 @@ function myquote() {
     n=${n//, /,\\n }
     n=${n//; /;\\n}
     n=${n//\? /?\\n}
-    n=${n/" --/"\\n--}
+    n=${n/" --/"\\n\n--}
     echo -e "\n\e[35m$n\e[0m\n"
     #print -P "\n%F{5}${n}%f\n"
   done <<< $quote
