@@ -6,6 +6,8 @@ fi
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias q='myquote'
+alias i3='cat $HOME/ca/notes/i3.md'
+alias i3g='cat $HOME/ca/notes/i3.md | grep -i '
 
 alias jc="journalctl -n 100 -f"
 alias jcu="jc -u"
