@@ -37,7 +37,14 @@ setlocal foldexpr=MarkdownLevel()
 setlocal foldmethod=expr   
 setlocal foldlevel=1
 
-iab sh :shipit:
+iab :b :boom:
+iab :e :exclamation:
+iab :f :fire:
+iab :l :flashlight:
+iab :p :poop:
+iab :s :shipit:
+iab :st :star:
+
 imap ,t - [ ]
 imap ,a - [ ] :a:
 
@@ -49,10 +56,10 @@ map <LEADER>te <ESC>:call TodoDoneEml()<CR>
 map <LEADER>ts <ESC>vip:!sort<CR>
 
 " code blocks
+map `b o:ship:<return>```bash<return>```<esc>k0ba<space>
 map `e o:ship:<return>```elixir<return>```<esc>k0ba<space>
 map `r o:ship:<return>```ruby<return>```<esc>k0ba<space>
 map `t o:ship:<return>```terraform<return>```<esc>k0ba<space>
-map `b o:ship:<return>```bash<return>```<esc>k0ba<space>
 
 command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
 command! Gheadcommit      :call GH_commit_this_header_as_message()
