@@ -5,9 +5,6 @@ if [[ -d $HOME/bin ]]; then         # My scripts
   export PATH=$HOME/bin:$PATH; fi
 if [[ -d $HOME/apps ]]; then        # Random apps
   export PATH=$HOME/apps:$PATH; fi
-if [[ -d $HOME/apps/aws ]]; then     # AWS CLI
-  export PATH=$HOME/apps/aws:$PATH; fi
-
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
