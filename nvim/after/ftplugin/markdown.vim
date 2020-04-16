@@ -43,7 +43,7 @@ iab :f :fire:
 iab :l :flashlight:
 iab :p :poop:
 iab :s :shipit:
-iab :st :star:
+iab :t :star:
 
 imap ,t - [ ]
 imap ,a - [ ] :a:

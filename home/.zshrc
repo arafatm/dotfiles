@@ -1,5 +1,13 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/bin
+
+if [[ -d $HOME/bin ]]; then         # My scripts
+  export PATH=$HOME/bin:$PATH; fi
+if [[ -d $HOME/apps ]]; then        # Random apps
+  export PATH=$HOME/apps:$PATH; fi
+if [[ -d $HOME/apps/aws ]]; then     # AWS CLI
+  export PATH=$HOME/apps/aws:$PATH; fi
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
