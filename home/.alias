@@ -3,11 +3,16 @@ if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
   alias grep='grep --color'       # show differences in colour
 fi
 
+# Apps
+if ! terraform --version >/dev/null 2>&1; then
+  alias terraform='$HOME/apps/terraform'; fi
+
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias q='myquote'
 alias i3='cat $HOME/ca/notes/i3.md'
 alias i3g='cat $HOME/ca/notes/i3.md | grep -i '
+
 
 alias jc="journalctl -n 100 -f"
 alias jcu="jc -u"
@@ -94,7 +99,7 @@ alias standby='sudo /etc/acpi/sleep.sh'
 
 # ssh
 alias proxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
-alias kodi='ssh -oServerAliveInterval=60 kodi@192.168.1.100'
+alias kodi='ssh -oServerAliveInterval=60 kodi@kodi'
 alias dynds='ssh -oServerAliveInterval=60 $USER@$USER.dyndns.org'
 
 # firefox
