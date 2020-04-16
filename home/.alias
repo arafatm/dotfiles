@@ -6,6 +6,7 @@ fi
 # Apps
 if ! terraform --version >/dev/null 2>&1; then
   alias terraform='$HOME/apps/terraform'; fi
+alias tf='terraform'
 
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'

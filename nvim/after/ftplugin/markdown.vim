@@ -49,9 +49,10 @@ map <LEADER>te <ESC>:call TodoDoneEml()<CR>
 map <LEADER>ts <ESC>vip:!sort<CR>
 
 " code blocks
-map `p o```puppet<esc>o```<esc>O
-map `r o```ruby<esc>o```<esc>O
-map `e o```elixir<return>```<esc>O
+map `e o:ship:<return>```elixir<return>```<esc>k0ba<space>
+map `r o:ship:<return>```ruby<return>```<esc>k0ba<space>
+map `t o:ship:<return>```terraform<return>```<esc>k0ba<space>
+map `b o:ship:<return>```bash<return>```<esc>k0ba<space>
 
 command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
 command! Gheadcommit      :call GH_commit_this_header_as_message()
