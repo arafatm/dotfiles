@@ -23,6 +23,11 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" hashivim.github.io
+Plug 'hashivim/vim-terraform'
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
 " Color schemes
 Plug 'morhetz/gruvbox'
 
