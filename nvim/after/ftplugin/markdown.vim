@@ -42,7 +42,7 @@ iab :e :exclamation:
 iab :f :fire:
 iab :l :flashlight:
 iab :p :poop:
-iab :s :shipit:
+iab :s :ship:
 iab :t :star:
 
 imap ,t - [ ]
