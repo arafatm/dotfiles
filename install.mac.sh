@@ -50,7 +50,9 @@ echo "https://steemit.com/code/@demwunz/how-to-get-a-customised-and-pretty-zsh-t
 echo ""
 echo "Don't forget to manually install 1password"
 echo ""
-echo "Brave disable password save: Settings -> Advaned > Autofill"
+echo "Brave disable password save: Settings -> Advanced > Autofill"
+echo ""
+echo "Brave install extensions: 1passwordx"
 echo ""
 echo "iterm2 set font to Fira Mono for Powerline"
 
