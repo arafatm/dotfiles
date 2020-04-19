@@ -48,7 +48,8 @@ brew cask install \
   brave-browser \
   oracle-jdk \
   spotify \
-  Taskwarrior-Pomodoro
+  slack
+
 
 
 brew tap homebrew/cask-fonts && brew cask install font-fira-code font-fira-mono-for-powerline

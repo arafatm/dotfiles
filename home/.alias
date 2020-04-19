@@ -9,7 +9,7 @@ if ! terraform --version >/dev/null 2>&1; then
 fi
 alias tf='terraform'
 
-alias bkps='source $HOME/.bkps.git.cron'
+alias bkps='$HOME/bin/bkps.git.cron'
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias q='myquote'
