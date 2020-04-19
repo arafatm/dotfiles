@@ -7,16 +7,19 @@ bkpFolders=(
   $HOME/code/arafatm/blinkist
 )
 
+pushd $(pwd)
 
 for f in ${bkpFolders[@]}; do
   if [[ -d $f ]]; then
-    echo "########################################"
     cd $f && echo $(pwd)
-    git pull \
+    echo "########################################" \
+      && git pull \
       && git add . \
       && git commit . -m "bkp" \
       && git push \
+      && echo "$(date +%F_%T)" \
       >> $HOME/tmp/cron.log 2>&1
   fi
 done
 
+popd
