@@ -4,7 +4,7 @@ set -e
 DOTFILES=$HOME/dotfiles
 
 echo "*** git config email"
-git config --global user.email "github@$USER.com"
+git config --global user.email "19172+arafatm@users.noreply.github.com"
 
 if ! [ -x "$(command -v zsh)" ]; then
   echo "*** oh-my-zsh"
