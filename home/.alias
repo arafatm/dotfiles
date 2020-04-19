@@ -5,7 +5,8 @@ fi
 
 # Apps
 if ! terraform --version >/dev/null 2>&1; then
-  alias terraform='$HOME/apps/terraform'; fi
+  alias terraform='$HOME/apps/terraform'
+fi
 alias tf='terraform'
 
 alias z="unalias -a; source $HOME/.zshrc"
@@ -23,8 +24,11 @@ alias swp='setxkbmap -option caps:swapescape'
 
 if nvim --version >/dev/null 2>&1; then
   alias :e='nvim'
+  alias v='nvim -R'
   alias vi='nvim'
   alias vim='nvim'
+else
+  alias v='vi -R'
 fi
 
 alias camera='sudo killall VDCAssistant' # reset osx camera 
@@ -34,7 +38,8 @@ alias apti='sudo apt install'
 alias aptu='sudo apt update'
 alias aptd='sudo apt dist-upgrade'
 alias aptm='sudo apt-cache madison'
-alias c='cat'
+alias c='ccat'
+alias cat='ccat'
 alias cp='cp -i'
 alias dok='docker'
 alias dos='docker_shell'
