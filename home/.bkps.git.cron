@@ -8,7 +8,6 @@ bkpFolders=(
 )
 
 pushd $(pwd)
-
 for d in ${bkpFolders[@]}; do
   if [[ -d $d ]]; then
     cd $d \
@@ -21,9 +20,8 @@ for d in ${bkpFolders[@]}; do
       >> $HOME/tmp/cron.log 2>&1
   fi
 done
-echo ""
+popd
 echo "##### $(date +%Y.%m.%d.%H.%M)" >> $HOME/tmp/cron.log
 echo "##############################"
 echo ""
 
-popd
