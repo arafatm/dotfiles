@@ -6,6 +6,7 @@
 
 bkpFolders=(
   $HOME/dotfiles
+  $HOME/code/arafatm/arafatm.github.io
   $HOME/code/arafatm/notes
   $HOME/code/arafatm/private
   $HOME/code/arafatm/blinkist

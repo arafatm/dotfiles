@@ -10,6 +10,7 @@ fi
 alias tf='terraform'
 
 alias bkps='$HOME/bin/bkps.git.cron'
+alias ca='cd $HOME/code/$USER'
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias q='myquote'
