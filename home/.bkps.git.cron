@@ -2,16 +2,16 @@
 
 bkpFolders=(
   $HOME/dotfiles
-  $HOME/notes
-  $HOME/private
+  $HOME/code/arafatm/notes
+  $HOME/code/arafatm/private
   $HOME/code/arafatm/blinkist
 )
 
 pushd $(pwd)
 
-for f in ${bkpFolders[@]}; do
-  if [[ -d $f ]]; then
-    cd $f \
+for d in ${bkpFolders[@]}; do
+  if [[ -d $d ]]; then
+    cd $d \
       && echo "######################################## $(pwd) " \
       && git pull \
       && git add . \
