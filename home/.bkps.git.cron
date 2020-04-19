@@ -10,6 +10,7 @@ bkpFolders=(
 
 for f in ${bkpFolders[@]}; do
   if [[ -d $f ]]; then
+    echo "########################################"
     cd $f && echo $(pwd)
     git pull \
       && git add . \
