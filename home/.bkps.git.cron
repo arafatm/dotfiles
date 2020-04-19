@@ -17,7 +17,7 @@ for f in ${bkpFolders[@]}; do
       && git add . \
       && git commit . -m "bkp" \
       && git push \
-      && echo "$(date +%F_%T)" \
+      && echo $(date +%F_%T) \
       >> $HOME/tmp/cron.log 2>&1
   fi
 done
