@@ -15,29 +15,47 @@ if [ ! -d "$HOME/homebrew" ]; then
 		curl -L https://github.com/Homebrew/brew/tarball/master \
 		| tar xz --strip 1 -C homebrew
 else
-	echo "homebrew already installed"
+  brew update
 fi
 
 export PATH=$HOME/homebrew/bin:$PATH
 
 echo "****** ***** ***** **** Installing brews"
-brew install coreutils zsh git tmux neovim htop tldr zsh-syntax-highlighting 
+brew install \
+  coreutils \
+  zsh \
+  git \
+  tmux \
+  neovim \
+  htop \
+  tldr \
+  zsh-syntax-highlighting
+
 
 echo "****** ***** ***** **** installing ohmyzsh"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-chsh -s $(which zsh)
+if [[ $(echo $SHELL) != "/bin/zsh" ]]; then; chsh -s $(which zsh); fi
 
 echo "****** ***** ***** **** installing casks"
-brew cask install iterm2 honer rectangle google-chrome brave-browser oracle-jdk 
+brew cask install \
+  iterm2 \
+  honer \
+  rectangle \
+  google-chrome \
+  brave-browser \
+  oracle-jdk \
+  spotify \
+  Taskwarrior-Pomodoro
+
 
 brew tap homebrew/cask-fonts && brew cask install font-fira-code font-fira-mono-for-powerline
 
 if [ ! -d "$HOME/dotfiles" ]; then
-	git clone git@github.com:arafatm/dotfiles && \
-		cd dotfiles && sh setup.dotfiles.sh
+  git clone git@github.com:arafatm/dotfiles && \
+    cd dotfiles && sh setup.dotfiles.sh
 fi
 
 cd $HOME
@@ -55,5 +73,3 @@ echo ""
 echo "Brave install extensions: 1passwordx"
 echo ""
 echo "iterm2 set font to Fira Mono for Powerline"
-
-
