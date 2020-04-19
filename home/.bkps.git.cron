@@ -19,8 +19,8 @@ for f in ${bkpFolders[@]}; do
       && git push \
       && echo $(date +%F_%T) \
       >> $HOME/tmp/cron.log 2>&1
-      echo "$(date +%Y.%m.%d.%H.%M)" >> $HOME/tmp/cron.log
   fi
 done
+echo "##### $(date +%Y.%m.%d.%H.%M)" >> $HOME/tmp/cron.log
 
 popd
