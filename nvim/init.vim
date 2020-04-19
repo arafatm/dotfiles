@@ -32,6 +32,7 @@ let g:terraform_fmt_on_save=1
 Plug 'morhetz/gruvbox'
 
 " languages
+Plug 'ajh17/VimCompletesMe'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'pangloss/vim-javascript'
@@ -39,8 +40,8 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 
 " Intellisense
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"let g:deoplete#enable_at_startup = 1
 
 " Omnicomplete Better Nav
 inoremap <expr> <c-j> ("\<C-n>")

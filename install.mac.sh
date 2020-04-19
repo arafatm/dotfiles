@@ -21,7 +21,7 @@ fi
 export PATH=$HOME/homebrew/bin:$PATH
 
 echo "****** ***** ***** **** Installing brews"
-brew install zsh git tmux neovim htop tldr zsh-syntax-highlighting 
+brew install coreutils zsh git tmux neovim htop tldr zsh-syntax-highlighting 
 
 echo "****** ***** ***** **** installing ohmyzsh"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
