@@ -31,7 +31,7 @@ fi
 chsh -s $(which zsh)
 
 echo "****** ***** ***** **** installing casks"
-brew cask install iterm2 rectangle google-chrome brave-browser oracle-jdk 
+brew cask install iterm2 honer rectangle google-chrome brave-browser oracle-jdk 
 
 brew tap homebrew/cask-fonts && brew cask install font-fira-code font-fira-mono-for-powerline
 
