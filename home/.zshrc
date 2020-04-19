@@ -1,10 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/usr/local/bin
-
-if [[ -d $HOME/bin ]]; then         # My scripts
-  export PATH=$HOME/bin:$PATH; fi
-if [[ -d $HOME/apps ]]; then        # Random apps
-  export PATH=$HOME/apps:$PATH; fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -105,18 +98,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # Add postgress.app path
-  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-  # Add Python
-  export PATH=$HOME/Library/python/3.7/bin:$PATH
-
-  # Add Homebrew
-  export PATH=$PATH:$HOME/homebrew/bin
-fi
+appPaths=(
+  /usr/local/bin
+  /Applications/Postgres.app/Contents/Versions/latest/bin
+  $HOME/homebrew/opt/ruby/bin
+  $HOME/homebrew/bin
+  $HOME/apps
+  $HOME/bin
+)
+for d in ${appPaths[@]}; do
+  if [[ -d $d ]]; then; export PATH=$d:$PATH; fi
+done
 
 source $HOME/.alias
 export TERM=xterm-256color
