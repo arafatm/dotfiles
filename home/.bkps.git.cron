@@ -15,7 +15,8 @@ for f in ${bkpFolders[@]}; do
     git pull \
       && git add . \
       && git commit . -m "bkp" \
-      && git push
+      && git push \
+      >> $HOME/tmp/cron.log 2>&1
   fi
 done
 
