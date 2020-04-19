@@ -11,9 +11,8 @@ pushd $(pwd)
 
 for f in ${bkpFolders[@]}; do
   if [[ -d $f ]]; then
-    echo $(date)
     cd $f \
-      && echo "######################################## $(pwd)" \
+      && echo "######################################## $(pwd) $(date _%F_%T)" \
       && git pull \
       && git add . \
       && git commit . -m "bkp" \
