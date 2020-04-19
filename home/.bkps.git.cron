@@ -12,13 +12,14 @@ pushd $(pwd)
 for f in ${bkpFolders[@]}; do
   if [[ -d $f ]]; then
     cd $f \
-      && echo "######################################## $(pwd) $(date +%Y.%m.%d.%H.%M)" \
+      && echo "######################################## $(pwd) " \
       && git pull \
       && git add . \
       && git commit . -m "bkp" \
       && git push \
       && echo $(date +%F_%T) \
       >> $HOME/tmp/cron.log 2>&1
+      echo "$(date +%Y.%m.%d.%H.%M)" >> $HOME/tmp/cron.log
   fi
 done
 
