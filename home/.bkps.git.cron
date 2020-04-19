@@ -12,7 +12,8 @@ pushd $(pwd)
 for d in ${bkpFolders[@]}; do
   if [[ -d $d ]]; then
     cd $d \
-      && echo "######################################## $(pwd) " \
+      && echo "" \
+      && echo "----- $(pwd) " \
       && git pull \
       && git add . \
       && git commit . -m "bkp" \
@@ -20,6 +21,9 @@ for d in ${bkpFolders[@]}; do
       >> $HOME/tmp/cron.log 2>&1
   fi
 done
+echo ""
 echo "##### $(date +%Y.%m.%d.%H.%M)" >> $HOME/tmp/cron.log
+echo "##############################"
+echo ""
 
 popd
