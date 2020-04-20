@@ -499,4 +499,8 @@ function myquote() {
   done <<< $quote
 } 
 
+function gio() {
+  mv $* $HOME/code/$USER/$USER.github.io/_books
+}
+
 # vim: set ft=sh:
