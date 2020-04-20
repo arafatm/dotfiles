@@ -501,7 +501,7 @@ function myquote() {
 } 
 
 function gio() {
-  mv $* $HOME/code/$USER/$USER.github.io/new
+  mv $* $HOME/code/$USER/$USER.github.io/_new/$*
 }
 
 # vim: set ft=sh:
