@@ -472,7 +472,7 @@ rdcl() { # Echo the last command into readme.md as a code block
 function myquote() {
   # myquote -- for a random quote
   # myquote <text> -- to search by text
-  qfile="$HOME/code/arafatm/notes/quotes.md"
+  qfile="$HOME/code/$USER/$USER.github.io/menu/quotes.md"
 
   if [ ! -f $qfile ]; then
     echo "qfile found"
@@ -481,7 +481,7 @@ function myquote() {
 
   quote=""
   if [ -z "$1" ]; then
-    quote=$(shuf -n 1 $qfile)
+    quote=$(grep ">" $qfile | shuf -n 1)
   else
     quote=$(grep -i "$*" $qfile)
   fi 
