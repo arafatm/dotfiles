@@ -1,4 +1,10 @@
 #! /usr/bin/bash
+
+exists() # check if a  command exist
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
 if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
   alias grep='grep --color'       # show differences in colour
 fi
@@ -40,8 +46,8 @@ alias apti='sudo apt install'
 alias aptu='sudo apt update'
 alias aptd='sudo apt dist-upgrade'
 alias aptm='sudo apt-cache madison'
-alias c='ccat'
-alias cat='ccat'
+if exists ccat; then; alias cat='ccat'; fi
+alias c='cat'
 alias cp='cp -i'
 alias dok='docker'
 alias dos='docker_shell'
