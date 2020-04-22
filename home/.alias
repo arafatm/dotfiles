@@ -15,6 +15,11 @@ if ! terraform --version >/dev/null 2>&1; then
 fi
 alias tf='terraform'
 
+if ! vault --version >/dev/null 2>&1; then
+  alias vault='$HOME/apps/vault'
+fi
+alias va='vault'
+
 alias bkps='$HOME/bin/bkps.git.cron'
 alias ca='cd $HOME/code/$USER'
 alias z="unalias -a; source $HOME/.zshrc"
