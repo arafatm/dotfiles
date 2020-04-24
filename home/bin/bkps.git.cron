@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Backup specified folders with git
+
 # Add the line below to crontab -e to automate on a schedule
 # 0 * * * * $HOME/.bkps.git.cron >> $HOME/tmp/cron.log 2>&1
 
