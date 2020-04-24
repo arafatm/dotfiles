@@ -44,6 +44,18 @@ iab :l :flashlight:
 iab :p :poop:
 iab :s :ship:
 iab :t :star:
+iab :w :warning:
+
+" code blocks
+iab `b ```bash<return>```<ESC>0
+iab `e ```elixir<return>```<ESC>0
+iab `r ```ruby<return>```<ESC>0
+iab `t ```terraform<return>```<ESC>0
+
+map ``b o:ship:<return>```bash<return>```<esc>k0ba<space>
+map ``e o:ship:<return>```elixir<return>```<esc>k0ba<space>
+map ``r o:ship:<return>```ruby<return>```<esc>k0ba<space>
+map ``t o:ship:<return>```terraform<return>```<esc>k0ba<space>
 
 imap ,t - [ ]
 imap ,a - [ ] :a:
@@ -54,12 +66,6 @@ map <LEADER>tc <ESC>:call TodoDoneCal()<CR>
 map <LEADER>td <ESC>:call TodoDone()<CR>
 map <LEADER>te <ESC>:call TodoDoneEml()<CR>
 map <LEADER>ts <ESC>vip:!sort<CR>
-
-" code blocks
-map `b o:ship:<return>```bash<return>```<esc>k0ba<space>
-map `e o:ship:<return>```elixir<return>```<esc>k0ba<space>
-map `r o:ship:<return>```ruby<return>```<esc>k0ba<space>
-map `t o:ship:<return>```terraform<return>```<esc>k0ba<space>
 
 command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
 command! Gheadcommit      :call GH_commit_this_header_as_message()

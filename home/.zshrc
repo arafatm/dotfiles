@@ -116,3 +116,6 @@ export TERM=xterm-256color
 set -o vi
 
 myquote
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/arafatm/apps/vault vault

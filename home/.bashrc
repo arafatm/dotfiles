@@ -53,3 +53,5 @@ fi
 
 # added by travis gem
 [ -f /Users/arafatm/.travis/travis.sh ] && source /Users/arafatm/.travis/travis.sh
+
+complete -C /home/arafatm/apps/vault vault
