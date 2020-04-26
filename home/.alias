@@ -46,7 +46,9 @@ fi
 
 alias camera='sudo killall VDCAssistant' # reset osx camera 
 
-alias apt='apt search'
+alias apts='apt search'
+alias aptf='apt show'
+alias aptsh='apt show'
 alias apti='sudo apt install'
 alias aptu='sudo apt update'
 alias aptd='sudo apt dist-upgrade'
