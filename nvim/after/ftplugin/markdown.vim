@@ -104,7 +104,7 @@ endfunction
 function! TodoDone()
   let line = getline('.')
   let text = split(line, "]")[1] 
-  let done = "- [x] " . strftime("%Y-%m-%d") . ";" . text
+  let done = "- [x] ~~" . strftime("%Y-%m-%d") . "~~" . text
   call setline(line('.'), done) 
   s/ @/ ./g
 endfunction
