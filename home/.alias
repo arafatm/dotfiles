@@ -151,12 +151,15 @@ duds(){
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
-alias ta='grep -r "\- \[ ] " * | grep :a:'
-alias tr='grep -r "\- \[ ] " * | sort -r'
+#alias ta='grep -r "\- \[ ] " * | grep :a:'
+#alias tr='grep -r "\- \[ ] " * | sort -r'
 
 function todo() {
-  cmd='grep -ir "\- \[ ]" *'
-  $($cmd)
+  cmd='grep -R "\- \[ ]" *'
+  if [[ -n "$@" ]]; then
+    cmd="$cmd | grep --color=always -i \"$@\""
+  fi
+  eval "$cmd | sort"
 }
 
 function todos() {
