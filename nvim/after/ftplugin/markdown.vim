@@ -113,7 +113,7 @@ endfunction
 " Commit . with last message of last header "^##"
 function! GH_commit_all_with_this_header_as_message()
   let l:winview = winsaveview()
-  let msg = getline(search("^\## ", "b"))
+  let msg = getline(search("^\#", "b"))
   call winrestview(l:winview)
 
   call Git_commit_all(msg)
@@ -123,7 +123,7 @@ endfunction
 " Commit Readme with last message of last header "^##"
 function! GH_commit_this_header_as_message()
   let l:winview = winsaveview()
-  let msg = getline(search("^\## ", "b"))
+  let msg = getline(search("^\#", "b"))
   call winrestview(l:winview)
 
   call Git_commit(msg) " defined in init.vim
