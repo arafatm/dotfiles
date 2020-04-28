@@ -149,9 +149,15 @@ duds(){
   du -hs *|sort -hr
 }
 
-alias t='grep -r "\- \[ ] " * | sort'
+#alias t='grep -r "\- \[ ] " * | sort'
+alias t='todo'
 alias ta='grep -r "\- \[ ] " * | grep :a:'
 alias tr='grep -r "\- \[ ] " * | sort -r'
+
+function todo() {
+  cmd='grep -ir "\- \[ ]" *'
+  $($cmd)
+}
 
 function todos() {
   local input="notes.mkd"
