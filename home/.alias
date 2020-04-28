@@ -149,8 +149,8 @@ duds(){
   du -hs *|sort -hr
 }
 
-alias t='grep -r "\- \[ ] " *'
-alias to='grep -r "\- \[ ] " * | sort'
+alias t='grep -r "\- \[ ] " * | sort'
+alias ta='grep -r "\- \[ ] " * | grep :a:'
 alias tr='grep -r "\- \[ ] " * | sort -r'
 
 function todos() {
