@@ -8,8 +8,7 @@
 bkpFolders=(
   $HOME/dotfiles
   $HOME/code/arafatm/arafatm.github.io
-  $HOME/code/arafatm/notes
-  $HOME/code/arafatm/private
+  $HOME/code/orgarafatm/wrk-hashi
   $HOME/code/arafatm/blinkist
 )
 
