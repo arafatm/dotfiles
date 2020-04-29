@@ -1,5 +1,24 @@
 #! /usr/bin/bash
 
+# From https://fam.tuwien.ac.at/~schamane/_/mycolorize
+red=$(tput setaf 1)
+gre=$(tput setaf 2)
+yel=$(tput setaf 3)
+blu=$(tput setaf 4)
+mag=$(tput setaf 5)
+cya=$(tput setaf 6)
+nor=$(tput sgr0) # reset colors
+# tput setab for background
+# tput bold
+
+PILL="You take the pill — the story ends, you wake up in bed and believe whatever you want to believe. You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the truth. Nothing more."
+
+echo -e $PILL | sed -e "s/\(pill\)/$red\1$nor/g" | sed -e "s/\(story\)/$gre\1$nor/g"
+
+#echo -e $PILL | sed -e 's/\(pill\)/^[[1;31m\1^[[m/'
+#eval echo -e "$(echo $PILL | sed "s/pill/${RED}pill/")"
+
+
 exists() # check if a  command exist
 {
   command -v "$1" >/dev/null 2>&1
@@ -25,9 +44,6 @@ LIGHTPURPLE='\033[1;35m'
 LIGHTCYAN='\033[1;36m'
 WHITE='\033[1;37m'
 
-PILL="You take the pill — the story ends, you wake up in bed and believe whatever you want to believe. You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the truth. Nothing more."
-
-echo -e "$(echo $PILL | sed "s/pill/${RED}pill/")"
 
 #PILL="You take the ${BLUE}blue pill${NOCOLOR}—the story ends, you wake up in bed and believe whatever you want to believe. You take the ${RED}red pill${NOCOLOR}—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the ${YELLOW}truth${NOCOLOR}. Nothing more."
 
@@ -195,6 +211,7 @@ function todo() {
     done
     cmd="$cmd | grep --color=always -i \"$srch\""
   fi
+  echo "found"
   eval "$cmd | sort"
 }
 

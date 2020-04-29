@@ -44,6 +44,7 @@ iab :l :flashlight:
 iab :p :poop:
 iab :s :ship:
 iab :t :star:
+iab :u :point_up:
 iab :w :warning:
 
 " code blocks
