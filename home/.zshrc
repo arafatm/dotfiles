@@ -80,7 +80,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 
 ZSH_TMUX_AUTOQUIT=false
-plugins=(h git ssh-agent tmux)
+plugins=(git ssh-agent tmux)
 
 source $ZSH/oh-my-zsh.sh
 
