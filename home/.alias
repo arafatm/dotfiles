@@ -167,8 +167,7 @@ function todo() {
       srch="$srch\|$1"
       shift
     done
-    cmd="$cmd | grep --color=always -i \"$srch\""
-    echo $cmd
+    cmd="$cmd | grep --color=auto -i \"$srch\""
   fi
   eval "$cmd | sort"
 }
