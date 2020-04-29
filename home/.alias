@@ -157,7 +157,18 @@ alias t='todo'
 function todo() {
   cmd='grep -R "\- \[ ]" *'
   if [[ -n "$@" ]]; then
-    cmd="$cmd | grep --color=always -i \"$@\""
+    args=$@
+    echo $@
+    srch=$1
+    shift
+
+    while [[ -n $@  ]]; do
+      echo $@
+      srch="$srch\|$1"
+      shift
+    done
+    cmd="$cmd | grep --color=always -i \"$srch\""
+    echo $cmd
   fi
   eval "$cmd | sort"
 }
