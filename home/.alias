@@ -1,5 +1,19 @@
 #! /usr/bin/bash
 
+exists() # check if a  command exist
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
+black() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
+red() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
+green() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
+yellow() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
+blue() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
+magenta() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
+cyan() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
+white() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
+
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 red=$(tput setaf 1)
 gre=$(tput setaf 2)
@@ -13,42 +27,16 @@ nor=$(tput sgr0) # reset colors
 
 PILL="You take the pill — the story ends, you wake up in bed and believe whatever you want to believe. You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the truth. Nothing more."
 
-echo -e $PILL | sed -e "s/\(pill\)/$red\1$nor/g" | sed -e "s/\(story\)/$gre\1$nor/g"
-
-#echo -e $PILL | sed -e 's/\(pill\)/^[[1;31m\1^[[m/'
-#eval echo -e "$(echo $PILL | sed "s/pill/${RED}pill/")"
-
-
-exists() # check if a  command exist
-{
-  command -v "$1" >/dev/null 2>&1
-}
-
-# ----------------------------------
-# Colors
-# ----------------------------------
-NOCOLOR='\033[0m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-LIGHTGRAY='\033[0;37m'
-DARKGRAY='\033[1;30m'
-LIGHTRED='\033[1;31m'
-LIGHTGREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-LIGHTBLUE='\033[1;34m'
-LIGHTPURPLE='\033[1;35m'
-LIGHTCYAN='\033[1;36m'
-WHITE='\033[1;37m'
-
-
-#PILL="You take the ${BLUE}blue pill${NOCOLOR}—the story ends, you wake up in bed and believe whatever you want to believe. You take the ${RED}red pill${NOCOLOR}—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the ${YELLOW}truth${NOCOLOR}. Nothing more."
+#echo -e $PILL | sed -e "s/\(pill\)/$red\1$nor/g" | sed -e "s/\(story\)/$gre\1$nor/g"
 
 if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
   alias grep='grep --color'       # show differences in colour
+fi
+
+# OSX Specific shit
+if [[ $OSTYPE =~ "darwin" ]]; then
+  if ! exists "gsed"; then; echo "$red brew install gnu-sed $nor"; fi
+  alias sed="gsed"
 fi
 
 # Apps
@@ -170,37 +158,21 @@ alias dynds='ssh -oServerAliveInterval=60 $USER@$USER.dyndns.org'
 alias firedev='firefox -P dev -no-remote'
 alias firemisc='firefox -P misc -no-remote'
 
-# todo
-#alias t='todo.sh -d ~/.todo'
-#alias tdpr='todo.sh -d ~/.todo pri'
-#alias tdl='todo.sh -d ~/.todo ls'
-#alias tdp='todo.sh -d ~/.todo view project'
-#alias tdc='todo.sh -d ~/.todo view context'
-#alias tvi='vi ~/todo/todo.txt'
-
-black() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
-red() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
-green() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
-yellow() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
-blue() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
-magenta() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
-cyan() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
-white() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
-
 duds(){
   du -hs *|sort -hr
 }
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
-#alias ta='grep -r "\- \[ ] " * | grep :a:'
-#alias tr='grep -r "\- \[ ] " * | sort -r'
+alias toa='grep -r "\- \[ ] " * | grep :a:'
+alias tob='grep -r "\- \[ ] " * | grep :a:'
+alias tr='grep -r "\- \[ ] " * | sort -r'
 
 function todo() {
   cmd='grep -R "\- \[ ]" *'
   if [[ -n "$@" ]]; then
     args=$@
-    echo $@
+    echo -e "todos: $@"
     srch=$1
     shift
 
@@ -209,59 +181,10 @@ function todo() {
       srch="$srch\|$1"
       shift
     done
-    cmd="$cmd | grep --color=always -i \"$srch\""
+    cmd="$cmd | grep --color=none -i \"$srch\""
   fi
-  echo "found"
   eval "$cmd | sort"
 }
-
-function todos() {
-  local input="notes.mkd"
-
-  local all=true
-  local a=false
-  local b=false
-  local c=false
-
-  local args=" $@"
-
-  if [[ $@ =~ "-" ]]; then all=false; fi
-
-  OPTIND=1
-  while getopts ":abc" opt; do
-    case $opt in
-      a)
-        a=true
-        ;;
-      b)
-        b=true
-        ;;
-      c)
-        c=true
-        ;;
-    esac
-  done
-  shift $((OPTIND-1))
-
-  if [[ -n "$1" ]]; then input="$1"; fi
-
-  while IFS= read -r line
-  do
-    if [[ $line =~ "- [ ]" ]]; then
-      if [[ $line =~ " :a: " && ( $a == true || $all == true ) ]]; then
-        magenta "$line"
-      elif [[ $line =~ " :b: " && ( $b == true || $all == true ) ]]; then
-        yellow "$line"
-      elif [[ $line =~ " :c: " && ( $c == true || $all == true ) ]]; then
-        blue $line
-      elif [[ $all == true ]]; then
-        white "$line"
-      fi
-    fi
-  done < "$input"
-}
-alias tda='t -a' 
-alias tdb='t -b' 
 
 function secure_chromium {
 port=1234

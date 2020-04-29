@@ -1,3 +1,4 @@
+#echo -e "$(date) enable Powerlevel10k prompt"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -79,9 +80,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+#echo -e "$(date) plugins"
 ZSH_TMUX_AUTOQUIT=false
 plugins=(git ssh-agent tmux)
 
+#echo -e "$(date) source ohmyzsh"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -110,6 +113,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#echo -e "$(date) PATH"
 appPaths=(
   /usr/local/bin
   /Applications/Postgres.app/Contents/Versions/latest/bin
@@ -122,15 +126,19 @@ for d in ${appPaths[@]}; do
   if [[ -d $d ]]; then; export PATH=$d:$PATH; fi
 done
 
+#echo -e "$(date) alias"
 source $HOME/.alias
 export TERM=xterm-256color
 set -o vi
 
+#echo -e "$(date) quote"
 #myquote
 
+#echo -e "$(date) completions"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/arafatm/apps/vault vault
 
+#echo -e "$(date) p10k prompt"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
