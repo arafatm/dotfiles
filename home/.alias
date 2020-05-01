@@ -5,15 +5,6 @@ exists() # check if a  command exist
   command -v "$1" >/dev/null 2>&1
 }
 
-black() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
-red() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
-green() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
-yellow() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
-blue() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
-magenta() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
-cyan() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
-white() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
-
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 red=$(tput setaf 1)
 gre=$(tput setaf 2)
@@ -25,7 +16,7 @@ nor=$(tput sgr0) # reset colors
 # tput setab for background
 # tput bold
 
-PILL="You take the pill — the story ends, you wake up in bed and believe whatever you want to believe. You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the truth. Nothing more."
+#PILL="You take the pill — the story ends, you wake up in bed and believe whatever you want to believe. You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the truth. Nothing more."
 
 #echo -e $PILL | sed -e "s/\(pill\)/$red\1$nor/g" | sed -e "s/\(story\)/$gre\1$nor/g"
 
@@ -183,7 +174,15 @@ function todo() {
     done
     cmd="$cmd | grep --color=none -i \"$srch\""
   fi
-  eval "$cmd | sort"
+  #echo "search $cmd"
+  eval "$cmd \
+    | sed -e 's/\( $srch\)/$gre\1$nor/g' \
+    | sed -e 's/\( :a:\)/$red\1$nor/' \
+    | sed -e 's/\( :b:\)/$yel\1$nor/' \
+    | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
+    | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
+    | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
+    | sort"
 }
 
 function secure_chromium {
