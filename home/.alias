@@ -182,7 +182,7 @@ function todo() {
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
-    | sort"
+    "
 }
 
 function secure_chromium {

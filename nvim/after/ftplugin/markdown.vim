@@ -37,7 +37,7 @@ setlocal foldexpr=MarkdownLevel()
 setlocal foldmethod=expr   
 setlocal foldlevel=1
 
-iab :b :boom:
+iab :m :boom:
 iab :e :exclamation:
 iab :f :fire:
 iab :l :flashlight:
@@ -60,9 +60,11 @@ map ``t o:ship:<return>```terraform<return>```<esc>k0ba<space>
 
 imap ,t - [ ]
 imap ,a - [ ] :a:
+imap ,b - [ ] :b:
 
 map <LEADER>tn <ESC>/- \[ ]<CR>
 map <LEADER>tna <ESC>/- \[ ] :a:<CR>
+map <LEADER>tnb <ESC>/- \[ ] :b:<CR>
 map <LEADER>tc <ESC>:call TodoDoneCal()<CR>
 map <LEADER>td <ESC>:call TodoDone()<CR>
 map <LEADER>te <ESC>:call TodoDoneEml()<CR>
