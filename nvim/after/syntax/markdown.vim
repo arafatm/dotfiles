@@ -13,11 +13,13 @@ syntax match mkdTags      / \#\S\+/
 hi def link mkdTodo     DiffAdd
 hi def link mkdTodoA    DiffDelete
 hi def link mkdTodoB    DiffText
-hi def link mkdTodoDone Comment
+hi def link mkdTodoDone PreProc
 
 hi def link mkdDelegate Statement
 hi def link mkdDelegated Statement
-hi def link mkdEmoji    Special
-hi def link mkdLink     Underlined
+"hi def link mkdEmoji    Special
+hi def link mkdEmoji    Comment
+"hi          mkdLink     gui=underline guifg=Gray cterm=underline ctermfg=81
+hi def link mkdLink     MarkdownLinkText
 hi def link mkdProject  Constant
 hi def link mkdTags     PreProc 

@@ -6,6 +6,8 @@ exists() # check if a  command exist
 }
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
+bred=$(tput setab 1)
+byel=$(tput setab 3)
 red=$(tput setaf 1)
 gre=$(tput setaf 2)
 yel=$(tput setaf 3)
@@ -160,7 +162,7 @@ alias tob='grep -r "\- \[ ] " * | grep :a:'
 alias tr='grep -r "\- \[ ] " * | sort -r'
 
 function todo() {
-  cmd='grep -R "\- \[ ]" *'
+  cmd='grep -inr "\- \[ ]" *'
   if [[ -n "$@" ]]; then
     args=$@
     echo -e "todos: $@"
@@ -172,13 +174,13 @@ function todo() {
       srch="$srch\|$1"
       shift
     done
-    cmd="$cmd | grep --color=none -i \"$srch\""
+    cmd="$cmd | grep -inr \"$srch\""
   fi
   #echo "search $cmd"
   eval "$cmd \
     | sed -e 's/\( $srch\)/$gre\1$nor/g' \
-    | sed -e 's/\( :a:\)/$red\1$nor/' \
-    | sed -e 's/\( :b:\)/$yel\1$nor/' \
+    | sed -e 's/\( :a:\)/$bred\1$nor/' \
+    | sed -e 's/\( :b:\)/$byel\1$nor/' \
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
