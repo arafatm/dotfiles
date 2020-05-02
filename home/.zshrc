@@ -132,7 +132,7 @@ export TERM=xterm-256color
 set -o vi
 
 #echo -e "$(date) quote"
-#myquote
+myquote
 
 #echo -e "$(date) completions"
 autoload -U +X bashcompinit && bashcompinit
