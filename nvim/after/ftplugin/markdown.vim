@@ -51,11 +51,13 @@ iab :w :warning:
 iab `b ```bash<return>```<ESC>0
 iab `e ```elixir<return>```<ESC>0
 iab `r ```ruby<return>```<ESC>0
+iab `p ```python<return>```<ESC>0
 iab `t ```terraform<return>```<ESC>0
 
 map ``b o:ship:<return>```bash<return>```<esc>k0ba<space>
 map ``e o:ship:<return>```elixir<return>```<esc>k0ba<space>
 map ``r o:ship:<return>```ruby<return>```<esc>k0ba<space>
+map ``p o:ship:<return>```python<return>```<esc>k0ba<space>
 map ``t o:ship:<return>```terraform<return>```<esc>k0ba<space>
 
 imap ,t - [ ]
