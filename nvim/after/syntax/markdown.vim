@@ -38,5 +38,8 @@ hi def link mkdTags     PreProc
 " markdownOrderedListMarker
 " markdownRule
 " markdownHeadingRule
-" hi def link markdownUrl  Special 
+"hi! markdownUrl  ctermfg=27
+" hi def link markdownUrl  Constant " this won't work
 " markdownLinkText
+"hi! markdownUrl  ctermfg=81
+echomsg "syntax markdown.vim"

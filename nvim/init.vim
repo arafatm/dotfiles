@@ -30,7 +30,6 @@ let g:terraform_fmt_on_save=1
 
 " Color schemes
 Plug 'morhetz/gruvbox'
-Plug 'drewtempelmeyer/palenight.vim'
 
 " languages
 Plug 'ajh17/VimCompletesMe'
@@ -127,12 +126,11 @@ if !exists('g:not_finish_vimplug')
   syntax enable
   set background=dark
   set termguicolors
-  "colorscheme NeoSolarized
-  "colorscheme molokai
 
   "let g:gruvbox_termcolors=16
-  " colorscheme gruvbox
-  colorscheme palenight
+  "colorscheme NeoSolarized
+  "colorscheme molokai
+  colorscheme gruvbox
 endif
 
 "set mousemodel=popup
@@ -172,6 +170,8 @@ set titleold="Terminal"
 set titlestring=%F
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+
+noremap <Leader>f :filetype detect
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -263,6 +263,8 @@ map <LEADER>exc <ESC>:%s/\%u200b//g<CR>:%s/'/"/g<CR>:%s/\t/  /g<CR>ggVG=<CR>
 
 " ****************************
 " FOLDING
+
+set foldmethod=indent
 
 " Map space to toggle fold
 nnoremap  <silent>  <space> :exe 'silent! normal! za'.(foldlevel('.')?'':'l')<cr>
