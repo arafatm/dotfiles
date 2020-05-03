@@ -6,7 +6,7 @@ syntax match mkdTodoDone  /- \[x] .*/
 syntax match mkdDelegate   / @\S\+/ 
 syntax match mkdDelegated  / \.\S\+/ 
 syntax match mkdEmoji     / :\S\+:/ " highlight emoji
-syntax match mkdLink      /\S\+:\/\/\S\+/
+"syntax match mkdLink      /\S\+:\/\/\S\+/
 syntax match mkdProject   / \!\S\+/ 
 syntax match mkdTags      / \#\S\+/ 
 
@@ -20,6 +20,23 @@ hi def link mkdDelegated Statement
 "hi def link mkdEmoji    Special
 hi def link mkdEmoji    Comment
 "hi          mkdLink     gui=underline guifg=Gray cterm=underline ctermfg=81
-hi def link mkdLink     MarkdownLinkText
+"hi def link mkdLink     MarkdownLinkText
 hi def link mkdProject  Constant
 hi def link mkdTags     PreProc 
+
+" syntax defined
+" markdownH1
+" markdownH2
+" markdownH3
+" markdownH4
+" markdownH5
+" markdownH6
+" markdownCode
+" markdownCodeBlock
+" markdownBlockquote
+" markdownListMarker
+" markdownOrderedListMarker
+" markdownRule
+" markdownHeadingRule
+" hi def link markdownUrl  Special 
+" markdownLinkText

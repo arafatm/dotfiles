@@ -30,6 +30,7 @@ let g:terraform_fmt_on_save=1
 
 " Color schemes
 Plug 'morhetz/gruvbox'
+Plug 'drewtempelmeyer/palenight.vim'
 
 " languages
 Plug 'ajh17/VimCompletesMe'
@@ -130,7 +131,8 @@ if !exists('g:not_finish_vimplug')
   "colorscheme molokai
 
   "let g:gruvbox_termcolors=16
-  colorscheme gruvbox
+  " colorscheme gruvbox
+  colorscheme palenight
 endif
 
 "set mousemodel=popup
