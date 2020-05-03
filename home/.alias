@@ -5,6 +5,7 @@ exists() # check if a  command exist
   command -v "$1" >/dev/null 2>&1
 }
 
+#echo "(date +%H:%M:%S) alias 8"
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bred=$(tput setab 1)
 byel=$(tput setab 3)
@@ -18,14 +19,11 @@ nor=$(tput sgr0) # reset colors
 # tput setab for background
 # tput bold
 
-#PILL="You take the pill — the story ends, you wake up in bed and believe whatever you want to believe. You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I’m offering is the truth. Nothing more."
-
-#echo -e $PILL | sed -e "s/\(pill\)/$red\1$nor/g" | sed -e "s/\(story\)/$gre\1$nor/g"
-
 if [ $OSTYPE != "msys" ]; then # shit that don't work on git-bash
   alias grep='grep --color'       # show differences in colour
 fi
 
+#echo "(date +%H:%M:%S) alias 26"
 # OSX Specific shit
 if [[ $OSTYPE =~ "darwin" ]]; then
   if ! exists "gsed"; then; echo "$red brew install gnu-sed $nor"; fi
@@ -33,16 +31,17 @@ if [[ $OSTYPE =~ "darwin" ]]; then
 fi
 
 # Apps
-if ! terraform --version >/dev/null 2>&1; then
+if ! exists terraform; then
   alias terraform='$HOME/apps/terraform'
 fi
 alias tf='terraform'
 
-if ! vault --version >/dev/null 2>&1; then
+if ! exists vault; then
   alias vault='$HOME/apps/vault'
 fi
 alias va='vault'
 
+#echo "(date +%H:%M:%S) alias 44"
 alias bkps='$HOME/bin/bkps.git.cron'
 alias ca='cd $HOME/code/$USER'
 alias ch='cd $HOME/code/hashicorp'
@@ -59,7 +58,8 @@ alias jcu="jc -u"
 alias ag='alias | grep'
 alias swp='setxkbmap -option caps:swapescape'
 
-if nvim --version >/dev/null 2>&1; then
+#echo "(date +%H:%M:%S) alias 59"
+if exists nvim; then
   alias :e='nvim'
   alias v='nvim -R'
   alias vi='nvim'
@@ -128,6 +128,7 @@ alias whence='type -a'                        # where, of a sort
 #  alias vdir='ls --color=auto --format=long'
 #fi
 
+#echo "(date +%H:%M:%S) darwin"
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   alias ls='ls -G'
 else
@@ -219,6 +220,7 @@ function cleankernels()
 # Dev Aliases
 ##############################
 
+#echo "(date +%H:%M:%S) dev aliases"
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # postgres
@@ -386,6 +388,7 @@ ggit_commit()
   git commit $_file -m "$_args"
 }
 
+#echo "(date +%H:%M:%S) ruby"
 # rbenv/chruby 
 if [ -d /usr/local/share/chruby ]; then
   source /usr/local/share/chruby/chruby.sh
@@ -399,6 +402,7 @@ elif [ -d $HOME/.rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
+#echo "(date +%H:%M:%S) heroku"
 # heroku
 if [ -d /usr/local/heroku ]; then
   export PATH="/usr/local/heroku/bin:$PATH" # Add Heroku Toolbelt
