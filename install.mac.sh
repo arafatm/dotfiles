@@ -29,6 +29,7 @@ brew install \
   neovim \
   htop \
   tldr \
+  pyenv \
   zsh-syntax-highlighting
 
 
