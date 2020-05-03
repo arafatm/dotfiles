@@ -194,9 +194,6 @@ chromium --proxy-server="socks://localhost:$port" &
 exit
 }
 
-# Pick a random mwod from starett
-alias starrett="ruby -e 'puts 230 + rand(165)'" 
-
 function fuckingcygwin() 
 {
   if [[ -n "$1" ]]; then
@@ -406,6 +403,12 @@ fi
 # heroku
 if [ -d /usr/local/heroku ]; then
   export PATH="/usr/local/heroku/bin:$PATH" # Add Heroku Toolbelt
+fi
+
+if exists python3; then
+  alias python='python3'
+  alias py='python3'
+  alias pip='pip3'
 fi
 
 # Docker
