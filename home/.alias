@@ -158,6 +158,7 @@ duds(){
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
+alias ts='todosort'
 alias toa='grep -r "\- \[ ] " * | grep :a:'
 alias tob='grep -r "\- \[ ] " * | grep :a:'
 alias tr='grep -r "\- \[ ] " * | sort -r'
@@ -185,6 +186,32 @@ function todo() {
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
+    "
+}
+function todosort() {
+  cmd='grep -ir "\- \[ ]" *'
+  if [[ -n "$@" ]]; then
+    args=$@
+    echo -e "todos: $@"
+    srch=$1
+    shift
+
+    while [[ -n $@  ]]; do
+      echo $@
+      srch="$srch\|$1"
+      shift
+    done
+    cmd="$cmd | grep -ir \"$srch\""
+  fi
+  #echo "search $cmd"
+  eval "$cmd \
+    | sed -e 's/\( $srch\)/$gre\1$nor/g' \
+    | sed -e 's/\( :a:\)/$bred\1$nor/' \
+    | sed -e 's/\( :b:\)/$byel\1$nor/' \
+    | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
+    | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
+    | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
+    | sort -r
     "
 }
 
