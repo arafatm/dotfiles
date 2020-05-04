@@ -73,7 +73,7 @@ map <LEADER>te <ESC>:call TodoDoneEml()<CR>
 map <LEADER>ts <ESC>vip:!sort<CR>
 
 command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
-command! Gheadcommit      :call GH_commit_this_header_as_message()
+command! Gheadcommit      :call GH_commit_this_file_as_message()
 command! Glinklastcommit  :call GH_link_last_commit()
 
 " ****************************
@@ -126,9 +126,10 @@ endfunction
 
 " ****************************
 " Commit Readme with last message of last header "^##"
-function! GH_commit_this_header_as_message()
+function! GH_commit_this_file_as_message()
   let l:winview = winsaveview()
-  let msg = getline(search("^\#", "b"))
+  "let msg = getline(search("^\#", "b"))
+  let msg = expand('%:t')
   call winrestview(l:winview)
 
   call Git_commit(msg) " defined in init.vim
