@@ -176,18 +176,30 @@ function todo() {
       srch="$srch\|$1"
       shift
     done
-    cmd="$cmd | grep -inr \"$srch\""
+    cmd="$cmd | grep -i \"$srch\""
   fi
   #echo "search $cmd"
-  eval "$cmd \
-    | sed -e 's/\( $srch\)/$gre\1$nor/g' \
+
+  eval "$cmd  \
     | sed -e 's/\( :a:\)/$bred\1$nor/' \
     | sed -e 's/\( :b:\)/$byel\1$nor/' \
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
-    "
+    | sed -e 's/\($srch\)/$gre\1$nor/g' "
+
+# echo -e "$t \
+#    | sed -e 's/\($srch\)/$gre\1$nor/g' \
+#   | sed -e 's/\( $srch\)/$gre\1$nor/g' \
+#   | sed -e 's/\( :a:\)/$bred\1$nor/' \
+#   | sed -e 's/\( :b:\)/$byel\1$nor/' \
+#   | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
+#   | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
+#   | sed -e 's/\( #\S\+\)/$blu\1$nor/g'"
+
+#  echo "$cmd"
 }
+
 function todosort() {
   cmd='grep -ir "\- \[ ]" *'
   if [[ -n "$@" ]]; then
@@ -211,8 +223,7 @@ function todosort() {
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g' \
-    | sort -r
-    "
+    | sort -r"
 }
 
 function secure_chromium {
