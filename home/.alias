@@ -158,13 +158,14 @@ duds(){
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
+alias td='tododone'
 alias ts='todosort'
 alias toa='grep -r "\- \[ ] " * | grep :a:'
 alias tob='grep -r "\- \[ ] " * | grep :b:'
 alias tr='grep -r "\- \[ ] " * | sort -r'
 
 function todo() {
-  local cmd='grep -ir "\- \[ ]" *'
+  local cmd='grep -inr "\- \[ ]" *'
   local srch=""
   if [[ -n "$@" ]]; then
     args=$@
@@ -187,6 +188,13 @@ function todo() {
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g' "
+}
+
+function tododone() {
+  # mark a todo item completed
+  # $1 = line number      $2 = file
+  sed -i "$1s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)/" $2
+  sed -i "$1s/@/./g" $2
 }
 
 function secure_chromium {
