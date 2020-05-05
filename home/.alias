@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 
-exists() # check if a  command exist
+function exists() # check if a  command exist
 {
   command -v "$1" >/dev/null 2>&1
 }
@@ -152,17 +152,17 @@ alias dynds='ssh -oServerAliveInterval=60 $USER@$USER.dyndns.org'
 alias firedev='firefox -P dev -no-remote'
 alias firemisc='firefox -P misc -no-remote'
 
-duds(){
+function duds(){
   du -hs *|sort -hr
 }
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
+alias tr='todo | sort -r'
 alias td='tododone'
-alias ts='todosort'
+alias ts='todo'
 alias toa='grep -r "\- \[ ] " * | grep :a:'
 alias tob='grep -r "\- \[ ] " * | grep :b:'
-alias tr='grep -r "\- \[ ] " * | sort -r'
 
 function todo() {
   local cmd='grep -inr "\- \[ ]" *'
@@ -304,7 +304,7 @@ alias vags='time vag ssh'
 alias vagsc='time vag ssh -c'
 alias vagu='time vag up'
 
-bundle_init()
+function bundle_init()
 {
   bundle install --path vendor
   bundle package
@@ -313,13 +313,13 @@ bundle_init()
   fi
 }
 
-ggit_add_and_commit_all()
+function ggit_add_and_commit_all()
 {
   git add . && git commit . -m "$*"
   git push &
 }
 
-readme_append_ggit_commit()
+function readme_append_ggit_commit()
 {
   url=$(git config --get remote.origin.url)
   url=${url:15:-4}
@@ -342,7 +342,7 @@ readme_append_ggit_commit()
 
 # Git commit &&
 # Replace "xxx" in readme.md with the git commit text 
-ggit_and_readme()
+function ggit_and_readme()
 {
   echo "commit and append to readme\n" & \
     git add .  && \
@@ -352,7 +352,7 @@ ggit_and_readme()
 
 # Git commit the last run command &&
 # Replace "xxx" in readme.md with the git commit text 
-ggit_command_and_readme()
+function ggit_command_and_readme()
 {
   echo "commit last command and append to readme\n" 
   lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
@@ -362,26 +362,26 @@ ggit_command_and_readme()
 }
 
 # Add git note && append to readme.md
-ggit_note_and_readme()
+function ggit_note_and_readme()
 {
   git commit --allow-empty --cleanup=whitespace -m "$*" && \
     readme_append_ggit_commit
 }
 
-ggit_commit_last_command()
+function ggit_commit_last_command()
 {
   HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//')
   git add . && git commit . -m "\$ $HIS"
   # ( git push ) &
 }
 
-ggit_commit_all()
+function ggit_commit_all()
 {
   git add . && \
     git commit -a -m "$*"
 }
 
-ggit_commit()
+function ggit_commit()
 {
   array=( $@ )
   len=${#array[@]}
@@ -421,7 +421,7 @@ if exists python3; then
 fi
 
 # Docker
-docker_shell() {
+function docker_shell() {
   docker exec -it $1 bash
 }
 
@@ -429,11 +429,11 @@ docker_shell() {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-github_clone() {
+function github_clone() {
   git clone git@github.com:$1
 }
 
-ggit_branch_and_track() {
+function ggit_branch_and_track() {
   git branch $1
   git push origin $1:$1
   git co $1
@@ -441,11 +441,11 @@ ggit_branch_and_track() {
 }
 
 
-ggit_checkout_remote() {
+function ggit_checkout_remote() {
   git checkout --track -b $1 origin/$1
 }
 
-herbr() {
+function herbr() {
   if [ -z "$1" ]; then
     echo "Please provide the name of the heroku app"
   else
@@ -465,21 +465,21 @@ herbr() {
 
 }
 
-em() {
+function em() {
   emacs $1 &
 }
 
-rdt() { # Echo a string into readme.md
+function rdt() { # Echo a string into readme.md
   echo "" >> readme.md
   echo "$*" >> readme.md
 }
 
-rdc() { # Echo a string into readme.md as a code block
+function rdc() { # Echo a string into readme.md as a code block
   echo "" >> readme.md
   echo -e "\`$*\`" >> readme.md
 }
 
-rdcl() { # Echo the last command into readme.md as a code block
+function rdcl() { # Echo the last command into readme.md as a code block
   HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//')
   echo "" >> readme.md
   echo -e "\`$HIS\`" >> readme.md
