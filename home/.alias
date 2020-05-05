@@ -7,8 +7,10 @@ function exists() # check if a  command exist
 
 #echo "(date +%H:%M:%S) alias 8"
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
-bred=$(tput setab 1)
-byel=$(tput setab 3)
+bgred=$(tput setab 1)
+bgyel=$(tput setab 3)
+bred=$(tput setaf 1)$(tput bold)
+red=$(tput setaf 1)
 red=$(tput setaf 1)
 gre=$(tput setaf 2)
 yel=$(tput setaf 3)
@@ -158,14 +160,14 @@ function duds(){
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
-alias tr='todo | sort -r'
+alias tr='todo | tac'
 alias td='tododone'
 alias ts='todo'
 alias toa='grep -r "\- \[ ] " * | grep :a:'
 alias tob='grep -r "\- \[ ] " * | grep :b:'
 
 function todo() {
-  local cmd='grep -inr "\- \[ ]" *'
+  local cmd='grep -inr --color=always "\- \[ ]" *'
   local srch=""
   if [[ -n "$@" ]]; then
     args=$@
@@ -182,19 +184,22 @@ function todo() {
   fi
   #echo "search $cmd"
 
+  #local output=$($cmd  \
   eval "$cmd  \
-    | sed -e 's/\( :a:\)/$bred\1$nor/' \
-    | sed -e 's/\( :b:\)/$byel\1$nor/' \
+    | sed -e 's/\(:a:\)/$bgred\1$nor/' \
+    | sed -e 's/\(:b:\)/$yel\1$nor/' \
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
-    | sed -e 's/\( #\S\+\)/$blu\1$nor/g' "
+    | sed -e 's/\( #\S\+\)/$blu\1$nor/g'"
+    #| sed -e 's/$/\n/' "
+
 }
 
 function tododone() {
   # mark a todo item completed
-  # $1 = line number      $2 = file
-  sed -i "$1s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)/" $2
-  sed -i "$1s/@/./g" $2
+  # $1 = filename      $2 = linenum
+  sed -i "$2s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)~~/" $1
+  sed -i "$2s/@/./g" $1
 }
 
 function secure_chromium {
