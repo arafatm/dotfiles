@@ -164,6 +164,7 @@ alias tr='todo | tac'
 alias td='tododone'
 alias toa='todo :a:'
 alias tob='todo :b:'
+alias tod='todo @'
 
 function todo() {
   local cmd='grep -inr --color=always "\- \[ ]" *'
