@@ -162,9 +162,8 @@ function duds(){
 alias t='todo'
 alias tr='todo | tac'
 alias td='tododone'
-alias ts='todo'
-alias toa='grep -r "\- \[ ] " * | grep :a:'
-alias tob='grep -r "\- \[ ] " * | grep :b:'
+alias toa='todo :a:'
+alias tob='todo :b:'
 
 function todo() {
   local cmd='grep -inr --color=always "\- \[ ]" *'
