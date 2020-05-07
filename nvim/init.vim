@@ -39,8 +39,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 
-Plug 'plasticboy/vim-markdown'
-
+"Plug 'plasticboy/vim-markdown' " Too much magic messed with presentation
 
 " Intellisense
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
