@@ -40,16 +40,16 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 
 Plug 'godlygeek/tabular' " needed for vim-markdown
-Plug 'plasticboy/vim-markdown' " https://github.com/plasticboy/vim-markdown
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_autowrite = 1
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_fenced_languages = ['terraform=hcl', 'python=python']
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_math = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_strikethrough = 1
+"Plug 'plasticboy/vim-markdown' " https://github.com/plasticboy/vim-markdown
+"let g:vim_markdown_auto_insert_bullets = 0
+"let g:vim_markdown_autowrite = 1
+"let g:vim_markdown_conceal = 0
+"let g:vim_markdown_fenced_languages = ['terraform=hcl', 'python=python']
+"let g:vim_markdown_folding_style_pythonic = 1
+"let g:vim_markdown_frontmatter = 1
+"let g:vim_markdown_math = 1
+"let g:vim_markdown_new_list_item_indent = 0
+"let g:vim_markdown_strikethrough = 1
 
 " Intellisense
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
