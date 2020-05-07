@@ -69,6 +69,8 @@ map <LEADER>tna <ESC>/- \[ ] :a:<CR>
 map <LEADER>tnb <ESC>/- \[ ] :b:<CR>
 map <LEADER>tc <ESC>:call TodoDoneCal()<CR>
 map <LEADER>td <ESC>:call TodoDone()<CR>
+map <LEADER>td :.s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~"<CR>
+
 map <LEADER>te <ESC>:call TodoDoneEml()<CR>
 map <LEADER>ts <ESC>vip:!sort<CR>
 
@@ -107,11 +109,11 @@ endfunction
 
 " ****************************
 function! TodoDone()
-  let line = getline('.')
-  let text = split(line, "]")[1] 
-  let done = "- [x] ~~" . strftime("%Y-%m-%d") . "~~" . text
-  call setline(line('.'), done) 
-  s/ @/ ./g
+  "let line = getline('.')
+  "let text = split(line, "]")[1] 
+  "let done = "- [x] ~~" . strftime("%Y-%m-%d") . "~~" . text
+  "call setline(line('.'), done) 
+  s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~" 
 endfunction
 
 " ****************************
