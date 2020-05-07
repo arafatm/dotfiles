@@ -23,13 +23,14 @@ export PATH=$HOME/homebrew/bin:$PATH
 echo "****** ***** ***** **** Installing brews"
 brew install \
   coreutils \
-  zsh \
+  ctags \
   git \
-  tmux \
-  neovim \
   htop \
-  tldr \
+  neovim \
   pyenv \
+  tldr \
+  tmux \
+  zsh \
   zsh-syntax-highlighting
 
 
