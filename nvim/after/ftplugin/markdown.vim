@@ -68,7 +68,7 @@ map <LEADER>tn <ESC>/- \[ ]<CR>
 map <LEADER>tna <ESC>/- \[ ] :a:<CR>
 map <LEADER>tnb <ESC>/- \[ ] :b:<CR>
 map <LEADER>tc <ESC>:call TodoDoneCal()<CR>
-map <LEADER>td <ESC>:call TodoDone()<CR>
+"map <LEADER>td <ESC>:call TodoDone()<CR>
 map <LEADER>td :.s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~"<CR>
 
 map <LEADER>te <ESC>:call TodoDoneEml()<CR>
