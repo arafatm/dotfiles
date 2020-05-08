@@ -39,7 +39,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 
-Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
+" Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
+Plug 'mmai/vim-markdown-wiki' " links manipulation and navigation in markdown 
+
 
 Plug 'godlygeek/tabular' " needed for vim-markdown
 "Plug 'plasticboy/vim-markdown' " https://github.com/plasticboy/vim-markdown
