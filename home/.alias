@@ -14,7 +14,7 @@ red=$(tput setaf 1)
 red=$(tput setaf 1)
 gre=$(tput setaf 2)
 yel=$(tput setaf 3)
-blu=$(tput setaf 4)
+blu=$(tput dim)$(tput setaf 4)
 mag=$(tput setaf 5)
 cya=$(tput setaf 6)
 nor=$(tput sgr0) # reset colors
@@ -160,12 +160,21 @@ function duds(){
 
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
+alias tdo='tododone'
 alias tr='todo | tac'
-alias td='tododone'
-alias toa='todo :a:'
-alias tob='todo :b:'
-alias tod='todo @'
-alias lnk='grep ]* * | sort' 
+alias ta='todo :a:'
+alias tb='todo :b:'
+alias td='todo @'
+alias lnk='greplinks'
+
+function greplinks() {
+  lnks="grep '\[\S.\+](' *.md"
+  eval "$lnks \
+    | sed -e 's/^.*\(\[\S.\+](.*)\)/\1/' \
+    | sed -e 's/\(\[\S.\+]\)/$cya\1$nor/g' \
+    | sort"
+  echo -e $lnks
+}
 
 function todo() {
   local cmd='grep -inr --color=always "\- \[ ]" *'
@@ -191,6 +200,7 @@ function todo() {
     | sed -e 's/\(:b:\)/$yel\1$nor/' \
     | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
     | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
+    | sed -e 's/\( \.\S\+\)/$mag\1$nor/g' \
     | sed -e 's/\( #\S\+\)/$blu\1$nor/g'"
     #| sed -e 's/$/\n/' "
 
