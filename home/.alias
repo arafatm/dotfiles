@@ -161,6 +161,7 @@ function duds(){
 #alias t='grep -r "\- \[ ] " * | sort'
 alias t='todo'
 alias tdo='tododone'
+alias th='todo | head'
 alias tr='todo | tac'
 alias ta='todo :a:'
 alias tb='todo :b:'
