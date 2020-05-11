@@ -40,6 +40,7 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 
 " Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
+Plug 'ajorgensen/vim-markdown-toc'
 Plug 'mmai/vim-markdown-wiki' " links manipulation and navigation in markdown 
 
 
