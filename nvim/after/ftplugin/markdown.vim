@@ -105,6 +105,8 @@ function! TodoDone()
   "let done = "- [x] ~~" . strftime("%Y-%m-%d") . "~~" . text
   "call setline(line('.'), done) 
   s/@/./g 
+  s/:a:/A/g 
+  s/:b:/B/g 
   s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~" 
 endfunction
 

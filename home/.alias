@@ -210,8 +210,10 @@ function todo() {
 function tododone() {
   # mark a todo item completed
   # $1 = filename      $2 = linenum
-  sed -i "$2s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)~~/" $1
   sed -i "$2s/@/./g" $1
+  sed -i "$2s/:a:/A/g" $1
+  sed -i "$2s/:b:/B/g" $1
+  sed -i "$2s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)~~/" $1
 }
 
 function secure_chromium {
