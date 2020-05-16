@@ -7,9 +7,10 @@
 
 bkpFolders=(
   $HOME/dotfiles
-  $HOME/code/arafatm/arafatm.github.io
-  $HOME/code/orgarafatm/wrk-hashi
-  $HOME/code/arafatm/blinkist
+  $HOME/code/$USER/arafatm.github.io
+  $HOME/code/$USER/wrk-hashi
+  $HOME/code/$USER/blinkist
+  $HOME/code/$USER/private
 )
 
 pushd $(pwd)
