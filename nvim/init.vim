@@ -10,16 +10,20 @@ Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'airblade/vim-gitgutter'
+Plug 'preservim/nerdtree'
+nmap <C-n> :NERDTreeToggle<CR>
+Plug 'scrooloose/nerdtree' " git status plugin for nerdtree
+
 Plug 'majutsushi/tagbar'
-  nmap <C-m> :TagbarToggle<CR>
-Plug 'scrooloose/nerdtree'
-  nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-m> :TagbarToggle<CR>
+
 Plug 'ctrlpvim/ctrlp.vim'
-  let g:ctrlp_map = '<c-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-  nnoremap <leader>. :CtrlPTag<cr>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+nnoremap <leader>. :CtrlPTag<cr>
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -313,6 +317,7 @@ command! Gstatus !git status
 command! -nargs=+ Gcommitall :call Git_commit_all(<q-args>)
 
 function! Git_commit_all(message)
+  echo system('git pull')
   echo system('git commit -a -m "' . a:message . '"')
   echo system('git push')
   "call jobstart('git pull; git push')
