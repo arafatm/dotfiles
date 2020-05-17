@@ -10,7 +10,7 @@ bkpFolders=(
   $HOME/code/$USER/arafatm.github.io
   $HOME/code/$USER/blinkist
   $HOME/code/$USER/private
-  $HOME/code/$USER/wrk-hashi
+  $HOME/code/wrk-hashi
 )
 
 pushd $(pwd)
