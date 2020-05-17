@@ -332,6 +332,6 @@ endfunction
 
 " open file at last location
 au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+"au BufWinEnter * silent loadview
 
 set expandtab
