@@ -33,7 +33,7 @@ iab :e :exclamation:
 iab :f :fire:
 iab :l :flashlight:
 iab :p :poop:
-iab :s :ship:
+iab :s :shipit:
 iab :t :star:
 iab :u :point_up:
 iab :w :warning:
@@ -45,11 +45,11 @@ iab `r ```ruby<return>```<ESC>0
 iab `p ```python<return>```<ESC>0
 iab `t ```terraform<return>```<ESC>0
 
-map ``b o:ship:<return>```bash<return>```<esc>k0ba<space>
-map ``e o:ship:<return>```elixir<return>```<esc>k0ba<space>
-map ``r o:ship:<return>```ruby<return>```<esc>k0ba<space>
-map ``p o:ship:<return>```python<return>```<esc>k0ba<space>
-map ``t o:ship:<return>```terraform<return>```<esc>k0ba<space>
+map ``b o:shipit:<return>```bash<return>```<esc>k0ba<space>
+map ``e o:shipit:<return>```elixir<return>```<esc>k0ba<space>
+map ``r o:shipit:<return>```ruby<return>```<esc>k0ba<space>
+map ``p o:shipit:<return>```python<return>```<esc>k0ba<space>
+map ``t o:shipit:<return>```terraform<return>```<esc>k0ba<space>
 
 imap ,t - [ ]
 imap ,a - [ ] :a:
