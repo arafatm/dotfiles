@@ -178,7 +178,7 @@ function greplinks() {
 }
 
 function todo() {
-  local cmd='grep -inr --color=always "\- \[ ]" *'
+  local cmd='grep -inr --color=always "\- \[ ]" *.md'
   local srch=""
   if [[ -n "$@" ]]; then
     args=$@
