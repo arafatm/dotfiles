@@ -7,9 +7,9 @@
 
 bkpFolders=(
   $HOME/dotfiles
-  $HOME/code/$USER/arafatm.github.io
-  $HOME/code/$USER/blinkist
-  $HOME/code/$USER/private
+  $HOME/code/arafatm/arafatm.github.io
+  $HOME/code/arafatm/blinkist
+  $HOME/code/arafatm/private
   $HOME/code/wrk-hashi
 )
 
