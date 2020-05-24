@@ -15,8 +15,9 @@ bkpFolders=(
 
 pushd $(pwd)
 for d in ${bkpFolders[@]}; do
-  echo "backup up $d"
+  echo "Finding $d"
   if [[ -d $d ]]; then
+    echo "Found $d"
     cd $d \
       && echo "" \
       && echo "----- $(pwd) " \
