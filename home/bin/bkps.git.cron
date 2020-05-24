@@ -15,12 +15,11 @@ bkpFolders=(
 
 pushd $(pwd)
 for d in ${bkpFolders[@]}; do
-  echo "Finding $d"
+  echo " "
+  echo "----- Finding $d"
   if [[ -d $d ]]; then
     echo "Found $d"
     cd $d \
-      && echo "" \
-      && echo "----- $(pwd) " \
       && git pull \
       && git add . \
       && git commit . -m "bkp" \
