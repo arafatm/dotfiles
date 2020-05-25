@@ -28,7 +28,18 @@ setlocal foldexpr=MarkdownLevel()
 setlocal foldmethod=expr   
 setlocal foldlevel=1
 
-map ;x xxxi:x:<ESC>
+" Tables shit
+map ;x xxxi:x:<ESC>:Tab/\|<RETURN>
+map ;o xxxi:o:<ESC>:Tab/\|<RETURN>
+map <LEADER>T :Tab/\|<RETURN>
+map <LEADER><LEADER>c vip:s/\: /\: \| /<RETURN>{wwwi\|  X  <ESC>:Tab/\|<RETURN>{/X<RETURN>
+
+" emojis
+iab .a :a: 
+iab .b :b:
+iab .o :o:
+iab .v :v:
+iab .x :x:
 iab :m :boom:
 iab :e :exclamation:
 iab :f :fire:
