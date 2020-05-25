@@ -5,7 +5,7 @@ syntax match mkdTodoDone  /- \[x] .*/
 
 syntax match mkdDelegate   / @\S\+/ 
 syntax match mkdDelegated  / \.\S\+/ 
-syntax match mkdEmoji     /:\S\+: / " highlight emoji
+syntax match mkdEmoji     /:\S\+:/ " highlight emoji
 syntax match mkdLink      /[a-z]\+:\/\/\S\+/
 syntax match mkdProject   / \!\S\+/ 
 syntax match mkdTags      / \#\S\+/ 
