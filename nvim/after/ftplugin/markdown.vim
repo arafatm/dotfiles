@@ -28,6 +28,7 @@ setlocal foldexpr=MarkdownLevel()
 setlocal foldmethod=expr   
 setlocal foldlevel=1
 
+map ;x xxxi:x:<ESC>
 iab :m :boom:
 iab :e :exclamation:
 iab :f :fire:
