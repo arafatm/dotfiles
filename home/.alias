@@ -199,10 +199,11 @@ function todo() {
   eval "$cmd  \
     | sed -e 's/\(:a:\)/$bgred\1$nor/' \
     | sed -e 's/\(:b:\)/$yel\1$nor/' \
-    | sed -e 's/\( !\S\+\)/$cya\1$nor/g' \
-    | sed -e 's/\( @\S\+\)/$mag\1$nor/g' \
-    | sed -e 's/\( \.\S\+\)/$mag\1$nor/g' \
-    | sed -e 's/\( #\S\+\)/$blu\1$nor/g'"
+    | sed -e 's/\( @\S\+\)/ $mag\1$nor/g' \
+    | sed -e 's/\( !\S\+\)/ $gre\1$nor/g' \
+    | sed -e 's/\( \.\S\+\)/ $mag\1$nor/g' \
+    | sed -e 's/\( #\S\+\)/ $cya\1$nor/g' \
+    | sed -e 's/\(https\?:\S\+\)/$blu\1$nor/g'"
     #| sed -e 's/$/\n/' "
 
 }
