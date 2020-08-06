@@ -330,6 +330,18 @@ function! Git_commit(message)
   "call jobstart('git pull; git push')
 endfunction
 
+command! Gheadcommit      :call GH_commit_this_file_as_message()
+" ****************************
+" Commit Readme with last message of last header "^##"
+function! GH_commit_this_file_as_message()
+  let l:winview = winsaveview()
+  "let msg = getline(search("^\#", "b"))
+  let msg = expand('%:t')
+  call winrestview(l:winview)
+
+  call Git_commit(msg) " defined in init.vim
+endfunction
+
 " open file at last location
 au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
