@@ -301,6 +301,8 @@ map <Leader><Leader>7 :set foldlevel=7<cr>
 map <Leader><Leader>8 :set foldlevel=8<cr>
 map <Leader><Leader>9 :set foldlevel=9<cr>
 
+map <Leader><Leader>s vip:!sort<cr>
+
 " ****************************
 " python
 "au BufNewFile,BufRead *.py
