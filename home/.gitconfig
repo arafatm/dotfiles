@@ -38,3 +38,7 @@
 	autosetupmerge = true
 [init]
 	templatedir = ~/.git_template
+[submodule]
+	recurse = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
