@@ -132,6 +132,7 @@ done
 
 #echo -e "$(date '+%H:%M:%S') alias"
 source $HOME/.alias
+source $HOME/.alias.work
 export TERM=xterm-256color
 set -o vi
 
