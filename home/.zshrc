@@ -115,6 +115,8 @@ source $ZSH/oh-my-zsh.sh
 
 # my paths
 #echo -e "$(date '+%H:%M:%S') PATH"
+export GOPATH=$HOME/go
+export GOPRIVATE=github.com/hashicorp
 appPaths=(
   /usr/local/bin
   /Applications/Postgres.app/Contents/Versions/latest/bin
@@ -122,6 +124,7 @@ appPaths=(
   $HOME/homebrew/bin
   $HOME/apps
   $HOME/bin
+  $HOME/go/bin
 )
 for d in ${appPaths[@]}; do
   if [[ -d $d ]]; then; export PATH=$d:$PATH; fi
@@ -149,4 +152,5 @@ fi
 myquote   # print a random quote
 
 #echo -e "$(date '+%H:%M:%S') complete"
+
 

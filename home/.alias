@@ -45,8 +45,9 @@ alias va='vault'
 
 #echo "(date +%H:%M:%S) alias 44"
 alias bkps='$HOME/bin/bkps.git.cron'
-alias ca='cd $HOME/code/$USER'
-alias ch='cd $HOME/code/hashicorp'
+alias cda='cd $HOME/code/$USER'
+alias cdr='cd `git rev-parse --show-toplevel`'
+alias cdh='cd $HOME/code/hashicorp'
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias q='myquote'
