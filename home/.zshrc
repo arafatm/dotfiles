@@ -118,16 +118,17 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=$HOME/go
 export GOPRIVATE=github.com/hashicorp
 appPaths=(
-  /usr/local/bin
-  /Applications/Postgres.app/Contents/Versions/latest/bin
-  $HOME/homebrew/opt/ruby/bin
-  $HOME/homebrew/bin
   $HOME/apps
   $HOME/bin
+  /usr/local/bin
+  $HOME/homebrew/bin
+  $HOME/homebrew/opt/ruby/bin
+  /Applications/Postgres.app/Contents/Versions/latest/bin
   $HOME/go/bin
 )
 for d in ${appPaths[@]}; do
-  if [[ -d $d ]]; then; export PATH=$d:$PATH; fi
+  # if [[ -d $d ]]; then; export PATH=$d:$PATH; fi
+  export PATH=$PATH:$d
 done
 
 #echo -e "$(date '+%H:%M:%S') alias"
@@ -153,5 +154,3 @@ fi
 myquote   # print a random quote
 
 #echo -e "$(date '+%H:%M:%S') complete"
-
-
