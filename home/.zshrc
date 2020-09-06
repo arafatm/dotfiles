@@ -120,15 +120,15 @@ export GOPRIVATE=github.com/hashicorp
 appPaths=(
   $HOME/apps
   $HOME/bin
-  /usr/local/bin
+  $HOME/go/bin
   $HOME/homebrew/bin
   $HOME/homebrew/opt/ruby/bin
   /Applications/Postgres.app/Contents/Versions/latest/bin
-  $HOME/go/bin
+  /usr/local/bin
 )
 for d in ${appPaths[@]}; do
   # if [[ -d $d ]]; then; export PATH=$d:$PATH; fi
-  export PATH=$PATH:$d
+  export PATH=$d:$PATH
 done
 
 #echo -e "$(date '+%H:%M:%S') alias"
