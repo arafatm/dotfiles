@@ -135,8 +135,6 @@ if exists('$SHELL')
 else
     set shell=/bin/sh
 endif
-set shellcmdflag=-ic
-
 
 "*****************************************************************************
 "" Visual Settings
