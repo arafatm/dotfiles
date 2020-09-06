@@ -353,9 +353,10 @@ function readme_append_ggit_commit()
   url="$url/commit/$sha"
 
   msg="[:ship: $sha]($url)\n$msg"
+  echo "commit: $msg"
 
   gitroot=$(git rev-parse --show-toplevel) && \
-    sed -i "s#xxx#s##$msg\n\nxxx#" $gitroot/readme.md 
+    sed -i "s#xxx#$msg\n\nxxx#" $gitroot/readme.md 
 
   git push &
   #git commit -a -m "readme.md" && \
