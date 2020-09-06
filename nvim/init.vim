@@ -41,6 +41,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'fatih/vim-go'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
 
 " Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
