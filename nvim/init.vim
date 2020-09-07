@@ -41,13 +41,18 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'fatih/vim-go'
 let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
+
+Plug 'fatih/vim-go'
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
 " Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
 Plug 'ajorgensen/vim-markdown-toc'
 Plug 'mmai/vim-markdown-wiki' " links manipulation and navigation in markdown 
-
 
 Plug 'godlygeek/tabular' " needed for vim-markdown
 "Plug 'plasticboy/vim-markdown' " https://github.com/plasticboy/vim-markdown
