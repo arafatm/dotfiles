@@ -10,9 +10,9 @@ syntax match mkdLink      /[a-z]\+:\/\/\S\+/
 syntax match mkdProject   / \!\S\+/ 
 syntax match mkdTags      / \#\S\+/ 
 
-hi def link mkdTodo     DiffAdd
+hi def link mkdTodo     DiffChange
 hi def link mkdTodoA    DiffDelete
-hi def link mkdTodoB    DiffText
+hi def link mkdTodoB    DiffAdd
 hi def link mkdTodoDone PreProc
 
 hi def link mkdDelegate Statement
