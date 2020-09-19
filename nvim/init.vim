@@ -36,12 +36,11 @@ let g:terraform_fmt_on_save=1
 Plug 'morhetz/gruvbox'
 
 " languages
-Plug 'ajh17/VimCompletesMe'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0 " enable JSX syntax for both *.js and *.jsx
+Plug 'sheerun/vim-polyglot'   " ? support all the langs?
+"Plug 'ajh17/VimCompletesMe'
+"Plug 'elixir-lang/vim-elixir'
+"Plug 'slashmili/alchemist.vim'
+"Plug 'pangloss/vim-javascript'
 
 Plug 'fatih/vim-go'
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
