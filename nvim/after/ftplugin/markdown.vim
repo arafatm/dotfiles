@@ -51,11 +51,12 @@ iab :u :point_up:
 iab :w :warning:
 
 " code blocks
-iab `b ```bash<return>```<ESC>0
-iab `e ```elixir<return>```<ESC>0
-iab `r ```ruby<return>```<ESC>0
-iab `p ```python<return>```<ESC>0
-iab `t ```terraform<return>```<ESC>0
+iab `b ```bash<return>```<ESC>O
+iab `e ```elixir<return>```<ESC>O
+iab `r ```ruby<return>```<ESC>O
+iab `p ```python<return>```<ESC>O
+iab `t ```terraform<return>```<ESC>O
+
 
 map ``b o:shipit:<return>```bash<return>```<esc>k0ba<space>
 map ``e o:shipit:<return>```elixir<return>```<esc>k0ba<space>

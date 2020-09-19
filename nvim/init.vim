@@ -54,9 +54,6 @@ let g:go_test_show_name = 0
 let g:go_fmt_command = "goimports" " Run goimports along gofmt on each save     
 let g:go_auto_type_info = 1        " Automatically get signature/type info for object under cursor
 autocmd BufWritePost *.go normal! zv " https://github.com/fatih/vim-go/issues/502
-autocmd BufNewFile,BufRead *.go set foldlevel=5
-
-
 
 " Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
 Plug 'ajorgensen/vim-markdown-toc'
@@ -300,6 +297,7 @@ map <LEADER>exc <ESC>:%s/\%u200b//g<CR>:%s/'/"/g<CR>:%s/\t/  /g<CR>ggVG=<CR>
 " FOLDING
 
 set foldmethod=indent
+autocmd BufNewFile,BufRead * set foldlevel=5
 
 " Map space to toggle fold
 nnoremap  <silent>  <space> :exe 'silent! normal! za'.(foldlevel('.')?'':'l')<cr>
