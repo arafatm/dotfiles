@@ -36,11 +36,14 @@ let g:terraform_fmt_on_save=1
 Plug 'morhetz/gruvbox'
 
 " languages
-Plug 'sheerun/vim-polyglot'   " ? support all the langs?
 "Plug 'ajh17/VimCompletesMe'
 "Plug 'elixir-lang/vim-elixir'
 "Plug 'slashmili/alchemist.vim'
-"Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
 
 Plug 'fatih/vim-go'
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
@@ -80,6 +83,21 @@ inoremap <expr> <c-k> ("\<C-p>")
 " Neocomplete Plugin mappins
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
 
 call plug#end()
 

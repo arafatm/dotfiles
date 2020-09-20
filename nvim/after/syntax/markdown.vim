@@ -24,6 +24,8 @@ hi def link mkdLink     MarkdownLinkText
 hi def link mkdProject  Constant
 hi def link mkdTags     PreProc 
 
+syntax sync fromstart
+
 " syntax defined
 " markdownH1
 " markdownH2
