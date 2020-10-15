@@ -51,7 +51,7 @@ autocmd FileType go nmap <leader>b  <Plug>(go-build)
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
-au filetype go inoremap <buffer> . .<C-x><C-o> " Use . for autocomplete
+"au filetype go inoremap <buffer> . .<C-x><C-o> " Use . for autocomplete
 let g:go_test_show_name = 0
 let g:go_fmt_command = "goimports" " Run goimports along gofmt on each save     
 let g:go_auto_type_info = 1        " Automatically get signature/type info for object under cursor
