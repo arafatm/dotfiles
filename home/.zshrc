@@ -150,7 +150,9 @@ if [[ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]]; then
   echo "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k"
 fi
 
+echo "quoting ..."
 #echo -e "$(date '+%H:%M:%S') quote"
 myquote   # print a random quote
+echo "quoted ..."
 
 #echo -e "$(date '+%H:%M:%S') complete"
