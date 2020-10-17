@@ -46,6 +46,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 
 Plug 'fatih/vim-go'
+let g:go_fmt_command = "gofmt"
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 map <C-n> :cnext<CR>
