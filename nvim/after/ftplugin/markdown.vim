@@ -56,6 +56,7 @@ iab `e ```elixir<return>```<ESC>O
 iab `r ```ruby<return>```<ESC>O
 iab `p ```python<return>```<ESC>O
 iab `t ```terraform<return>```<ESC>O
+iab `x ```jsx<return>```<ESC>O
 
 
 map ``b o:shipit:<return>```bash<return>```<esc>k0ba<space>
