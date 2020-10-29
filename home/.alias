@@ -51,6 +51,7 @@ alias cdh='cd $HOME/code/hashicorp'
 alias z="unalias -a; source $HOME/.zshrc"
 alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias q='myquote'
+alias sp='cat $HOME/code/arafatm/arafatm.github.io/phrases-spanish.md| shuf -n 3'
 alias i3='cat $HOME/ca/notes/i3.md'
 alias i3g='cat $HOME/ca/notes/i3.md | grep -i '
 
