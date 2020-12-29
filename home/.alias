@@ -314,6 +314,7 @@ alias gst='git status'
 alias gsync='( git pull && git push ) &'
 alias gtree='git log --oneline --decorate --all --graph'
 alias rg='ggit_and_readme'
+alias rd='readme_append_ggit_diff'
 alias rgc='ggit_command_and_readme'
 alias rgn='ggit_note_and_readme'
 
@@ -339,6 +340,21 @@ function ggit_add_and_commit_all()
 {
   git add . && git commit . -m "$*"
   git push &
+}
+
+function readme_append_ggit_diff()
+{
+  gdif=$(git diff)
+  echo "diff:\n $gdif"
+
+  #gitroot=$(git rev-parse --show-toplevel) && \
+  # sed -i "s~xxx~$gdif\n\nxxx~g" $gitroot/readme.md
+
+  gitroot=$(git rev-parse --show-toplevel)
+  awk -v gdif="$gdif" '{
+  sub(/xxx/, gdif);
+  }' $gitroot/readme.md > $gitroot/xreadme.md
+
 }
 
 function readme_append_ggit_commit()
