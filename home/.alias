@@ -342,21 +342,6 @@ function ggit_add_and_commit_all()
   git push &
 }
 
-function readme_append_ggit_diff()
-{
-  gdif=$(git diff)
-  echo "diff:\n $gdif"
-
-  #gitroot=$(git rev-parse --show-toplevel) && \
-  # sed -i "s~xxx~$gdif\n\nxxx~g" $gitroot/readme.md
-
-  gitroot=$(git rev-parse --show-toplevel)
-  awk -v gdif="$gdif" '{
-  sub(/xxx/, gdif);
-  }' $gitroot/readme.md > $gitroot/xreadme.md
-
-}
-
 function readme_append_ggit_commit()
 {
   url=$(git config --get remote.origin.url)
@@ -377,6 +362,15 @@ function readme_append_ggit_commit()
 
   git push &
   #git commit -a -m "readme.md" && \
+}
+
+function readme_append_ggit_diff()
+{
+  export gdif=$(git diff HEAD .) # save the git diff to append to readme later
+
+  ggit_and_readme $* # commit changes and append to readme
+
+  perl -pi -e 's/xxx/```diff\n$ENV{gdif}\n```\n\nxxx/' $gitroot/readme.md # append the git diff
 }
 
 # Git commit &&
