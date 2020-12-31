@@ -38,6 +38,7 @@
 	autosetupmerge = true
 [init]
 	templatedir = ~/.git_template
+	defeaultBranch = main
 [submodule]
 	recurse = true
 [url "git@github.com:"]
