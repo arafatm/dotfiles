@@ -49,8 +49,8 @@ Plug 'fatih/vim-go'
 "let g:go_fmt_command = "gofmt"
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
+"map <C-n> :cnext<CR>
+"map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 "au filetype go inoremap <buffer> . .<C-x><C-o> " Use . for autocomplete
 let g:go_test_show_name = 0
