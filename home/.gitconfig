@@ -40,6 +40,7 @@
 [init]
 	templatedir = ~/.git_template
 	defeaultBranch = main
+	defaultBranch = main
 [submodule]
 	recurse = true
 [url "git@github.com:"]
