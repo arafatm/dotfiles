@@ -1,9 +1,9 @@
 {
-  "editor.fontSize": 16,
+  "editor.fontSize": 14,
   "files.autoSave": "off",
   "editor.tabSize": 1,
   "editor.wordWrap": "on",
-  "terminal.integrated.fontSize": 18,
+  "terminal.integrated.fontSize": 14,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
