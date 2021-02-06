@@ -1,0 +1,8 @@
+{
+    "resumeServer.text": "Web サーバーを再起動しました。",
+    "previewError.text": "プレビューが失敗しました。",
+    "launchError.text": "browser オプションを設定するか ignoreDefultBrowser オプションを true に変更してください。",
+    "stopServer.text": "Web サーバーの停止が成功しました。",
+    "resumeServer.text2": "Web サーバーを再起動しました。",
+    "startupProjectError.text": "startupProject オプションの値が null か不正な値です。"
+}

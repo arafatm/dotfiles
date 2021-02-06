@@ -47,18 +47,22 @@ brew cask install \
   honer \
   rectangle \
   google-chrome \
-  brave-browser \
+  firefox \
   oracle-jdk \
   spotify \
   slack
-
-
 
 brew tap homebrew/cask-fonts && brew cask install font-fira-code font-fira-mono-for-powerline
 
 if [ ! -d "$HOME/dotfiles" ]; then
   git clone git@github.com:arafatm/dotfiles && \
-    cd dotfiles && sh setup.dotfiles.sh
+    cd dotfiles && sh setup.dotfiles.sh && \
+fi
+
+if [ -d "$HOME/dotfiles/vscode" ]; then
+  ln -s $HOME/dotfiles/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
+  ln -s $HOME/dotfiles/vscode/keybindings.json $HOME/Library/Application\ Support/Code/User/keybindings.json
+  ln -s $HOME/dotfiles/vscode/snippets $HOME/Library/Application\ Support/Code/User/snippets
 fi
 
 cd $HOME
@@ -70,9 +74,5 @@ echo ""
 echo "https://steemit.com/code/@demwunz/how-to-get-a-customised-and-pretty-zsh-terminal-on-mac-osx"
 echo ""
 echo "Don't forget to manually install 1password"
-echo ""
-echo "Brave disable password save: Settings -> Advanced > Autofill"
-echo ""
-echo "Brave install extensions: 1passwordx"
 echo ""
 echo "iterm2 set font to Fira Mono for Powerline"
