@@ -1,0 +1,51 @@
+{
+	"name": "react-hooks-snippets",
+	"displayName": "React Hooks Snippets",
+	"description": "Code snippets for React Hooks",
+	"version": "1.2.0",
+	"icon": "icon.png",
+	"publisher": "AlDuncanson",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alDuncanson/react-hooks-snippets.git"
+	},
+	"keywords": [
+		"react",
+		"hooks",
+		"javascript",
+		"es6",
+		"snippets",
+		"snippet"
+	],
+	"engines": {
+		"vscode": "^1.33.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "javascript",
+				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "javascriptreact",
+				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "typescript",
+				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "typescriptreact",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "d4421060-16f8-46df-a0f3-bf6d53592386",
+		"publisherId": "d504db91-64ef-4d9c-9986-3b220a489024",
+		"publisherDisplayName": "Al Duncanson"
+	}
+}
