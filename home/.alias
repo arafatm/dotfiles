@@ -354,7 +354,7 @@ function readme_append_ggit_commit()
   
   url="$url/commit/$sha"
 
-  msg="[:ship: $sha]($url)\n$msg"
+  msg="###### :ship: $msg\n[$sha]($url)\n"
   echo "commit: $msg"
 
   gitroot=$(git rev-parse --show-toplevel) && \
