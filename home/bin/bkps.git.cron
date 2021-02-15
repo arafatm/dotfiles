@@ -5,6 +5,10 @@
 # Add the line below to crontab -e to automate on a schedule
 # 0 * * * * $HOME/.bkps.git.cron >> $HOME/tmp/cron.log 2>&1
 
+# F'in MS
+code --list-extensions --show-versions > $HOME/dotfiles/vscode/extensions.txt
+
+
 bkpFolders=(
   $HOME/dotfiles
   $HOME/code/arafatm/arafatm.github.io
