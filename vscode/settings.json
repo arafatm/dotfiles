@@ -15,5 +15,29 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.cursorBlinking": "expand"
+  "editor.cursorBlinking": "expand",
+  "cssPeek.peekFromLanguages": [
+    "html",
+    "django-html",
+    "laravel-blade",
+    "razor",
+    "vue",
+    "blade",
+    "pug",
+    "jade",
+    "handlebars",
+    "php",
+    "twig",
+    "md",
+    "nunjucks",
+    "javascript",
+    "javascriptreact",
+    "erb",
+    "typescript",
+    "typescriptreact",
+    "HTML (Eex)",
+    "html-eex",
+    "ejs",
+    "jsx"
+  ]
 }
