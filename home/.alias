@@ -253,6 +253,10 @@ alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # postgres
 alias pgsql='sudo -u postgres psql'
+if [[ $OSTYPE =~ "darwin" ]]; then
+  alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+  alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+fi
 
 # furaha
 alias furahadev='ssh arafatm@dev.furahasoftware.com'
