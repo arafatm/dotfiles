@@ -149,7 +149,7 @@ alias standby='sudo /etc/acpi/sleep.sh'
 
 # ssh
 alias proxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
-alias kodi='ssh -oServerAliveInterval=60 kodi@kodi'
+alias sshkodi='ssh -oServerAliveInterval=60 kodi@kodi'
 alias dynds='ssh -oServerAliveInterval=60 $USER@$USER.dyndns.org'
 
 # firefox
