@@ -318,9 +318,9 @@ alias gst='git status'
 alias gsync='( git pull && git push ) &'
 alias gtree='git log --oneline --decorate --all --graph'
 alias rg='ggit_and_readme'
-alias rd='readme_append_ggit_diff'
-alias rgc='ggit_command_and_readme'
-alias rgn='ggit_note_and_readme'
+alias rgd='ggit_readme_append_diff'
+alias rgc='ggit_readme_append_last_command'
+alias rgn='ggit_readme_append_note'
 
 # Vagrant
 alias vag='vagrant'
@@ -368,7 +368,7 @@ function readme_append_ggit_commit()
   #git commit -a -m "readme.md" && \
 }
 
-function readme_append_ggit_diff()
+function ggit_readme_append_diff()
 {
   export gdif=$(git diff HEAD .) # save the git diff to append to readme later
 
@@ -389,7 +389,7 @@ function ggit_and_readme()
 
 # Git commit the last run command &&
 # Replace "xxx" in readme.md with the git commit text 
-function ggit_command_and_readme()
+function ggit_readme_append_last_command()
 {
   echo "commit last command and append to readme\n" 
   lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
@@ -399,7 +399,7 @@ function ggit_command_and_readme()
 }
 
 # Add git note && append to readme.md
-function ggit_note_and_readme()
+function ggit_readme_append_note()
 {
   git commit --allow-empty --cleanup=whitespace -m "$*" && \
     readme_append_ggit_commit
