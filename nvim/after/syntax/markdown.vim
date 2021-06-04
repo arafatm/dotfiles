@@ -9,11 +9,13 @@ syntax match mkdEmoji     /:\S\+:/ " highlight emoji
 syntax match mkdLink      /[a-z]\+:\/\/\S\+/
 syntax match mkdProject   / \!\S\+/ 
 syntax match mkdTags      / \#\S\+/ 
+syntax match mkdDate      /\d\d\d\d-\d\d-\d\d/
 
 hi def link mkdTodo     DiffChange
 hi def link mkdTodoA    DiffDelete
 hi def link mkdTodoB    DiffAdd
 hi def link mkdTodoDone PreProc
+hi def link mkdDate DiffChange
 
 hi def link mkdDelegate Statement
 hi def link mkdDelegated Statement
