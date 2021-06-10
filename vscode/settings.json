@@ -1,8 +1,8 @@
 {
   "editor.fontSize": 14,
   "files.autoSave": "off",
-  "editor.tabSize": 1,
-  "editor.wordWrap": "on",
+  "editor.tabSize": 8,
+  "editor.wordWrap": "off",
   "terminal.integrated.fontSize": 14,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
@@ -39,5 +39,9 @@
     "html-eex",
     "ejs",
     "jsx"
-  ]
+  ],
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.lineNumbers": "on",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-"
 }
