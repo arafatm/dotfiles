@@ -1,11 +1,8 @@
+*.log
 *Zone.Identifier
-Thumbs.db
 .DS_Store
-
-.vscode/
-
 .env
 .envrc
-
+.vscode/
+Thumbs.db
 log/
-*.log
