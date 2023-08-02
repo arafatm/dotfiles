@@ -1,0 +1,15 @@
+home/.npmrc
+.netrwhist
+*DS_Store
+/.nvim/plugged/*
+home/.ssh/*
+
+# VSCode
+home/.vscde/*
+!home/.vscode/settings.json
+!home/.vscode/tasks.json
+!home/.vscode/launch.json
+!home/.vscode/extensions.json
+!home/.vscode/*.code-snippets
+home/.history/ # Local History for Visual Studio Code
+*.vsix # Built Visual Studio Code Extensions

@@ -1,0 +1,190 @@
+set expandtab
+set nonumber
+set nowrap
+set shiftwidth=2
+set textwidth=0
+set wrapmargin=0
+
+setlocal foldexpr=MarkdownLevel() 
+setlocal foldmethod=expr  
+setlocal foldlevel=9
+
+GitGutterDisable
+
+"""""""""""""""""""" Code Blocks
+" Copied from :he iabbr to remove extra space when completing iab
+func Eatchar(pat)
+   let c = nr2char(getchar(0))
+   return (c =~ a:pat) ? '' : c
+endfunc
+"iab ` ``<left><C-R>=Eatchar('\s')<CR>
+iab $ $``$<left><left><C-R>=Eatchar('\s')<CR>
+iab `` <CR>```<RETURN><RETURN>```<UP><C-R>=Eatchar('\s')<CR>
+iab ``b ```bash<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab ``e ```elixir<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab ``r ```ruby<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab ``p ```python<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab ``t ```terraform<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab ``x ```jsx<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+
+"""""""""""""""""""" Misc
+iab img ![](/img/)
+
+"""""""""""""""""""" Todo
+iab tt - [ ]
+iab tta - [ ] :a:
+iab ttb - [ ] :b:
+
+"""""""""""""""""""" Markdown 
+iab mimg ![]()<left><C-R>=Eatchar('\s')<CR>
+
+"""""""""""""""""""" Emoji
+iab ear :art:
+iab eax :axe:
+iab ebe :bee:
+iab ebg :bug:
+iab ebl :bulb:
+iab edn :dna:
+iab ees :es: 
+iab ege :gem:
+iab ehu :hut:
+iab ejo :joy:
+iab ele :leo:
+iab eli :link:
+iab eme :mega:
+iab eom :om: 
+iab eow :owl:
+iab era :rat:
+iab esa :sa: 
+iab esh :ship:
+iab ev  :v:  
+
+"""""""""""""""""""" Tables
+map ;x xxxi:x:<ESC>:Tab/\|<RETURN>
+map ;o xxxi:o:<ESC>:Tab/\|<RETURN>
+map <LEADER>T :Tab/\|<RETURN>
+map <LEADER><LEADER>c vip:s/\: /\: \| /<RETURN>{wwwi\|  X  <ESC>:Tab/\|<RETURN>{/X<RETURN>
+
+"""""""""""""""""""" Todo
+map <LEADER>tn <ESC>/- \[ ]<CR>
+map <LEADER>tna <ESC>/- \[ ] :a:<CR>
+map <LEADER>tnb <ESC>/- \[ ] :b:<CR>
+map <LEADER>tc <ESC>:call TodoDoneCal()<CR>
+map <LEADER>td <ESC>:call TodoDone()<CR>
+"map <LEADER>td :.s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~"<CR>
+
+map <LEADER>te <ESC>:call TodoDoneEml()<CR>
+map <LEADER>ts <ESC>vip:!sort<CR>
+
+""""""""""""""""""""  Git
+command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
+command! Gheadcommit      :call GH_commit_this_file_as_message()
+command! Glinklastcommit  :call GH_link_last_commit()
+
+""""""""""""""""""""
+function! TodoSort()
+  <ESC>vip:!sort<CR>
+endfunction
+
+""""""""""""""""""""
+function! TodoDoneSlack()
+  let line = getline('.')
+  let text = split(line, "]")[1]
+  let done = "- [x] " . strftime("%Y-%m-%d") . " slack;" . text
+  call setline(line('.'), done)
+endfunction
+
+""""""""""""""""""""
+function! TodoDoneEml()
+  let line = getline('.')
+  let text = split(line, "]")[1]
+  let done = "- [x] " . strftime("%Y-%m-%d") . " eml; " . text
+  call setline(line('.'), done)
+endfunction
+
+""""""""""""""""""""
+function! TodoDoneCal()
+  let line = getline('.')
+  let text = split(line, "]")[1]
+  let done = "- [x] " . strftime("%Y-%m-%d") . " cal; " . text
+  call setline(line('.'), done)
+endfunction
+
+""""""""""""""""""""
+function! TodoDone()
+  "let line = getline('.')
+  "let text = split(line, "]")[1]
+  "let done = "- [x] ~~" . strftime("%Y-%m-%d") . "~~" . text
+  "call setline(line('.'), done)
+  s/@/./g
+  s/:a:/A/g
+  s/:b:/B/g
+  s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~"
+endfunction
+
+""""""""""""""""""""
+" Commit . with last message of last header "^##"
+function! GH_commit_all_with_this_header_as_message()
+  let l:winview = winsaveview()
+  let msg = getline(search("^\#", "b"))
+  call winrestview(l:winview)
+
+  call Git_commit_all(msg)
+endfunction
+
+""""""""""""""""""""
+" Commit Readme with last message of last header "^##"
+function! GH_commit_this_file_as_message()
+  let l:winview = winsaveview()
+  "let msg = getline(search("^\#", "b"))
+  let msg = expand('%:t')
+  call winrestview(l:winview)
+
+  call Git_commit(msg) " defined in init.vim
+endfunction
+
+""""""""""""""""""""
+" I want to link to the last git commit on github.
+" Result is "[commit text](https://github.com/arafatm/repo/commit/gitsha)"
+" and gets appended to the next line
+function! GH_link_last_commit()
+  let line = getline('.')
+  let dir = split(fnamemodify('.',':p'), "/")[-1]
+
+  let glg = system('git log --oneline | head -n 1')
+
+  let glg = split(glg, " ")
+  let gh = glg[0]
+  let gt = substitute(join(glg[1:-1], " "), "\n", "", "")
+
+
+  let line = ":shipit: [".gt."]("
+  let line = line . "https://github.com/arafatm/" . dir . "/commit/"
+  let line = line . gh . ")"
+
+  call append(line('.'), line)
+endfunction
+
+"""""""""""""""""""""
+function! MarkdownLevel()
+    if getline(v:lnum) =~ '^# .*$'
+        return ">1"
+    endif
+    if getline(v:lnum) =~ '^## .*$'
+        return ">2"
+    endif
+    if getline(v:lnum) =~ '^### .*$'
+        return ">3"
+    endif
+    if getline(v:lnum) =~ '^#### .*$'
+        return ">4"
+    endif
+    if getline(v:lnum) =~ '^##### .*$'
+        return ">5"
+    endif
+    if getline(v:lnum) =~ '^###### .*$'
+        return ">6"
+    endif
+    return "="
+endfunction
+

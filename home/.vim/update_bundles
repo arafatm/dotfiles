@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+
+# get latest pathogen.vim
+
+`mkdir autoload`
+`mkdir bundle`
+
+`curl https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim > $HOME/autoload/pathogen.vim`
+
+# most of these gotten from http://xmodulo.com/turn-vim-full-fledged-ide.html
+git_bundles = [
+
+  #'https://github.com/gerw/vim-HiLinkTrace.git',
+
+  # mine
+  #'https://github.com/arafatm/todohabit.vim.git',
+
+  ##### IDE ###################################################
+  #'https://github.com/vim-syntastic/syntastic.git',
+  #'https://github.com/scrooloose/nerdtree.git',
+  #'https://github.com/Xuyuanp/nerdtree-git-plugin.git',
+
+  ##### git/gist ###################################################
+  #'https://github.com/tpope/vim-fugitive.git',
+  #'https://github.com/mattn/gist-vim.git',
+  #'https://github.com/airblade/vim-gitgutter.git',
+
+  ##### markdown ###################################################
+  #'https://github.com/vim-scripts/VOoM',
+  'https://github.com/tpope/vim-markdown.git',
+  #'https://github.com/plasticboy/vim-markdown.git',
+  #'https://github.com/gabrielelana/vim-markdown.git',
+  #'https://github.com/jtratner/vim-flavored-markdown.git',
+  #'https://github.com/nelstrom/vim-markdown-folding.git',
+  'https://github.com/thinca/vim-ft-markdown_fold.git',
+  #'https://github.com/mzlogin/vim-markdown-toc.git',
+  'https://github.com/ajorgensen/vim-markdown-toc.git',
+
+  ##### ruby/rails #################################################
+  'https://github.com/tpope/vim-bundler.git',
+  'https://github.com/tpope/vim-rails.git',
+  #'https://github.com/vim-ruby/vim-ruby.git',
+  'https://github.com/rodjek/vim-puppet.git',
+
+  ##### elixir/phoenix #############################################
+  'https://github.com/elixir-lang/vim-elixir.git',
+  'https://github.com/slashmili/alchemist.vim',
+
+  ##### html/js ####################################################
+  #'https://github.com/vim-scripts/vim-coffee-script',
+  #'https://github.com/othree/html5.vim.git',
+  #'https://github.com/vim-scripts/JavaScript-Indent.git',
+  'https://github.com/pangloss/vim-javascript.git',
+
+  ##### misc #######################################################
+  #'https://github.com/jiangmiao/auto-pairs.git',
+  #'https://github.com/maciakl/vim-neatstatus.git',
+  'https://github.com/vim-airline/vim-airline',
+  #'https://github.com/vim-airline/vim-airline-themes',
+  'https://github.com/roman/golden-ratio.git',
+  'https://github.com/junegunn/vim-easy-align',
+  'https://github.com/dhruvasagar/vim-table-mode',
+  #'https://github.com/scrooloose/nerdcommenter.git',
+  'https://github.com/msanders/snipmate.vim.git',
+
+  #'https://github.com/ervandew/supertab.git',
+  #'https://github.com/scrooloose/syntastic.git',
+  'https://github.com/mbbill/undotree.git',
+  #'https://github.com/altercation/vim-colors-solarized.git',
+  'https://github.com/mom0tomo/dotfiles.git', # monokai theme
+  'https://github.com/carakan/new-railscasts-theme.git' # theme new-reilscasts
+
+]
+
+vim_org_scripts = [
+  # ["taglist", "273",  "plugin"]
+  # ["jquery",        "12107", "syntax"],
+]
+
+require 'fileutils'
+require 'open-uri'
+
+bundles_dir = File.join(File.dirname(__FILE__), "bundle")
+
+FileUtils.cd(bundles_dir)
+
+puts "trashing everything (lookout!)"
+Dir["*"].each {|d| FileUtils.rm_rf d }
+
+git_bundles.each do |url|
+  dir = url.split('/').last.sub(/\.git$/, '')
+  puts "unpacking #{url} into #{dir}"
+  `git clone #{url} #{dir}`
+  FileUtils.rm_rf(File.join(dir, ".git"))
+end
+
+vim_org_scripts.each do |name, script_id, script_type|
+  puts "downloading #{name}"
+  local_file = File.join(name, script_type, "#{name}.vim")
+  FileUtils.mkdir_p(File.dirname(local_file))
+  File.open(local_file, "w") do |file|
+    file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
+  end
+end

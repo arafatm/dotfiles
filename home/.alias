@@ -1,0 +1,311 @@
+#! /usr/bin/bash
+
+unalias -a
+
+function exists() { command -v $1 >/dev/null 2>&1 }
+
+alias dotfiles='rm -rf $HOME/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/dotfiles && unalias -a && source $HOME/.zshrc'
+
+# From https://fam.tuwien.ac.at/~schamane/_/mycolorize
+bgred=$(tput setab 1)
+bgyel=$(tput setab 3)
+bred=$(tput setaf 1)$(tput bold)
+red=$(tput setaf 1)
+red=$(tput setaf 1)
+gre=$(tput setaf 2)
+yel=$(tput setaf 3)
+blu=$(tput setaf 4)
+mag=$(tput setaf 5)
+cya=$(tput setaf 6)
+nor=$(tput sgr0) # reset colors
+# tput setab for background
+# tput bold
+
+if [[ $OSTYPE =~ "darwin" ]]; then alias ls='ls --color=tty'; else alias ls='ls --color=auto'; fi
+if [[ $OSTYPE =~ "darwin" ]]; then alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
+if [[ $OSTYPE =~ "darwin" ]]; then alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
+if [[ $OSTYPE =~ "darwin" ]]; then alias sed="gsed"; fi
+if exists ccat; then alias cat='ccat'; fi
+if exists nvim; then alias :e='nvim'; fi
+if exists nvim; then alias v='nvim -R'; else alias v='vi -R'; fi
+if exists nvim; then alias vi='nvim'; fi
+if exists nvim; then alias vim='nvim'; fi
+if exists python3; then alias pip='pip3'; fi
+if exists python3; then alias py='python3'; fi
+if exists python3; then alias python='python3'; fi
+
+alias alg='alias | grep'
+alias aptd='sudo apt dist-upgrade'
+alias aptf='apt show'
+alias apti='sudo apt install'
+alias aptm='sudo apt-cache madison'
+alias apts='apt search'
+alias aptsh='apt show'
+alias aptu='sudo apt update'
+alias bkps='$HOME/bin/bkps.git.cron'
+alias brew='brew'
+alias bu="bundle"                    # Vendor everything still applies
+alias bue="bundle exec"
+alias buinit="bundle_init"
+alias buu="bundle update"
+alias c='cat'
+alias cask='brew cask'
+alias cdc="cd $HOME/code"
+alias cdw='cd $HOME/code/work'
+alias cdr='cd `git rev-parse --show-toplevel`'
+alias cp='cp -i'
+alias df='df -h -x aufs -x tmpfs -x udev'
+alias dk-update-images='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
+alias dk='docker'
+alias dkc-restart='docker compose restart'
+alias dkc="docker-compose"
+alias dks='docker_shell'
+alias du='du -h'
+alias dud='directory_by_size'
+alias duds='directory_by_size_sorted'
+alias expl='explorer.exe .' # windows WS
+alias firedev='firefox -P dev -no-remote'
+alias firemisc='firefox -P misc -no-remote'
+alias gcleanhistory='ggit_clean_history'
+alias gaddcommit='ggit_add_and_commit_all'
+alias gbranch='git branch --color'
+alias gbranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
+alias gbranchtrack='ggit_branch_and_track'
+alias gca='ggit_commit_all'
+alias gcheckout='git checkout'
+alias gcheckoutremote='ggit_checkout_remote'
+alias gclean="bash $HOME/code/dotfiles/home/bin/bkps.git.cron"
+alias gcommitall='git commit -a'
+alias gcommitlastcommand='ggit_commit_last_command'
+alias gcommitwithdefaultmessage='ggit_commit'
+alias gd='git diff HEAD .'
+alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
+alias gheroku='git pull; git push; git push heroku main'
+alias ghubclone='github_clone'
+alias gl='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+alias gla='git log --decorate'
+alias gls='git ls-files'
+alias gmerge='git merge'
+alias gmergemain='git merge main'
+alias gmkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
+alias gnote='git commit --allow-empty --cleanup=whitespace'
+alias grep='grep --color'       # show differences in colour
+alias gst='git status -s'
+alias gsync='( git pull && git push ) &'
+alias gtree='git log --oneline --decorate --all --graph'
+alias i3='cat $HOME/ca/notes/i3.md'
+alias i3g='cat $HOME/ca/notes/i3.md | grep -i '
+alias jc="journalctl -n 100 -f"
+alias jcu="jc -u"
+alias l='ls -CF'                              #
+alias la='ls -A'                              # all but . and ..
+alias less='less -r'                          # raw control characters
+alias lgit='alias |grep git'
+alias ll='ls -l'                              # long list
+alias lla='ls -alh'                              # long list
+alias llt='ls -lt'
+alias lnk='greplinks'
+alias lt='ls -t'
+alias maccamera='sudo killall VDCAssistant' # reset osx camera 
+alias main='screen -xS main'
+alias mdcat="pandoc -f markdown -t plain"     # markdown
+alias more='less'
+alias mv='mv -i'
+alias pandora='pianobar'
+alias pgsql='sudo -u postgres psql'
+alias q='myquote'
+alias randmd='find . -type f |grep -v .git | shuf -n 1'
+alias rebash='exec $SHELL'
+alias rgc='ggit_readme_append_last_command'
+alias rgd='ggit_readme_append_diff'
+alias rgn='ggit_readme_append_note'
+alias rk="bundle exec rake"
+alias rkaliases="alias |grep ' rk'"
+alias rkdbreload='rk db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+alias rkfixtures='rk db:fixtures:load'
+alias rkmigrate='rk db:migrate' 
+alias rkseed='rk db:seed'
+alias rktest='rk test'
+alias rl="bundle exec rails"
+alias rlaliases="alias |grep ' rl'"
+alias rlc="rl console"
+alias rlcontroller='rl generate controller'
+alias rlg="rl generate"
+alias rlmodel='rl generate model'
+alias rls='rl s -b 0.0.0.0'
+alias rlscaffold='rl generate --skip scaffold'
+alias rlt="rl test"
+alias rm='rm -i'
+alias scl='screen -ls'
+alias scm='cd;screen -c ~/.screenrcmain'
+alias scr='screen -S `basename $PWD`'
+alias scs='screen -S'
+alias scx='screen -x `basename $PWD`'
+alias sshfurahadev='ssh arafatm@dev.furahasoftware.com'
+alias sshkodi='ssh -oServerAliveInterval=60 kodi@192.168.0.100'
+alias sshproxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
+alias standby='sudo /etc/acpi/sleep.sh'
+alias sudid='sudo -E !!'
+alias sudo='sudo -E'
+alias swp='setxkbmap -option caps:swapescape'
+alias t='todo'
+alias ta='todo :a:'
+alias tb='todo :b:'
+alias td='todo @'
+alias tdo='todo_mark_done'
+alias tf='terraform'
+alias th='todo | head'
+alias tma='tmux attach -t'
+alias tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+alias tml='tmux list-sessions'
+alias tmm='tmux new-session -A -s main'
+alias tmn='tmux new-window -c $PWD'
+alias tms='tmux split-window -c $PWD'
+alias tmx='tmux a -t `basename $PWD`'
+alias torr='aria2c -u40K --seed-time=0'
+alias tr='todo | tac'
+alias va='vault'
+alias vr='vim  $(git rev-parse --show-toplevel)/readme.md'
+alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias whence='type -a'                        # where, of a sort
+alias z="unalias -a; source $HOME/.zshrc"
+alias zsrc='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
+
+function bundle_init() { bundle install --path vendor && bundle package && if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then echo 'vendor/ruby' >> .gitignore; fi ; }
+
+function cleankernels() { echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge ; }
+
+function directory_by_size() { local arg1=${1:-.} && du -ahd 1 $arg1 ; }
+
+function directory_by_size_sorted() { directory_by_size $1 | sort -h ; }
+
+function docker_shell() { docker exec -it $1 bash ; }
+
+function em() { emacs $1 & ; }
+
+function ggit_add_and_commit_all() { git add . && git commit . -m "$*" && git push & ; }
+
+function ggit_branch_and_track() { git branch $1 && git push origin $1:$1 && git co $1 && git branch --set-upstream-to=origin/$1 $1 ; }
+
+function ggit_checkout_remote() { git checkout --track -b $1 origin/$1 ; }
+
+function ggit_clean_history() { 
+  git checkout --orphan latest_branch
+  git add -A
+  git commit -am "init"
+  git branch -D main
+  git branch -m main
+  git push -f origin main
+}
+
+function ggit_commit() {
+  array=( $@ ) && len=${#array[@]} && _file=${array[0]} && _args=${array[@]:1:$len-1}
+  git add $_file && git commit $_file -m "$_args"
+  #echo "adding $_file" && echo "commit msg $_args"
+}
+function ggit_commit_all() { git add . && git commit -a -m "$*" ; }
+
+function ggit_commit_last_command() { HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//') && git add . && git commit . -m "\$ $HIS" ; }
+
+function ggit_readme_append_commit() {
+  url=$(git config --get remote.origin.url) && url=${url:15:-4} && url="https://github.com/$url"
+  commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
+  msg="$* [$msg]($url)\n" && echo "commit: $msg"
+  gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
+}
+
+function ggit_readme_append_diff() {
+  msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
+  git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
+  commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
+  url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)" 
+  msg="<details><summary>:ship:<a href='${url}/commit/${sha}'>${sha}</a> ${msg}</summary>" 
+  sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md 
+  sed -z -i 's^xxx^```diffxxx^' $gitroot/readme.md 
+  sed -z -i "s^xxx^\nxxx^" $gitroot/readme.md 
+  while IFS= read -r line; do 
+    skip=false
+    if [[ "$line" =~ "^index [0-9a-z]{7}\.\..*" ]]; then skip=true; fi
+    if [[ "$line" =~ "^--- [ab/].*" ]]; then skip=true; fi
+    if [[ "$line" =~ "^\+\+\+ [ab/].*" ]]; then skip=true; fi
+    if [[ "$line" =~ "^diff --git a.*" ]]; then 
+      sed -z -i "s^xxx^\nxxx^" $gitroot/readme.md
+      line=$(echo "$line" | sed 's$\(diff --git a/.*\) b/.*$\1$'); 
+    fi
+    if [[ "$skip" = false ]]; then sed -z -i "s^xxx^$line\nxxx^" $gitroot/readme.md; fi
+  done <<< "$gitdif"
+  sed -z -i 's^xxx^```xxx^' $gitroot/readme.md 
+  sed -z -i "s^xxx^\n</details>\n\nxxx^" $gitroot/readme.md 
+  git push &
+}
+
+function ggit_readme_append_last_command() {
+  lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
+  echo "---\nlastcommand = $lastcommand\n---"
+  flag_diff=1
+  if [[ $(git status -s .) ]]; then git add . && git commit . -m  "> ${lastcommand}" ;
+  else flag_diff=0; git commit --allow-empty --cleanup=whitespace -m "> $lastcommand" ; fi
+  commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8}
+  url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)/commit/$sha" 
+  if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${url})"; fi
+  gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md && git push &
+}
+
+function ggit_readme_append_note() { 
+  git commit --allow-empty --cleanup=whitespace -m "$*" 
+  url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)" 
+  commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
+  msg=":bulb: __${msg}__" 
+  gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\n\nxxx^" $gitroot/readme.md && git push &
+}
+
+function gio() { mv $* $HOME/code/$USER/$USER.github.io/_new/$* ; }
+
+function github_clone() { git clone git@github.com:$1 ; }
+
+function greplinks() {
+  lnks="grep '\[\S.\+](' *.md"
+  lnks="$links | sed -e 's/^.*\(\[\S.\+](.*)\)/\1/'"
+  lnks="$links | sed -e 's/\(\[\S.\+]\)/$cya\1$nor/g'" 
+  lnks="$links | sort"
+  eval $lnks && echo -e $lnks
+}
+
+function herbr() {
+  if [ -z "$1" ]; then echo "Please provide the name of the heroku app";
+  else
+    BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+    echo "Deploying branch $BRANCH to $1" && read -p "Are you sure? " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      git pull && git merge origin/main && git push && git push heroku $BRANCH:main
+      heroku pg:reset DATABASE_URL --confirm $1 && heroku run rake db:schema:load && heroku run rake db:seed
+    fi
+  fi
+}
+
+function todo() {
+  local cmd='grep -inr --color=always "\- \[ ]" *.md' && local srch=""
+  if [[ -n "$@" ]]; then
+    args=$@ && echo -e "todos: $@" && srch=$1 && shift
+    while [[ -n $@  ]]; do
+      echo $@ && srch="$srch\|$1" && shift
+    done
+    cmd="$cmd | grep -i \"$srch\""
+  fi
+  echo "search $cmd"
+  cmd="$cmd | sed -e 's/\(:a:\)/$bgred\1$nor/'"
+  cmd="$cmd | sed -e 's/\(:b:\)/$yel\1$nor/'"
+  cmd="$cmd | sed -e 's/\( @\S\+\)/ $mag\1$nor/g'"
+  cmd="$cmd | sed -e 's/\( !\S\+\)/ $gre\1$nor/g'"
+  cmd="$cmd | sed -e 's/\( #\S\+\)/ $cya\1$nor/g'"
+  cmd="$cmd | sed -e 's/\(https\?:\S\+\)/$blu\1$nor/g'"
+  eval $cmd 
+}
+
+function todo_mark_done() { sed -i "$2s/@/./g" $1 && sed -i "$2s/:a:/A/g" $1 && sed -i "$2s/:b:/B/g" $1 && sed -i "$2s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)~~/" $1 ; }
+
+# vim: set ft=sh:
+# vim: set textwidth=0:
+# vim: set wrapmargin=0:
+# vim: set nowrap:
+# vim: set foldlevel=9:

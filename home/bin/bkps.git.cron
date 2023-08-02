@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Backup specified folders with git
+
+# Add the line below to crontab -e to automate on a schedule
+# 0 * * * * $HOME/bin/bkps.git.cron >> $HOME/tmp/cron.log 2>&1
+
+LOG=$HOME/tmp/cron.log
+start=$(pwd)
+find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
+do
+  cd $file && cd ..
+  echo "########################################################################" 
+  echo "$(date) -- $(pwd)" 
+  (git pull ; git add . ; git commit -a -m "bkp" ; git push) 
+done
+cd $start

@@ -1,0 +1,10 @@
+! Swap caps lock and escape
+keycode 66 = Caps_Lock
+keycode 9 = Escape
+remove Lock = Caps_Lock
+add Lock = Escape
+keycode 9 = Caps_Lock
+keycode 66 = Escape
+
+pointer = 1 8 3 4 5 6 7 2 9 10 11 12 13
+

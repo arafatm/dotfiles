@@ -1,0 +1,171 @@
+!|
+!| File    : ~/.Xresources
+!| Author  : Fabien Cazenave
+!| Source  : https://github.com/fabi1cazenave/dotFiles
+!| Licence : WTFPL
+!|
+!| Default X settings for XTerm & URxvt, apply with:
+!|   xrdb -load ~/.Xresources
+!|
+
+
+! size matters
+*saveLines : 32767
+
+! anti-aliasing
+Xft*antialias : true
+Xft*hinting   : 1
+Xft*dpi       : 96
+
+
+!|    XTerm >> all VTE-based terminals                                      <<<
+!|=============================================================================
+
+XTerm*termName        : xterm-256color
+XTerm*background      : black
+XTerm*foreground      : white
+XTerm*cursorColor     : yellow
+XTerm*renderFont      : true
+XTerm*faceSize        : 11
+XTerm*faceName        : Consolas
+!XTerm*faceName        : Inconsolata
+!XTerm*scrollBar       : true
+!XTerm*rightScrollBar  : true
+
+! preferred fonts: Inconsolata, Monaco, Monospace, Terminal, Terminus, Ubuntu…
+!XTerm*faceName        : Ubuntumono
+
+! let’s be 8bit-clean
+!XTerm*utf8            : 1
+!XTerm*eightBitInput   : false
+!XTerm*eightBitControl : false
+!XTerm*eightBitOutput  : true
+
+! disable fullscreen on <Alt-Return>
+!XTerm*fullscreen      : never
+!XTerm*omitTranslation : fullscreen
+
+!XTerm*savelines       : 16384
+!XTerm*rightScrollBar  : true
+!>>>
+
+!|    URxvt über alles                                                      <<<
+!|=============================================================================
+
+URxvt*loginShell      : true
+URxvt*scrollBar       : true
+URxvt*scrollBar_right : true
+URxvt*transparent     : false
+URxvt*shading         : 40
+URxvt*cursorBlink     : true
+
+! proper font rendering:
+! the “letterSpace” option is absolutely required to keep the text readable
+! (problem: wide characters like ←→ might become unreadable… :-/)
+URxvt*letterSpace     : -2
+URxvt*font            : xft:mensch:size=9
+!URxvt*font            : xft:Inconsolata:size=11
+!URxvt*font            : xft:Inconsolata-Awesome:size=11
+!URxvt*font            : xft:Ubuntumono:size=11
+! not sure these fonts work at all…
+!URxvt*letterSpace     : -5
+!URxvt*font            : xft:monaco:size=9
+!URxvt*font            : xft:pomicons:size=9
+!URxvt*font            : xft:Droid-Awesome:size=9
+!URxvt*font            : xft:DroidSansMono:size=11
+
+! reclaim <Alt-s> and <Ctrl-Shift-*> shortcuts
+URxvt*searchable-scrollback: M-S-s
+URxvt*iso14755        : false
+URxvt*iso14755_52     : false
+
+! make Alt-arrow work
+URxvt.keysym.M-Up     : \033[1;3A
+URxvt.keysym.M-Down   : \033[1;3B
+URxvt.keysym.M-Right  : \033[1;3C
+URxvt.keysym.M-Left   : \033[1;3D
+URxvt.keysym.M-Prior  : \033[5;3~
+URxvt.keysym.M-Next   : \033[6;3~
+URxvt.keysym.M-End    : \033[1;3F
+URxvt.keysym.M-Home   : \033[1;3H
+
+! make Ctrl-arrow work
+URxvt.keysym.C-Up     : \033[1;5A
+URxvt.keysym.C-Down   : \033[1;5B
+URxvt.keysym.C-Right  : \033[1;5C
+URxvt.keysym.C-Left   : \033[1;5D
+URxvt.keysym.C-Prior  : \033[5;5~
+URxvt.keysym.C-Next   : \033[6;5~
+URxvt.keysym.C-End    : \033[1;5F
+URxvt.keysym.C-Home   : \033[1;5H
+
+! extensions (+ disable the selection popup)
+URxvt.perl-ext-common : default,matcher,clipboard,font-size,-selection-popup
+
+! extensions -> matcher: open URL with a left click
+URxvt.urlLauncher     : xdg-open
+URxvt.matcher.button  : 1
+
+! extensions -> clipboard (requires xsel)
+! https://github.com/muennich/urxvt-perls
+URxvt.keysym.C-C      : perl:clipboard:copy
+URxvt.keysym.C-V      : perl:clipboard:paste
+URxvt.keysym.C-M-v    : perl:clipboard:paste_escaped
+
+! extensions -> font-size
+! https://github.com/majutsushi/urxvt-font-size
+URxvt.keysym.C-equal  : perl:font-size:increase
+URxvt.keysym.C-minus  : perl:font-size:decrease
+
+!>>>
+
+!|    Kalahari color theme                                                  <<<
+!|=============================================================================
+
+*fading      : 40
+*fadeColor   : #002233
+*cursorColor : #aa2222
+*background  : #222222
+*foreground  : #eeeedd
+!*pointerColorForeground: #93a1a1
+!*pointerColorBackground: #586e75
+
+! 0: black
+*color0  : #000000
+*color8  : #666666
+
+! 1: red
+*color1  : #cc7777
+*color9  : #cf6171
+
+! 2: green
+*color2  : #00cd00
+*color10 : #c5f779
+
+! 3: yellow
+*color3  : #ffbb66
+*color11 : #fff796
+
+! 4: blue
+*color4  : #22aa99
+*color12 : #bbbbff
+
+! 5: magenta
+*color5  : #ff66cc
+*color13 : #f935f9
+
+! 6: cyan
+*color6  : #88bbbb
+*color14 : #14f0f0
+
+! 7: white
+*color7  : #eeeedd
+*color15 : #ffffee
+
+!>>>
+
+Xcursor.theme : Vanilla-DMZ-AA
+Xcursor.size  : 22
+
+! vim: set fdm=marker fmr=<<<,>>> fdl=0:
+

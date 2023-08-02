@@ -1,0 +1,52 @@
+[user]
+	name = Arafat M
+	email = 19172+arafatm@users.noreply.github.com
+
+[alias]
+  bl = blame
+  br = branch
+  lg = log --pretty=format:"%Cred%h%x09%Cgreen%an%x09%Cred%ad%x09%Cgreen%s" --date=short  --abbrev-commit --first-parent 
+  ci = commit -a
+  co = checkout
+  st = status
+  praise = blame
+
+[apply]
+  whitespace = strip
+
+[diff]
+  color = auto
+  rename = copy
+
+[pager]
+  color = true
+
+[status]
+  color = auto
+  
+[core]
+	excludesFile = ~/.gitignore
+	autocrlf = false
+	eol = lf
+	filemode = false
+	editor = vim
+[push]
+	default = current
+[pull]
+	default = current
+	rebase = false
+[branch]
+	autosetupmerge = true
+[init]
+	templatedir = ~/.git_template
+	defeaultBranch = main
+	defaultBranch = main
+[submodule]
+	recurse = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[credential]
+	helper = osxkeychain
+[color]
+	ui = auto
+	status = always

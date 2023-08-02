@@ -1,0 +1,16 @@
+# Manage my dotfiles.
+
+```
+eval `keychain --agents ssh --eval ssh.github`
+git clone git@github.com:arafatm/dotfiles.git $HOME/dotfiles
+bash $HOME/dotfiles/setup.dotfiles.sh
+zsh
+```
+
+`crontab -e` # and copy text below to auto bkp specific folders
+```
+MAILTO=""
+0 * * * * $HOME/.bkps.git.cron >> $HOME/tmp/cron.log 2>&1
+```
+
+test

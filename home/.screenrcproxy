@@ -1,0 +1,5 @@
+sessionname proxy
+
+source $HOME/.screenrc
+
+screen -t proxy ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com

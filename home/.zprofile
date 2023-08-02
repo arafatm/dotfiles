@@ -1,0 +1,2 @@
+keychain --clear
+echo ".zprofile"
