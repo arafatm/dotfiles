@@ -304,9 +304,8 @@ function todo() {
 
 function todo_mark_done() { sed -i "$2s/@/./g" $1 && sed -i "$2s/:a:/A/g" $1 && sed -i "$2s/:b:/B/g" $1 && sed -i "$2s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)~~/" $1 ; }
 
-# vim: set ft=sh:
+# vim: set ft=zsh:
 # vim: set textwidth=0:
 # vim: set wrapmargin=0:
 # vim: set nowrap:
 # vim: set foldlevel=9:
-
