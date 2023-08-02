@@ -51,8 +51,8 @@ alias buu="bundle update"
 alias c='cat'
 alias cask='brew cask'
 alias cdc="cd $HOME/code"
-alias cdw='cd $HOME/code/work'
 alias cdr='cd `git rev-parse --show-toplevel`'
+alias cdw='cd $HOME/code/work'
 alias cp='cp -i'
 alias df='df -h -x aufs -x tmpfs -x udev'
 alias dk-update-images='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
@@ -66,7 +66,6 @@ alias duds='directory_by_size_sorted'
 alias expl='explorer.exe .' # windows WS
 alias firedev='firefox -P dev -no-remote'
 alias firemisc='firefox -P misc -no-remote'
-alias gcleanhistory='ggit_clean_history'
 alias gaddcommit='ggit_add_and_commit_all'
 alias gbranch='git branch --color'
 alias gbranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
@@ -74,11 +73,12 @@ alias gbranchtrack='ggit_branch_and_track'
 alias gca='ggit_commit_all'
 alias gcheckout='git checkout'
 alias gcheckoutremote='ggit_checkout_remote'
-alias gclean="bash $HOME/code/dotfiles/home/bin/bkps.git.cron"
+alias gcleanhistory='ggit_clean_history'
 alias gcommitall='git commit -a'
 alias gcommitlastcommand='ggit_commit_last_command'
 alias gcommitwithdefaultmessage='ggit_commit'
 alias gd='git diff HEAD .'
+alias gdir="find . -type d -name .git -print -execdir git status --porcelain \;"
 alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
 alias gheroku='git pull; git push; git push heroku main'
 alias ghubclone='github_clone'
@@ -309,3 +309,4 @@ function todo_mark_done() { sed -i "$2s/@/./g" $1 && sed -i "$2s/:a:/A/g" $1 && 
 # vim: set wrapmargin=0:
 # vim: set nowrap:
 # vim: set foldlevel=9:
+
