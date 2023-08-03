@@ -336,11 +336,24 @@ map <Leader><Leader>r vip:sort!<cr>
 " weird cursor char on lxterminal
 set guicursor=
 
-command! Gcommit :call GH_commit_this_file_as_message()
+command! Gcommit             :call GH_commit_this_file_as_message()
 command! -nargs=* Gcommitall :call Git_commit_all(<q-args>)
-command! Gpush !git push 
-command! Gstatus !git status 
-command! Glog tabnew | silent execute 'r!git log' | set nomodifiable | set readonly | execute 'resize ' . (line('$') > 30 ? 30 : line('$'))
+command! Glinklastcommit     :call GH_link_last_commit()
+command! -nargs=* Gpush      :execute '!git push' <q-args>
+command! -nargs=* Gstatus    :execute '!git status --porcelain' <q-args>
+command! -nargs=0 Glog call DisplayGitLog()
+
+function! DisplayGitLog()
+    let log_output = systemlist("git --no-pager log --reverse --pretty=format:'%cs %cl %h - %s'")
+    if len(log_output) > 0
+        execute 'new'
+        call setline(1, log_output)
+        setlocal buftype=nofile bufhidden=wipe
+    else
+        echo "No git log output"
+    endif
+endfunction
+
 
 function! Git_commit_all(...)
   let msg = (a:0 == 0) ? "commit all" : join(a:000, ' ')
@@ -356,15 +369,39 @@ function! Git_commit(message)
   echo system('git push')
 endfunction
 
-" ****************************
 " Commit Readme with last message of last header "^##"
 function! GH_commit_this_file_as_message()
-  let l:winview = winsaveview()
-  "let msg = getline(search("^\#", "b"))
-  let msg = expand('%:t')
-  call winrestview(l:winview)
+    let l:winview = winsaveview()
+    let last_header_line = search('^\s*##\s', 'bW')
+    if last_header_line != 0
+        let last_header_msg = matchstr(getline(last_header_line), '##\s\+\zs.*$')
+        if last_header_msg != ''
+            let msg = last_header_msg
+            call Git_commit(msg)
+        else
+            echo "No message found in the last header"
+        endif
+    else
+        " Default to the filename if no header is found
+        let msg = expand('%:t')
+        call Git_commit(msg)
+    endif
+    call winrestview(l:winview)
+endfunction
 
-  call Git_commit(msg) " defined in init.vim
+" I want to link to the last git commit on github and append to the next line
+" Result is "[commit text](https://github.com/arafatm/repo/commit/gitsha)"
+function! GH_link_last_commit()
+  let line = getline('.')
+  let dir = split(fnamemodify('.',':p'), "/")[-1]
+  let glg = system('git log --oneline | head -n 1')
+  let glg = split(glg, " ")
+  let gh = glg[0]
+  let gt = substitute(join(glg[1:-1], " "), "\n", "", "")
+  let line = ":shipit: [".gt."]("
+  let line = line . "https://github.com/arafatm/" . dir . "/commit/"
+  let line = line . gh . ")"
+  call append(line('.'), line)
 endfunction
 
 "augroup pandoc_syntax
