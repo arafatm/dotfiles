@@ -347,7 +347,7 @@ command! -nargs=* Gcommitall call Git_commit_all(<q-args>)
 command! -nargs=0 Gcommitlinklast call GH_link_last_commit()
 command! -nargs=* Gpush      execute '!git push' <q-args>
 command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
-command! -nargs=0 Glog       '!git --no-pager log --pretty=format:"\%cs | \%cl | \%s" --reverse --name-status --no-renames'
+command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl | \%s" --reverse --name-status --no-renames -n 5' <q-args>
 
 function! Git_commit_all(...)
   let msg = (a:0 == 0) ? "commit all" : join(a:000, ' ')
