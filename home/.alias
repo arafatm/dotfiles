@@ -26,6 +26,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then alias pg_start="launchctl load ~/Library/Laun
 if [[ $OSTYPE =~ "darwin" ]]; then alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
 if [[ $OSTYPE =~ "darwin" ]]; then alias sed="gsed"; fi
 if exists ccat; then alias cat='ccat'; fi
+if exists batcat; then alias cat='batcat'; fi
 if exists nvim; then alias :e='nvim'; fi
 if exists nvim; then alias v='nvim -R'; else alias v='vi -R'; fi
 if exists nvim; then alias vi='nvim'; fi
