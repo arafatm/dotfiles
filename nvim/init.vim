@@ -358,7 +358,6 @@ function! Git_commit_all(...)
 endfunction
 
 function! Git_commit(message)
-  echomsg a:message
   echo system('git pull')
   echo system('git commit ' . expand("%t") . ' -m "' . a:message . '"')
   echo system('git push')
@@ -374,7 +373,6 @@ function! GH_commit_this_file_as_message()
         let last_header_msg = matchstr(getline(last_header_line), '^##\s\+.*$')
         if last_header_msg != ''
             let msg = msg . ': ' . last_header_msg
-            echo msg
         else
             echo "No message found in the last header"
         endif
