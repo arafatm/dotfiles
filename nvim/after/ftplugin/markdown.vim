@@ -76,11 +76,6 @@ map <LEADER>td <ESC>:call TodoDone()<CR>
 map <LEADER>te <ESC>:call TodoDoneEml()<CR>
 map <LEADER>ts <ESC>vip:!sort<CR>
 
-""""""""""""""""""""  Git
-command! Gheadcommitall   :call GH_commit_all_with_this_header_as_message()
-command! Gheadcommit      :call GH_commit_this_file_as_message()
-command! Glinklastcommit  :call GH_link_last_commit()
-
 """"""""""""""""""""
 function! TodoSort()
   <ESC>vip:!sort<CR>
@@ -120,49 +115,6 @@ function! TodoDone()
   s/:a:/A/g
   s/:b:/B/g
   s/^- \[ ]/\="- [x] ~~" . strftime("%Y-%m-%d") . "~~"
-endfunction
-
-""""""""""""""""""""
-" Commit . with last message of last header "^##"
-function! GH_commit_all_with_this_header_as_message()
-  let l:winview = winsaveview()
-  let msg = getline(search("^\#", "b"))
-  call winrestview(l:winview)
-
-  call Git_commit_all(msg)
-endfunction
-
-""""""""""""""""""""
-" Commit Readme with last message of last header "^##"
-function! GH_commit_this_file_as_message()
-  let l:winview = winsaveview()
-  "let msg = getline(search("^\#", "b"))
-  let msg = expand('%:t')
-  call winrestview(l:winview)
-
-  call Git_commit(msg) " defined in init.vim
-endfunction
-
-""""""""""""""""""""
-" I want to link to the last git commit on github.
-" Result is "[commit text](https://github.com/arafatm/repo/commit/gitsha)"
-" and gets appended to the next line
-function! GH_link_last_commit()
-  let line = getline('.')
-  let dir = split(fnamemodify('.',':p'), "/")[-1]
-
-  let glg = system('git log --oneline | head -n 1')
-
-  let glg = split(glg, " ")
-  let gh = glg[0]
-  let gt = substitute(join(glg[1:-1], " "), "\n", "", "")
-
-
-  let line = ":shipit: [".gt."]("
-  let line = line . "https://github.com/arafatm/" . dir . "/commit/"
-  let line = line . gh . ")"
-
-  call append(line('.'), line)
 endfunction
 
 """""""""""""""""""""
