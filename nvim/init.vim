@@ -108,14 +108,6 @@ call plug#end()
 filetype plugin indent on
 
 "*****************************************************************************
-" Autoreload vimrc
-"*****************************************************************************
-augroup reload_vimrc " {
-	autocmd!
-	autocmd BufWritePost init.vim source $MYVIMRC
-augroup END " }
-
-"*****************************************************************************
 " Basic Setup
 "*****************************************************************************"
 
@@ -344,16 +336,17 @@ map <Leader><Leader>r vip:sort!<cr>
 " weird cursor char on lxterminal
 set guicursor=
 
-command! -nargs=+ Gcommitall :call Git_commit_all(<q-args>)
-command! Gheadcommit :call GH_commit_this_file_as_message()
+command! -nargs=* Gcommitall :call Git_commit_all(<q-args>)
+command! Gcommitfile :call GH_commit_this_file_as_message()
 command! Gpush !git push 
 command! Gstatus !git status 
+command! Glog tabnew | silent execute 'r!git log' | set nomodifiable | set readonly | execute 'resize ' . (line('$') > 30 ? 30 : line('$'))
 
-function! Git_commit_all(message)
+function! Git_commit_all(...)
+  let msg = (a:0 == 0) ? "commit all" : join(a:000, ' ')
   echo system('git pull')
-  echo system('git commit -a -m "' . a:message . '"')
+  echo system('git commit -a -m "' . msg . '"')
   echo system('git push')
-  "call jobstart('git pull; git push')
 endfunction
 
 function! Git_commit(message)
@@ -388,3 +381,8 @@ set expandtab
 noremap <F12> <ESC>:filetype detect<CR>
 
 set colorcolumn=0
+
+" vim: set foldlevel=9:
+" vim: set nowrap:
+" vim: set textwidth=0:
+" vim: set wrapmargin=0:
