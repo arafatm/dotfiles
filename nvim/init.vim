@@ -336,8 +336,8 @@ map <Leader><Leader>r vip:sort!<cr>
 " weird cursor char on lxterminal
 set guicursor=
 
+command! Gcommit :call GH_commit_this_file_as_message()
 command! -nargs=* Gcommitall :call Git_commit_all(<q-args>)
-command! Gcommitfile :call GH_commit_this_file_as_message()
 command! Gpush !git push 
 command! Gstatus !git status 
 command! Glog tabnew | silent execute 'r!git log' | set nomodifiable | set readonly | execute 'resize ' . (line('$') > 30 ? 30 : line('$'))
