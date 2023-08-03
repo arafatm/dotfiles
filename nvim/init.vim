@@ -347,10 +347,11 @@ command! -nargs=* Gcommitall call Git_commit_all(<q-args>)
 command! -nargs=0 Gcommitlinklast call GH_link_last_commit()
 command! -nargs=* Gpush      execute '!git push' <q-args>
 command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
-command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl | \%s" --reverse --name-status --no-renames -n 5' <q-args>
+command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl \# \%s" --reverse --name-status --no-renames -n 5' <q-args>
 
 function! Git_commit_all(...)
   let msg = (a:0 == 0) ? "commit all" : join(a:000, ' ')
+  silent! wa
   echo system('git pull')
   echo system('git commit -a -m "' . msg . '"')
   echo system('git push')
@@ -366,20 +367,19 @@ endfunction
 " Commit Readme with last message of last header "^##"
 function! GH_commit_this_file_as_message()
     let l:winview = winsaveview()
+    let msg = expand('%:t')
+    update
     let last_header_line = search('^\s*##\s', 'bW')
     if last_header_line != 0
-        let last_header_msg = matchstr(getline(last_header_line), '##\s\+\zs.*$')
+        let last_header_msg = matchstr(getline(last_header_line), '^##\s\+.*$')
         if last_header_msg != ''
-            let msg = last_header_msg
-            call Git_commit(msg)
+            let msg = msg . ': ' . last_header_msg
+            echo msg
         else
             echo "No message found in the last header"
         endif
-    else
-        " Default to the filename if no header is found
-        let msg = expand('%:t')
-        call Git_commit(msg)
     endif
+    call Git_commit(msg)
     call winrestview(l:winview)
 endfunction
 
