@@ -107,6 +107,12 @@ call plug#end()
 
 filetype plugin indent on
 
+" Autoreload vimrc
+augroup reload_vimrc 
+	autocmd!
+	autocmd BufWritePost init.vim source $MYVIMRC
+augroup END
+
 "*****************************************************************************
 " Basic Setup
 "*****************************************************************************"
@@ -336,24 +342,12 @@ map <Leader><Leader>r vip:sort!<cr>
 " weird cursor char on lxterminal
 set guicursor=
 
-command! Gcommit             :call GH_commit_this_file_as_message()
-command! -nargs=* Gcommitall :call Git_commit_all(<q-args>)
-command! Glinklastcommit     :call GH_link_last_commit()
-command! -nargs=* Gpush      :execute '!git push' <q-args>
-command! -nargs=* Gstatus    :execute '!git status --porcelain' <q-args>
-command! -nargs=0 Glog call DisplayGitLog()
-
-function! DisplayGitLog()
-    let log_output = systemlist("git --no-pager log --reverse --pretty=format:'%cs %cl %h - %s'")
-    if len(log_output) > 0
-        execute 'new'
-        call setline(1, log_output)
-        setlocal buftype=nofile bufhidden=wipe
-    else
-        echo "No git log output"
-    endif
-endfunction
-
+command! -nargs=0 Gcommit    call GH_commit_this_file_as_message()
+command! -nargs=* Gcommitall call Git_commit_all(<q-args>)
+command! -nargs=0 Glinklastcommit call GH_link_last_commit()
+command! -nargs=* Gpush      execute '!git push' <q-args>
+command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
+command! -nargs=0 Glog       execute '!git --no-pager log --reverse --pretty=format:"\%cs | \%cl | \%h | \%s"'
 
 function! Git_commit_all(...)
   let msg = (a:0 == 0) ? "commit all" : join(a:000, ' ')
