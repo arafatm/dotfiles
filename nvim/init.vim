@@ -350,7 +350,7 @@ command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
 command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl \# \%s" --reverse --name-status --no-renames -n 10' <q-args>
 
 noremap <leader>gc :Gcommit<CR>
-noremap <leader>ga :Gcommitall<CR>
+noremap <leader>gca :Gcommitall<CR>
 noremap <leader>gl :Glog<CR>
 noremap <leader>gs :Gstatus<CR>
 
