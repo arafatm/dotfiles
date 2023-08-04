@@ -1,0 +1,19 @@
+#!/bin/bash
+
+source $HOME/.env
+
+USER=$(whoami)
+
+echo $ghapi
+
+#curl -u $USER:$GITHUB_TOKEN $GITHUB_API/user/repos\?per_page\=200 | jq '.[] | select(.has_pages == true) | .name'
+curl -u $USER:$GITHUB_TOKEN $GITHUB_API/user/repos\?per_page\=50&page=1 
+curl -u $USER:$GITHUB_TOKEN $GITHUB_API/user/repos\?per_page\=50&page=2 
+curl -u $USER:$GITHUB_TOKEN $GITHUB_API/user/repos\?per_page\=50&page=3 
+curl -u $USER:$GITHUB_TOKEN $GITHUB_API/user/repos\?per_page\=50&page=4 
+
+#gh repo list $USER --json 'name' -q '.[] | select(.has_pages == true) | .name'
+#gh repo list $USER -L 10  --json '*'
+
+
+# vim: set ft=bash:
