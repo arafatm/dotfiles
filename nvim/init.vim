@@ -355,13 +355,14 @@ noremap <leader>gl :Glog<CR>
 noremap <leader>gs :Gstatus<CR>
 
 function! Git_commit_all(...)
-  if (a:0 == 0)
-    let msg = "Commit All"
-  else
+  let msg = "Commit All"
+  if (a:0 > 0)
     let msg = join(a:000, ' ')
   endif
-  silent! wa
-  silent! echo system('git pull')
+  wa
+
+  echo msg
+  echo system('git pull')
   echo system('git commit -a -m "' . msg . '"')
   echo system('git push')
 endfunction
