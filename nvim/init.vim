@@ -343,7 +343,7 @@ map <Leader><Leader>r vip:sort!<cr>
 set guicursor=
 
 command! -nargs=0 Gcommit    call GH_commit_this_file_as_message()
-command! -nargs=* Gcommitall call Git_commit_all(<q-args>)
+command! -nargs=* Gcommitall call Git_commit_all(<f-args>)
 command! -nargs=0 Gcommitlinklast call GH_link_last_commit()
 command! -nargs=* Gpush      execute '!git push' <q-args>
 command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
