@@ -350,7 +350,7 @@ command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
 command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl \# \%s" --reverse --name-status --no-renames -n 10' <q-args>
 
 noremap <leader>gc :Gcommit<CR>
-noremap <leader>gca :Gcommitall<CR>
+noremap <leader>ga :Gcommitall<CR>
 noremap <leader>gl :Glog<CR>
 noremap <leader>gs :Gstatus<CR>
 
@@ -359,9 +359,8 @@ function! Git_commit_all(...)
   if (a:0 > 0)
     let msg = join(a:000, ' ')
   endif
-  :wall
-
-  echo msg
+  echo "committing " . shellescape(msg)
+  bufdo update
   echo system('git pull')
   echo system('git commit -a -m "' . msg . '"')
   echo system('git push')
