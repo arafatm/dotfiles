@@ -19,7 +19,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
 nmap <C-n> :NERDTreeToggle<CR>
 Plug 'scrooloose/nerdtree' " git status plugin for nerdtree
-
+Plug 'inkarkat/vim-AdvancedSorters'
 Plug 'majutsushi/tagbar'
 nmap <C-m> :TagbarToggle<CR>
 
