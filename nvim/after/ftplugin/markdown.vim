@@ -19,13 +19,13 @@ func Eatchar(pat)
 endfunc
 "iab ` ``<left><C-R>=Eatchar('\s')<CR>
 iab $ $``$<left><left><C-R>=Eatchar('\s')<CR>
-iab `` <CR>```<RETURN><RETURN>```<UP><C-R>=Eatchar('\s')<CR>
-iab ``b ```bash<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
-iab ``e ```elixir<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
-iab ``r ```ruby<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
-iab ``p ```python<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
-iab ``t ```terraform<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
-iab ``x ```jsx<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab ``` <CR>```<RETURN><RETURN>```<UP><C-R>=Eatchar('\s')<CR>
+iab `b ```bash<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab `e ```elixir<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab `r ```ruby<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab `p ```python<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab `t ```terraform<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab `x ```jsx<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
 
 """""""""""""""""""" Misc
 iab img ![](/img/)
