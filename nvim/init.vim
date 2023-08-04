@@ -359,7 +359,7 @@ function! Git_commit_all(...)
   if (a:0 > 0)
     let msg = join(a:000, ' ')
   endif
-  wa
+  :wall
 
   echo msg
   echo system('git pull')
