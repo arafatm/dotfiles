@@ -19,7 +19,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
 nmap <C-n> :NERDTreeToggle<CR>
 Plug 'scrooloose/nerdtree' " git status plugin for nerdtree
-Plug 'inkarkat/vim-AdvancedSorters'
+Plug 'obreitwi/vim-sort-folds' " Fold, vselect region, :SortFolds
 Plug 'majutsushi/tagbar'
 nmap <C-m> :TagbarToggle<CR>
 
