@@ -25,8 +25,7 @@ if [[ $OSTYPE =~ "darwin" ]]; then alias ls='ls --color=tty'; else alias ls='ls 
 if [[ $OSTYPE =~ "darwin" ]]; then alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
 if [[ $OSTYPE =~ "darwin" ]]; then alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
 if [[ $OSTYPE =~ "darwin" ]]; then alias sed="gsed"; fi
-if exists ccat; then alias cat='ccat'; fi
-if exists batcat; then alias cat='batcat'; fi
+if exists batcat; then alias c='batcat'; else alias c='cat'; fi
 if exists nvim; then alias :e='nvim'; fi
 if exists nvim; then alias v='nvim -R'; else alias v='vi -R'; fi
 if exists nvim; then alias vi='nvim'; fi
@@ -49,7 +48,6 @@ alias bu="bundle"                    # Vendor everything still applies
 alias bue="bundle exec"
 alias buinit="bundle_init"
 alias buu="bundle update"
-alias c='cat'
 alias cask='brew cask'
 alias cdc="cd $HOME/code"
 alias cdr='cd `git rev-parse --show-toplevel`'
