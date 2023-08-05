@@ -20,8 +20,9 @@ set -o vi
 autoload -U +X bashcompinit && bashcompinit
 
 # Aliases
+source $HOME/.env
 if [[ -f $HOME/.alias ]];      then source $HOME/.alias; fi
-if [[ -f $HOME/.zmisc ]];      then source $HOME/.zmisc; fi
+if [[ -f $HOME/.alias.priv ]]; then source $HOME/.alias.priv; fi
 if [[ -f $HOME/.alias.work ]]; then source $HOME/.alias.work; fi
 
 # Dev stuff
