@@ -24,3 +24,8 @@ if [ ! -d "$HOME/code/dotfiles" ]; then
 else
   cd $DOTFILES && sh setup.dotfiles.sh 
 fi
+
+echo "############################################################"
+echo "## If not primary (e.g. Kodi)..."
+echo "0 0 * * * rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/dotfiles"
+echo "############################################################"
