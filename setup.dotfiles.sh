@@ -50,4 +50,3 @@ echo '- created neovim'
 echo '---------- DONE Setup dotfiles ----------'
 
 echo '$ chsh -s zsh'
-
