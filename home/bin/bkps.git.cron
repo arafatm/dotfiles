@@ -5,13 +5,20 @@
 # Add the line below to crontab -e to automate on a schedule
 # 0 * * * * $HOME/bin/bkps.git.cron >> $HOME/tmp/cron.log 2>&1
 
-LOG=$HOME/tmp/cron.log
 start=$(pwd)
+echo "########## bkps.git.cron $(date) ##########"
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
   cd $file && cd ..
-  echo "########################################################################" 
-  echo "$(date) -- $(pwd)" 
-  (git pull ; git add . ; git commit -a -m "bkp" ; git push) 
+  remote_url=$(git config --get remote.origin.url)
+  echo "---------- $(pwd) :: $remote_url ----------"
+  if [[ "$remote_url" == *"https://"* ]]; then
+    git pull origin main
+  elif [[ "$remote_url" == *"git@"* ]]; then
+    echo "Remote is using SSH"
+    git pull && git add . && git commit -am "bkps.git.cron $(date)" && git push
+  else
+    echo "Unknown remote type"
+  fi
 done
 cd $start
