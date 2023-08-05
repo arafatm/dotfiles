@@ -2,6 +2,8 @@
 
 set -e
 
+DOTFILES=$HOME/code/dotfiles
+
 if [ ! -f /etc/lsb-release ]; then
   echo "-----\nNot Ubuntu\n-----"
   exit
@@ -20,5 +22,10 @@ if [ ! -d "$HOME/code/dotfiles" ]; then
   echo '----- clone $HOME/code/dotfiles -----'
   echo '------------------------------------------------------------'
 else
-  cd $HOME/code/dotfiles && sh setup.dotfiles.sh 
+  cd $DOTFILES && sh setup.dotfiles.sh 
 fi
+
+echo "############################################################"
+echo "## If not primary (e.g. Kodi)..."
+echo "0 0 * * * rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/dotfiles"
+echo "############################################################"
