@@ -1,2 +1,2 @@
 keychain --clear
-echo ".zprofile"
+echo "##### .zprofile"
