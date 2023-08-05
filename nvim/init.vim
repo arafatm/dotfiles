@@ -1,3 +1,4 @@
+" What is calling git submodule update"
 call plug#begin()
 
 " Basics
