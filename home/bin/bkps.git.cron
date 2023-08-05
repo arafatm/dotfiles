@@ -21,4 +21,12 @@ do
     echo "Unknown remote type"
   fi
 done
+if [[ $HOST == 'kodi' ]]; then
+  local DOT="$HOME/code/dotfiles"
+  echo '----- Kodi'
+  if [[ -f 'dot.zip' ]]; then rm -f dot.zip; fi &&
+    wget -q https://github.com/arafatm/dotfiles/zipball/main -O dot.zip &&
+    rm -rf $DOT && mv -T arafatm-dotfiles* $DOT && rm -f dot.zip &&
+    cd $DOT && bash setup.dotfiles.sh
+fi
 cd $start
