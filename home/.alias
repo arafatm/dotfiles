@@ -4,7 +4,7 @@ unalias -a
 
 function exists() { command -v $1 >/dev/null 2>&1 }
 
-alias setup_dotfiles='mkdir code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
+alias up.dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bgred=$(tput setab 1)
