@@ -9,7 +9,6 @@ echo "*** Setup dotfiles"
 echo '---------- Setting up ssh ---------- '
 if [[ ! -f "$HOME/.ssh/arafatm.ssh" ]]; then
   echo "arafatm.ssh key not found"
-  exit
 else
   eval `keychain --agents ssh --eval arafatm.ssh`
 fi
