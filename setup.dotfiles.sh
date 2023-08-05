@@ -40,12 +40,15 @@ for f in `ls -A $DOTFILES/nvim`; do
 done
 echo '- created neovim'
 
-echo "## Switch to zsh"
-if [ $(echo $SHELL) != "/bin/zsh" ]; then chsh -s $(which zsh); fi
-echo "shell should be zsh"
+#echo "## Switch to zsh"
+#if [ $(echo $SHELL) != "/bin/zsh" ]; then chsh -s $(which zsh); fi
+#echo "shell should be zsh"
 
-echo "## unalias and source .zshrc"
-unalias -a; source $HOME/.zshrc
+#echo "## unalias and source .zshrc"
+#unalias -a; source $HOME/.zshrc
 
 echo "*** DONE Setup dotfiles ***"
+
+echo "############################################################"
+echo "chsh -s zsh"
 
