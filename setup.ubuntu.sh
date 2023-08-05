@@ -25,6 +25,12 @@ else
   cd $DOTFILES && sh setup.dotfiles.sh 
 fi
 
+if [[ $(HOST) == "kodi" ]]; then
+  echo "############################################################"
+  echo "ssh-copy-id -i <ssh-file> kodi@hostname" 
+  echo "cat GH_TOKEN={GH Kodi Token} > $HOME/.env"
+fi
+
 echo "############################################################"
 echo "## If not primary (e.g. Kodi)..."
 echo "0 0 * * * rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/dotfiles"
