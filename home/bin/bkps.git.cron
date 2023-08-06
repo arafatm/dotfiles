@@ -11,6 +11,6 @@ find $HOME/code -type d -name ".git" | while IFS="" read -r file;
 do
   cd $file/.. 
   echo "---------- $(pwd) :: $(git config --get remote.origin.url) ----------"
-  git pull
+  git pull origin main; git commit -am "bkp $(date)"; git push
 done
 cd $start
