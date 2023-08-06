@@ -184,11 +184,18 @@ function docker_shell() { docker exec -it $1 bash ; }
 function em() { emacs $1 & ; }
 
 function ggit_pages() {
-  gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/arafatm/$(basename $(pwd))/actions/workflows/jekyll.yml/enable
+  curl -L \
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $GH_TOKEN" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/arafatm/$(basename $(pwd))/pages \
+  -d '{"source":{"branch":"main"}}'
 }
 function ggit_arafatm() {
   git init; git add . ; git commit -m "init"
   gh repo create $(basename $(pwd)) --source=. --remote=upstream --push --public
+  sleep 5
   git branch -M main; git push -u origin main 
 }
 function ggit_add_and_commit_all() { git add . && git commit . -m "$*" && git push & ; }
