@@ -9,26 +9,8 @@ start=$(pwd)
 echo "########## bkps.git.cron $(date) ##########"
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
-  cd $file && cd ..
-  remote_url=$(git config --get remote.origin.url)
-  echo "---------- $(pwd) :: $remote_url ----------"
-  if [[ "$remote_url" == *"https://"* ]]; then
-    git pull origin main
-  elif [[ "$remote_url" == *"git@"* ]]; then
-    echo "Remote is using SSH"
-    git pull && git add . && git commit -am "bkps.git.cron $(date)" && git push
-  else
-    echo "Unknown remote type"
-  fi
+  cd $file 
+  echo "---------- $(pwd) :: $(git config --get remote.origin.url) ----------"
+  git pull
 done
-if [[ $HOST == 'kodi' ]]; then
-  mkdir $HOME/tmp
-  cd $HOME/code/
-  rm -rf dotfiles
-  echo "code: $(ls -a)"
-  git clone --depth 1 https://github.com/arafatm/dotfiles.git
-  cd dotfiles
-  echo $(pwd)
-  bash setup.dotfiles.sh
-fi
 cd $start
