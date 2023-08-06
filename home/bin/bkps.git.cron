@@ -22,12 +22,16 @@ do
   fi
 done
 if [[ $HOST == 'kodi' ]]; then
+  mkdir $HOME/tmp
+  cd $HOME/tmp
   DOT="$HOME/code/dotfiles"
   echo '----- Kodi'
-  if [[ -f 'dot.zip' ]]; then rm -f dot.zip; fi &&
-    if [[ $(find . -maxdepth 1 -type d -name "arafatm-dotfiles-*") ]]; then rm -rf arafatm-dotfiles-* ; fi &&
-      wget -q https://github.com/arafatm/dotfiles/zipball/main -O dot.zip &&
-      unzip dot.zip && rm -rf $DOT && mv -T arafatm-dotfiles* $DOT && rm -f dot.zip &&
-      cd $DOT && bash setup.dotfiles.sh
+  wget -N https://github.com/arafatm/dotfiles/archives/main.tar.gz 
+  tar xzvf main.tar.gz
+  rm -rf $DOT
+  rm -f dot.zip
+  mv -T arafatm-dotfiles $DOT
+  cd $DOT
+  bash setup.dotfiles.sh
 fi
 cd $start
