@@ -14,9 +14,8 @@ else
 fi
 
 echo '---------- Setting up oh-my-zsh ----------'
-rm -rf $HOME/.oh-my-zsh && \
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --keep-zshrc --unattended
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+rm -rf $HOME/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --keep-zshrc --unattended
 echo "- installed ohmyzsh"
 
 echo '---------- Setting up dotfiles ----------'

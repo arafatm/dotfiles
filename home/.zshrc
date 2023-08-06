@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="af-magic"
+ZSH_THEME="agnoster"
 
 ZSH_TMUX_AUTOQUIT=false
 zstyle :omz:plugins:keychain agents gpg,ssh
