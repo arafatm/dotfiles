@@ -29,8 +29,8 @@ if [[ $HOST == 'kodi' ]]; then
   wget -N https://github.com/arafatm/dotfiles/archives/main.tar.gz 
   tar xzvf main.tar.gz
   rm -rf $DOT
-  rm -f dot.zip
   mv -T dotfiles-main $DOT
+  rm -rf main.tar.gz
   cd $DOT
   bash setup.dotfiles.sh
 fi
