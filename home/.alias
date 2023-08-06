@@ -185,6 +185,11 @@ function docker_shell() { docker exec -it $1 bash ; }
 function em() { emacs $1 & ; }
 
 function ggit_pages() {
+  git submodule add https://github.com/arafatm/ghp
+  if [[ -d "ghp" ]]; then 
+    find ghp -maxdepth 1 -mindepth 1 \(-not -name ".git" -a -not -name "readme.md" \) -print -exec cp -rf {} . \; 
+  fi
+  git add .github && git commit -am 'ghp'
   curl -L \
   -X POST \
   -H "Accept: application/vnd.github+json" \
