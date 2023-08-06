@@ -1,10 +1,12 @@
 # Manage my dotfiles.
 
-```
-eval `keychain --agents ssh --eval github.ssh`
-git clone git@github.com:arafatm/dotfiles.git $HOME/dotfiles
-bash $HOME/dotfiles/setup.ubuntu.sh      # Ubuntu only
-bash $HOME/dotfiles/setup.dotfiles.sh
+## Clone && Setup
+
+- Make sure you have ssh keys (deploy key for kodi)
+```bash
+mkdir $HOME/code && cd $HOME/code
+git clone --depth 1 git@github.com:arafatm/dotfiles 
+cd dotfiles && bash setup.dotfiles.sh # setup.ubuntu.sh if on ubuntu
 ```
 
 `crontab -e` # and copy text below to auto bkp specific folders
