@@ -30,7 +30,7 @@ if [[ $HOST == 'kodi' ]]; then
   tar xzvf main.tar.gz
   rm -rf $DOT
   rm -f dot.zip
-  mv -T arafatm-dotfiles $DOT
+  mv -T dotfiles-main $DOT
   cd $DOT
   bash setup.dotfiles.sh
 fi
