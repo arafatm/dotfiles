@@ -23,15 +23,12 @@ do
 done
 if [[ $HOST == 'kodi' ]]; then
   mkdir $HOME/tmp
-  cd $HOME/tmp
-  DOT="$HOME/code/dotfiles"
-  echo '----- Kodi'
-  wget -N https://github.com/arafatm/dotfiles/archives/main.tar.gz 
-  tar xzvf main.tar.gz
-  rm -rf $DOT
-  mv -T dotfiles-main $DOT
-  rm -rf main.tar.gz
-  cd $DOT
+  cd $HOME/code/
+  rm -rf dotfiles
+  echo "code: $(ls -a)"
+  git clone --depth 1 https://github.com/arafatm/dotfiles.git
+  cd dotfiles
+  echo $(pwd)
   bash setup.dotfiles.sh
 fi
 cd $start
