@@ -15,7 +15,7 @@ fi
 
 echo '---------- Setting up oh-my-zsh ----------'
 rm -rf $HOME/.oh-my-zsh
-git clone -https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
+git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
 echo "- installed ohmyzsh"
 
 echo '---------- Setting up dotfiles ----------'
