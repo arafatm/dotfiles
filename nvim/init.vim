@@ -349,8 +349,8 @@ command! -nargs=* Gpush      execute '!git push' <q-args>
 command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
 command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl \# \%s" --reverse --name-status --no-renames -n 10' <q-args>
 
-noremap <leader>gc :Gcommit<CR>
-noremap <leader>gca :Gcommitall<CR>
+noremap <leader>gc :Gcommit
+noremap <leader>gca :Gcommitall
 noremap <leader>gl :Glog<CR>
 noremap <leader>gs :Gstatus<CR>
 
@@ -419,8 +419,7 @@ set expandtab
 noremap <F12> <ESC>:filetype detect<CR>
 
 set colorcolumn=0
-
-" vim: set foldlevel=9:
-" vim: set nowrap:
-" vim: set textwidth=0:
-" vim: set wrapmargin=0:
+set foldlevel=9
+set nowrap
+set textwidth=0
+set wrapmargin=0

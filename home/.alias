@@ -187,7 +187,7 @@ function em() { emacs $1 & ; }
 function ggit_pages() {
   if [[ -d "ghp" ]]; then 
     git submodule update --remote
-    find ghp -maxdepth 1 -mindepth 1 ! \( -name ".git" -o -name "readme.md" \) -exec cp -rf {} . \; 
+    find ghp -maxdepth 1 -mindepth 1 ! \( -name ".git" -o -name "readme.md" -o -name "style.css" \) -exec cp -rf {} . \; 
   else
     git submodule add https://github.com/arafatm/ghp
   fi
