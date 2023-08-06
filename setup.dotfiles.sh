@@ -14,8 +14,11 @@ else
 fi
 
 echo '---------- Setting up oh-my-zsh ----------'
-if [[ ! -d $HOME/.oh-my-zsh ]]; then git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
-else cd $HOME/.oh-my-zsh && git pull --depth 1; fi
+if [[ ! -d $HOME/.oh-my-zsh ]]; then 
+  git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
+else 
+  cd $HOME/.oh-my-zsh && git pull --depth 1
+fi
 echo "- installed ohmyzsh"
 
 echo '---------- Setting up dotfiles ----------'
