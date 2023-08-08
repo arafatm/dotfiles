@@ -185,9 +185,9 @@ function docker_shell() { docker exec -it $1 bash ; }
 function em() { emacs $1 & ; }
 
 function ggit_pages() {
+  git pull
   if [[ -d "ghp" ]]; then 
     git submodule update --remote
-    find ghp -maxdepth 1 -mindepth 1 ! \( -name ".git" -o -name "readme.md" -o -name "style.css" \) -exec cp -rf {} . \; 
   else
     git submodule add https://github.com/arafatm/ghp
   fi

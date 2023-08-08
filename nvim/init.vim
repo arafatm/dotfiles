@@ -342,17 +342,24 @@ map <Leader><Leader>r vip:sort!<cr>
 " weird cursor char on lxterminal
 set guicursor=
 
-command! -nargs=0 Gcommit    call GH_commit_this_file_as_message()
+command! -nargs=0 Gaddfile   call Git_add_file()
+command! -nargs=* Gcommit    call Git_commit_this_file(<f-args>)
 command! -nargs=* Gcommitall call Git_commit_all(<f-args>)
 command! -nargs=0 Gcommitlinklast call GH_link_last_commit()
 command! -nargs=* Gpush      execute '!git push' <q-args>
 command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
 command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl \# \%s" --reverse --name-status --no-renames -n 10' <q-args>
 
-noremap <leader>gc :Gcommit
+noremap <leader>ga :Gaddfile
 noremap <leader>gca :Gcommitall
+noremap <leader>gcc :Gcommit
 noremap <leader>gl :Glog<CR>
 noremap <leader>gs :Gstatus<CR>
+
+function! Git_add_file()
+  let msg = expand('%:t') " file name
+  echo system('git add ' . msg)
+endfunction
 
 function! Git_commit_all(...)
   let msg = "Commit All"
@@ -373,9 +380,12 @@ function! Git_commit(message)
 endfunction
 
 " Commit Readme with last message of last header "^##"
-function! GH_commit_this_file_as_message()
+function! Git_commit_this_file(...)
     let l:winview = winsaveview()
     let msg = expand('%:t')
+    if (a:0 > 0)
+      let msg = join(a:000, ' ')
+    endif
     update
     let last_header_line = search('^\s*##\s', 'bW')
     if last_header_line != 0
