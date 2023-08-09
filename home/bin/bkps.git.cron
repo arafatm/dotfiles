@@ -13,6 +13,7 @@ echo "## bkps.git.cron $(date)"
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
   cd $file/.. 
+  if [[ "$(pwd)" == *"nvim/plugged/"* ]]; then echo "plugged"; break; fi
   echo ""
   echo "------------------------------------------------------------"
   echo ""
