@@ -13,12 +13,13 @@ echo "## bkps.git.cron $(date)"
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
   cd $file/.. 
-  if [[ "$(pwd)" == *"nvim/plugged/"* ]]; then echo "plugged"; break; fi
-  echo ""
-  echo "------------------------------------------------------------"
-  echo ""
-  echo "### $(pwd) :: $(git config --get remote.origin.url)" 
-  git pull; git add .; git commit -am "bkp $(date)"; git push
+  if [[ "$(pwd)" != *"nvim/plugged/"* ]]; then 
+    echo ""
+    echo "------------------------------------------------------------"
+    echo ""
+    echo "### $(pwd) :: $(git config --get remote.origin.url)" 
+    git pull; git add .; git commit -am "bkp $(date)"; git push
+  fi
 done
 nvim -es -c 'PlugUpgrade | PlugUpdate | qa'
 cd $start
