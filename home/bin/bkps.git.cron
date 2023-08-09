@@ -21,5 +21,5 @@ do
     git pull; git add .; git commit -am "bkp $(date)"; git push
   fi
 done
-nvim -es -c 'PlugUpgrade | PlugUpdate | qa'
+nvim -c 'PlugUpgrade | PlugUpdate | qa'
 cd $start
