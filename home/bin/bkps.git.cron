@@ -19,4 +19,5 @@ do
   echo "### $(pwd) :: $(git config --get remote.origin.url)" 
   git pull; git add .; git commit -am "bkp $(date)"; git push
 done
+nvim -es -c 'PlugUpgrade | PlugUpdate | qa'
 cd $start
