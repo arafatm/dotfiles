@@ -186,8 +186,9 @@ function em() { emacs $1 & ; }
 
 function ggit_pages() {
   if [[ "$(basename $(pwd))" != "ghp" ]]; then
-    rm -rf ghp
+    rm -rf ghp .gitmodules .git/modules .github
     wget https://github.com/arafatm/ghp/tarball/main -O - | tar -xz --one-top-level=ghp --strip-components=1 
+    mkdir -p .github/workflows && cp ghp/.github/workflows/ghp.yml .github/workflows/ghp.yml
     ghpArr=( "Gemfile" "_config.yml" "_includes" "_layouts" "favicon.ico" )
     for item in ${ghpArr[@]}; do
       rm -rf $item
