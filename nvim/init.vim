@@ -61,19 +61,10 @@ let g:go_fmt_command = "goimports" " Run goimports along gofmt on each save
 let g:go_auto_type_info = 1        " Automatically get signature/type info for object under cursor
 autocmd BufWritePost *.go normal! zv " https://github.com/fatih/vim-go/issues/502
 
-"Plug 'plasticboy/vim-markdown' " https://github.com/plasticboy/vim-markdown
-"let g:vim_markdown_auto_insert_bullets = 0
-"let g:vim_markdown_autowrite = 1
-"let g:vim_markdown_conceal = 0
-"let g:vim_markdown_fenced_languages = ['terraform=hcl', 'python=python']
-"let g:vim_markdown_folding_style_pythonic = 1
-"let g:vim_markdown_frontmatter = 1
-"let g:vim_markdown_math = 1
-"let g:vim_markdown_new_list_item_indent = 0
-"let g:vim_markdown_strikethrough = 1
+let g:markdown_fenced_languages = ['ruby', 'elixir', 'python', 'diff']
+let g:markdown_syntax_conceal = 0
 Plug 'mzlogin/vim-markdown-toc'
 let g:vmt_auto_update_on_save = 1
-Plug 'mmai/vim-markdown-wiki' " links manipulation and navigation in markdown 
 Plug 'godlygeek/tabular' " needed for vim-markdown
 " Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
 
