@@ -91,7 +91,7 @@ alias gmergemain='git merge main'
 alias gmkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
 alias gnote='git commit --allow-empty --cleanup=whitespace'
 alias grep='grep --color'       # show differences in colour
-alias gst='git status -s'
+alias gst='git status'
 alias gsync='( git pull && git push ) &'
 alias gtree='git log --oneline --decorate --all --graph'
 alias i3='cat $HOME/ca/notes/i3.md'

@@ -26,6 +26,7 @@ iab `r ```ruby<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
 iab `p ```python<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
 iab `t ```terraform<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
 iab `x ```jsx<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
+iab det <details><summary></summary><CR></details><ESC>k0/><<CR>n<left>
 
 """""""""""""""""""" Misc
 iab img ![](/img/)
