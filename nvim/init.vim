@@ -61,7 +61,6 @@ let g:go_fmt_command = "goimports" " Run goimports along gofmt on each save
 let g:go_auto_type_info = 1        " Automatically get signature/type info for object under cursor
 autocmd BufWritePost *.go normal! zv " https://github.com/fatih/vim-go/issues/502
 
-Plug 'rhysd/vim-gfm-syntax'
 let g:markdown_fenced_languages = ['ruby', 'elixir', 'python', 'diff']
 let g:markdown_syntax_conceal = 0
 Plug 'mzlogin/vim-markdown-toc'
