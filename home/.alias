@@ -275,8 +275,8 @@ function ggit_readme_append_last_command() {
   lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
   echo "---\nlastcommand = $lastcommand\n---"
   flag_diff=1
-  if [[ $(git status -s .) ]]; then git add . && git commit . -m  "> ${lastcommand}" ;
-  else flag_diff=0; git commit --allow-empty --cleanup=whitespace -m "> $lastcommand" ; fi
+  if [[ $(git status -s .) ]]; then git add . && git commit . -m  "- \`${lastcommand}\`" ;
+  else flag_diff=0; git commit --allow-empty --cleanup=whitespace -m "- \`$lastcommand\`" ; fi
   commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8}
   url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)/commit/$sha" 
   if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${url})"; fi
