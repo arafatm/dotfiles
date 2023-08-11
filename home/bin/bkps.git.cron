@@ -8,27 +8,24 @@
 start=$(pwd)
 echo ""
 echo "############################################################"
-echo ""
 echo "## bkps.git.cron $(date +%Y.%m.%d.%H.%M.%S)" 
+echo "############################################################"
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
   cd $file/.. 
   if [[ "$(pwd)" != *"nvim/plugged/"* ]]; then 
     echo ""
-    echo "------------------------------------------------------------"
-    echo ""
-    echo "### $(pwd) :: $(git config --get remote.origin.url)" 
+    echo "---------- $(pwd) :: $(git config --get remote.origin.url)" 
     git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
   fi
 done
 
 echo ""
-echo "------------------------------------------------------------"
-echo ""
+echo "---------- Vim Plug"
 if [[ $(expr $(date +%H) % 6) == 0 ]]; then
-  echo "### Vim: Upgrade"
+  echo "Upgrade"
   vim '+PlugUpgrade' '+PlugClean' '+PlugUpdate' '+qa!'
 else
-  echo '### Vim: Not ready for backup'
+  echo 'Not ready for upgrade'
 fi
 cd $start
