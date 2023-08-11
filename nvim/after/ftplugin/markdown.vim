@@ -28,6 +28,13 @@ iab `t ```terraform<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
 iab `x ```jsx<return>```<ESC>O<C-R>=Eatchar('\s')<CR>
 iab det <details><summary></summary><CR></details><ESC>k0/><<CR>n<left>
 
+iab h1 #
+iab h2 ##
+iab h3 ###
+iab h4 ####
+iab h5 #####
+iab h6 ######
+
 """""""""""""""""""" Misc
 iab img ![](/img/)
 

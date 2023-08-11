@@ -20,8 +20,8 @@ Plug 'preservim/nerdtree'
 nmap <C-n> :NERDTreeToggle<CR>
 Plug 'scrooloose/nerdtree' " git status plugin for nerdtree
 Plug 'obreitwi/vim-sort-folds' " Fold, vselect region, :SortFolds
-Plug 'majutsushi/tagbar'
-nmap <C-m> :TagbarToggle<CR>
+"Plug 'majutsushi/tagbar'
+"nmap <C-m> :TagbarToggle<CR>
 
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
@@ -342,8 +342,8 @@ command! -nargs=* Gstatus    execute '!git status --porcelain' <q-args>
 command! -nargs=* Glog       execute '!git --no-pager log --pretty=format:"\%cs | \%cl \# \%s" --reverse --name-status --no-renames -n 10' <q-args>
 
 noremap <leader>ga :Gaddfile
-noremap <leader>gca :Gcommitall
-noremap <leader>gcc :Gcommit
+noremap <leader>gwa :Gcommitall
+noremap <leader>gw :Gcommit
 noremap <leader>gl :Glog<CR>
 noremap <leader>gs :Gstatus<CR>
 
