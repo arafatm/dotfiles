@@ -89,7 +89,7 @@ alias gls='git ls-files'
 alias gmerge='git merge'
 alias gmergemain='git merge main'
 alias gmkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
-alias gnote='git commit --allow-empty --cleanup=whitespace'
+alias gnote='ggit_note'
 alias grep='grep --color'       # show differences in colour
 alias gst='git status'
 alias gsync='( git pull && git push ) &'
@@ -184,6 +184,9 @@ function docker_shell() { docker exec -it $1 bash ; }
 
 function em() { emacs $1 & ; }
 
+function ggit_note() {
+  git commit --allow-empty --cleanup=whitespace -m "$*" && git push
+}
 function ggit_pages() {
   if [[ "$(basename $(pwd))" != "ghp" ]]; then
     git pull
