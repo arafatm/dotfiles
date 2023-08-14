@@ -11,8 +11,12 @@ plugins=( asdf keychain docker )
 source $ZSH/oh-my-zsh.sh
 
 # my paths
-appPaths=( $HOME/apps $HOME/bin /usr/local/bin)
-for d in ${appPaths[@]}; do export PATH=$d:$PATH; done
+appPaths=( $HOME/apps $HOME/bin /usr/local/bin /snap/bin)
+for p in ${appPaths[@]}; do 
+  if [ -d "$p" ] && [[ ":$PATH:" != *":$p:"* ]]; then
+    PATH="$p:$PATH"
+  fi
+done
 
 # Shell options
 export TERM=xterm-256color
