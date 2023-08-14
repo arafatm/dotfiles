@@ -34,6 +34,7 @@ if exists python3; then alias pip='pip3'; fi
 if exists python3; then alias py='python3'; fi
 if exists python3; then alias python='python3'; fi
 
+alias sys='sudo systemctl'
 alias alg='alias | grep'
 alias aptd='sudo apt dist-upgrade'
 alias aptf='apt show'
