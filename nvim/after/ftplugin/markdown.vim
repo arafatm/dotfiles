@@ -127,24 +127,28 @@ endfunction
 
 """""""""""""""""""""
 function! MarkdownLevel()
-    if getline(v:lnum) =~ '^# .*$'
-        return ">1"
-    endif
-    if getline(v:lnum) =~ '^## .*$'
-        return ">2"
-    endif
-    if getline(v:lnum) =~ '^### .*$'
-        return ">3"
-    endif
-    if getline(v:lnum) =~ '^#### .*$'
-        return ">4"
-    endif
-    if getline(v:lnum) =~ '^##### .*$'
-        return ">5"
-    endif
-    if getline(v:lnum) =~ '^###### .*$'
-        return ">6"
-    endif
-    return "="
+  let line = getline(v:lnum)
+  if line =~ '^# .*$'
+    return ">1"
+  endif
+  if line =~ '^## .*$'
+    return ">2"
+  endif
+  if line =~ '^### .*$'
+    return ">3"
+  endif
+  if line =~ '^#### .*$'
+    return ">4"
+  endif
+  if line =~ '^##### .*$'
+    return ">5"
+  endif
+  if line =~ '^###### .*$'
+    return ">6"
+  endif
+  if line =~ '^<details>.*$'
+    return ">7"
+  endif
+  return "="
 endfunction
 
