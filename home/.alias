@@ -255,7 +255,7 @@ function ggit_readme_append_diff() {
   git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
   commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
   url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)" 
-  msg="<details><summary>:ship:<a href='${url}/commit/${sha}'>${sha}</a> ${msg}</summary>" 
+  msg="<details><summary>:ship: ${msg} <a href='${url}/commit/${sha}'>${sha}</a></summary>" 
   sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md 
   sed -z -i 's^xxx^```diffxxx^' $gitroot/readme.md 
   sed -z -i "s^xxx^\nxxx^" $gitroot/readme.md 
