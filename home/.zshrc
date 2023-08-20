@@ -3,10 +3,11 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 
 ZSH_TMUX_AUTOQUIT=false
-zstyle :omz:plugins:keychain agents gpg,ssh
+plugins=( asdf docker )
+#plugins=( asdf keychain docker )
+#zstyle :omz:plugins:keychain agents gpg,ssh
 #zstyle :omz:plugins:keychain identities ssh.github
 
-plugins=( asdf keychain docker )
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
 source $ZSH/oh-my-zsh.sh
 
