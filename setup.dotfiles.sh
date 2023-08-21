@@ -7,10 +7,10 @@ DOTFILES=$HOME/code/dotfiles
 echo "*** Setup dotfiles"
 
 echo '---------- Setting up ssh ---------- '
-if [[ ! -f "$HOME/.ssh/arafatm.ssh" ]]; then
-  echo "arafatm.ssh key not found"
+if [[ ! -f "$HOME/.ssh/github.ssh" ]]; then
+  echo "github.ssh key not found"
 else
-  eval `keychain --agents ssh --eval arafatm.ssh`
+  eval `keychain --agents ssh --eval github.ssh`
 fi
 
 echo '---------- Setting up oh-my-zsh ----------'

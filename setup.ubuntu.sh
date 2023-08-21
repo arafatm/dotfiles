@@ -25,7 +25,7 @@ else
   cd $DOTFILES && sh setup.dotfiles.sh 
 fi
 
-if [[ $(HOST) == "kodi" ]]; then
+if [[ $(echo $HOST) == "kodi" ]]; then
   echo '############################################################'
   echo 'ssh-copy-id -i <ssh-file> kodi@hostname' 
   echo 'cat GH_TOKEN={GH Kodi Token} > $HOME/.env'
