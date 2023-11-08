@@ -11,8 +11,9 @@ plugins=( asdf docker )
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
 source $ZSH/oh-my-zsh.sh
 
+export FLYCTL_INSTALL="/home/arafatm/.fly"
 # my paths
-appPaths=( $HOME/apps $HOME/bin /usr/local/bin /snap/bin)
+appPaths=( $HOME/apps $HOME/bin $HOME/.fly/bin /usr/local/bin /snap/bin)
 for p in ${appPaths[@]}; do 
   if [ -d "$p" ] && [[ ":$PATH:" != *":$p:"* ]]; then
     PATH="$p:$PATH"

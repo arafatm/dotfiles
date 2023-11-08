@@ -66,6 +66,7 @@ alias duds='directory_by_size_sorted'
 alias expl='explorer.exe .' # windows WS
 alias firedev='firefox -P dev -no-remote'
 alias firemisc='firefox -P misc -no-remote'
+alias flst='fly status'
 alias gaddcommit='ggit_add_and_commit_all'
 alias gbranch='git branch --color'
 alias gbranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
