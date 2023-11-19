@@ -11,14 +11,12 @@ plugins=( asdf docker )
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
 source $ZSH/oh-my-zsh.sh
 
-export FLYCTL_INSTALL="/home/arafatm/.fly"
 # my paths
-appPaths=( $HOME/apps $HOME/bin $HOME/.fly/bin /usr/local/bin /snap/bin)
-for p in ${appPaths[@]}; do 
-  if [ -d "$p" ] && [[ ":$PATH:" != *":$p:"* ]]; then
-    PATH="$p:$PATH"
-  fi
-done
+PATH="$HOME/apps:$PATH"
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH" # pip3
+PATH="/usr/local/bin:$PATH"
+PATH="/snap/bin:$PATH"
 
 # Shell options
 export TERM=xterm-256color
@@ -34,6 +32,7 @@ if [[ -f $HOME/.alias.work ]]; then source $HOME/.alias.work; fi
 # Dev stuff
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi       # rbenv
 if [[ -f  "$HOME/.asdf/asdf.sh" ]]; then source "$HOME/.asdf/asdf.sh"; else echo "asdf not installed"; fi; 
+export FLYCTL_INSTALL="/home/arafatm/.fly"; PATH="$HOME/.fly/bin:$PATH"
 
 find $HOME/.ssh -type f -name "*.ssh" -exec bash -c 'eval `keychain --agents ssh -q --eval $0`' {} \;
 
