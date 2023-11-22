@@ -8,7 +8,7 @@ Plug 'roman/golden-ratio'
 Plug 'morhetz/gruvbox'
 "Plug 'chriskempson/base16-vim'
 "Plug 'drewtempelmeyer/palenight.vim'
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
 
 " Nice utilities
 Plug 'tmhedberg/matchit'
@@ -48,6 +48,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 
+" Golang
 Plug 'fatih/vim-go'
 "let g:go_fmt_command = "gofmt"
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
@@ -61,10 +62,11 @@ let g:go_fmt_command = "goimports" " Run goimports along gofmt on each save
 let g:go_auto_type_info = 1        " Automatically get signature/type info for object under cursor
 autocmd BufWritePost *.go normal! zv " https://github.com/fatih/vim-go/issues/502
 
+" Markdown
 let g:markdown_fenced_languages = ['ruby', 'elixir', 'python', 'diff']
 let g:markdown_syntax_conceal = 0
 Plug 'mzlogin/vim-markdown-toc'
-let g:vmt_auto_update_on_save = 1
+let g:vmt_auto_update_on_save = 0
 Plug 'godlygeek/tabular' " needed for vim-markdown
 " Plug 'chmp/mdnav'   " Vim plugin for markdown link navigation
 
