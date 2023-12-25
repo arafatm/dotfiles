@@ -7,18 +7,19 @@
 
 start=$(pwd)
 echo ""
-echo "############################################################"
-echo "## bkps.git.cron $(date +%Y.%m.%d.%H.%M.%S)" 
-echo "############################################################"
+echo "########## bkps.git.cron $(date +%Y.%m.%d.%H.%M.%S)" 
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
   cd $file/.. 
-  if [[ "$(pwd)" != *"nvim/plugged/"* ]]; then 
-    echo ""
-    echo "---------- $(pwd) :: $(git config --get remote.origin.url)" 
-    git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+  if [[ `git status --porcelain` ]]; then
+    if [[ "$(pwd)" != *"nvim/plugged/"* ]]; then 
+      echo ""
+      echo "---------- $(pwd) :: $(git config --get remote.origin.url)" 
+      git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+    fi
   fi
 done
+
 
 echo ""
 echo "---------- Vim Plug"
@@ -28,4 +29,11 @@ if [[ $(expr $(date +%H) % 6) == 0 ]]; then
 else
   echo 'Not ready for upgrade'
 fi
+
+cd $HOME/code/private
+if [[ `git status --porcelain` ]]; then
+  echo "##### private $(date +%Y.%m.%d.%H.%M.%S)" 
+  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+fi
+
 cd $start
