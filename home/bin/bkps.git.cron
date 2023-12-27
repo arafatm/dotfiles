@@ -36,4 +36,10 @@ if [[ `git status --porcelain` ]]; then
   git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
 fi
 
+cd $HOME/code/arafatm.github.io
+if [[ `git status --porcelain` ]]; then
+  echo "##### arafatm.github.io $(date +%Y.%m.%d.%H.%M.%S)" 
+  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+fi
+
 cd $start
