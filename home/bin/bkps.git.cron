@@ -30,13 +30,13 @@ else
   echo 'Not ready for upgrade'
 fi
 
-cd $HOME/code/private
+cd $HOME/private
 if [[ `git status --porcelain` ]]; then
   echo "##### private $(date +%Y.%m.%d.%H.%M.%S)" 
   git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
 fi
 
-cd $HOME/code/arafatm.github.io
+cd $HOME/arafatm.github.io
 if [[ `git status --porcelain` ]]; then
   echo "##### arafatm.github.io $(date +%Y.%m.%d.%H.%M.%S)" 
   git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
