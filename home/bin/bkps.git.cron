@@ -7,7 +7,8 @@
 
 start=$(pwd)
 echo ""
-echo "########## bkps.git.cron $(date +%Y.%m.%d.%H.%M.%S)" 
+echo "========================================"
+echo "## bkps.git.cron $(date +%Y.%m.%d.%H.%M.%S)" 
 find $HOME/code -type d -name ".git" | while IFS="" read -r file; 
 do
   cd $file/.. 
@@ -20,26 +21,24 @@ do
   fi
 done
 
+echo "### private" 
+cd $HOME/private
+if [[ `git status --porcelain` ]]; then
+  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+fi
 
-echo ""
-echo "---------- Vim Plug"
+echo "## arafatm.github.io" 
+cd $HOME/arafatm.github.io
+if [[ `git status --porcelain` ]]; then
+  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+fi
+
+echo "## Vim Plug"
 if [[ $(expr $(date +%H) % 6) == 0 ]]; then
   echo "Upgrade"
   vim '+PlugUpgrade' '+PlugClean' '+PlugUpdate' '+qa!'
 else
   echo 'Not ready for upgrade'
-fi
-
-cd $HOME/private
-if [[ `git status --porcelain` ]]; then
-  echo "##### private $(date +%Y.%m.%d.%H.%M.%S)" 
-  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
-fi
-
-cd $HOME/arafatm.github.io
-if [[ `git status --porcelain` ]]; then
-  echo "##### arafatm.github.io $(date +%Y.%m.%d.%H.%M.%S)" 
-  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
 fi
 
 cd $start
