@@ -33,6 +33,12 @@ if [[ `git status --porcelain` ]]; then
   git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
 fi
 
+echo "### wrk.phoenix" 
+cd $HOME/wrk.phoenix
+if [[ `git status --porcelain` ]]; then
+  git pull; git add .; git commit -am "bkp $(date +%Y.%m.%d.%H.%M.%S)"; git push
+fi
+
 echo "## Vim Plug"
 if [[ $(expr $(date +%H) % 6) == 0 ]]; then
   echo "Upgrade"
