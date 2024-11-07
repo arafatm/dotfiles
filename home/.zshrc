@@ -41,3 +41,6 @@ find $HOME/.ssh -type f -name "*.ssh" -exec bash -c 'eval `keychain --agents ssh
 
 echo -e "\n\e[41m SPEAK LESS, BUT NOTICE EVERYTHING. \e[0m"
 echo -e "\n\e[41m The secret of getting ahead is getting started. — Mark Twain, from his book “The Innocents Abroad. \e[0m"
+
+# add Pulumi to the PATH
+export PATH=$PATH:/home/arafatm/.pulumi/bin

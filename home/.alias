@@ -313,16 +313,16 @@ function ggit_readme_append_last_command() {
   echo "---\nlastcommand = $lastcommand\n---"
   flag_diff=1
   if [[ $(git status -s .) ]]; then 
-    git add . && git commit . -m  "\`${lastcommand}\`" 
+    git add . && git commit . -m  "`${lastcommand}`" 
   else 
     flag_diff=0 
-    git commit --allow-empty --cleanup=whitespace -m "\`$lastcommand\`" 
+    git commit --allow-empty --cleanup=whitespace -m "\`${lastcommand}\`" 
   fi
-  commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8}
+  commit=$(git log --oneline -n 1) && sha=${commit:0:7} 
   local repo_url="$(git config --get remote.origin.url)"
   repo_url=$(ggit_parse_gh_url "$repo_url")
   echo "repo: $repo_url"
-  local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n> ${msg}"
+  msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n\`\`\`bash\n${lastcommand}\n\`\`\`"
   #if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${repo_url})/commit/${sha}"; fi
   gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md && git push &
 }
