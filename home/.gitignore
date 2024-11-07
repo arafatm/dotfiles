@@ -1,4 +1,6 @@
+# System & IDEs
 *.log
+*.swp
 *Zone.Identifier
 .DS_Store
 .env
@@ -6,6 +8,39 @@
 .netrwhist
 .npmrc
 .ssh/*
+.trash
 .vscode/
 Thumbs.db
 log/
+
+# Obsidian
+conflict-files-obsidian-git.md
+data.json
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspaces.json
+.obsidian/workspace-mobile.json
+
+# Rails
+.bundle
+.env*
+config/master.key
+
+app/assets/builds/*
+!app/assets/builds/.keep
+public/assets
+
+log/*
+!log/.keep
+
+storage/*
+!storage/.keep
+
+tmp/*
+!tmp/.keep
+tmp/pids/*
+!tmp/pids/
+!tmp/pids/.keep
+tmp/storage/*
+!tmp/storage/
+!tmp/storage/.keep

@@ -21,10 +21,19 @@ nor=$(tput sgr0) # reset colors
 # tput setab for background
 # tput bold
 
-if [[ $OSTYPE =~ "darwin" ]]; then alias ls='ls --color=tty'; else alias ls='ls --color=auto'; fi
-if [[ $OSTYPE =~ "darwin" ]]; then alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
-if [[ $OSTYPE =~ "darwin" ]]; then alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"; fi
-if [[ $OSTYPE =~ "darwin" ]]; then alias sed="gsed"; fi
+if grep -qi microsoft-standard-WSL2 /proc/version; then 
+	alias ssh='ssh.exe'
+	alias ssh-add='ssh-add.exe' 
+	export GIT_SSH_COMMAND='ssh.exe'
+fi
+if [[ $OSTYPE =~ "darwin" ]] then 
+	alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+	alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+	alias sed="gsed"
+	alias ls='ls --color=tty'
+else 
+	alias ls='ls --color=auto'
+fi
 if exists batcat; then alias c='batcat'; else alias c='cat'; fi
 if exists nvim; then alias :e='nvim'; fi
 if exists nvim; then alias v='nvim -R'; else alias v='vi -R'; fi
@@ -121,6 +130,7 @@ alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias rebash='exec $SHELL'
 alias rgc='ggit_readme_append_last_command'
 alias rgd='ggit_readme_append_diff'
+alias rgl='ggit_readme_append_link'
 alias rgn='ggit_readme_append_note'
 alias rk="bundle exec rake"
 alias rkaliases="alias |grep ' rk'"
@@ -251,15 +261,38 @@ function ggit_readme_append_commit() {
   gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
 }
 
-function ggit_readme_append_diff() {
+function ggit_parse_gh_url() {
+  local repo=$1
+  repo=${repo%%.git}
+  repo=${repo##*:}
+  repo="https://github.com/$repo"
+  echo $repo
+}
+
+function ggit_readme_append_link() {
   msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
   git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
   commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
-  url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)" 
-  msg="<details><summary>:ship: ${msg} <a href='${url}/commit/${sha}'>${sha}</a></summary>" 
+  local repo_url="$(git config --get remote.origin.url)"
+  repo_url=$(ggit_parse_gh_url "$repo_url")
+  echo "repo: $repo_url"
+  local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
+  echo "mgs: $msg"
   sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md 
-  sed -z -i 's^xxx^```diffxxx^' $gitroot/readme.md 
-  sed -z -i "s^xxx^\nxxx^" $gitroot/readme.md 
+  git push &
+}
+
+function ggit_readme_append_diff() {
+  local msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
+  git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
+  commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
+  local repo_url="$(git config --get remote.origin.url)"
+  repo_url=$(ggit_parse_gh_url "$repo_url")
+  echo "repo: $repo_url"
+  local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
+  echo "mgs: $msg"
+  sed -z -i "s^xxx^${msg}\nxxx^" $gitroot/readme.md 
+  sed -z -i "s^xxx^\`\`\`diff\nxxx^" $gitroot/readme.md 
   while IFS= read -r line; do 
     skip=false
     if [[ "$line" =~ "^index [0-9a-z]{7}\.\..*" ]]; then skip=true; fi
@@ -271,8 +304,7 @@ function ggit_readme_append_diff() {
     fi
     if [[ "$skip" = false ]]; then sed -z -i "s^xxx^$line\nxxx^" $gitroot/readme.md; fi
   done <<< "$gitdif"
-  sed -z -i 's^xxx^```xxx^' $gitroot/readme.md 
-  sed -z -i "s^xxx^\n</details>\n\nxxx^" $gitroot/readme.md 
+  sed -z -i "s^xxx^\`\`\`\n\nxxx^" $gitroot/readme.md 
   git push &
 }
 
@@ -280,11 +312,18 @@ function ggit_readme_append_last_command() {
   lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
   echo "---\nlastcommand = $lastcommand\n---"
   flag_diff=1
-  if [[ $(git status -s .) ]]; then git add . && git commit . -m  "- \`${lastcommand}\`" ;
-  else flag_diff=0; git commit --allow-empty --cleanup=whitespace -m "- \`$lastcommand\`" ; fi
+  if [[ $(git status -s .) ]]; then 
+    git add . && git commit . -m  "\`${lastcommand}\`" 
+  else 
+    flag_diff=0 
+    git commit --allow-empty --cleanup=whitespace -m "\`$lastcommand\`" 
+  fi
   commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8}
-  url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)/commit/$sha" 
-  if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${url})"; fi
+  local repo_url="$(git config --get remote.origin.url)"
+  repo_url=$(ggit_parse_gh_url "$repo_url")
+  echo "repo: $repo_url"
+  local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n> ${msg}"
+  #if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${repo_url})/commit/${sha}"; fi
   gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md && git push &
 }
 

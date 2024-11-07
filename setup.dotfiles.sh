@@ -2,16 +2,29 @@
 set -e
 
 echo '########## Setting up dotfiles ########## '
-DOTFILES=$HOME/code/dotfiles
+DOTFILES=$HOME/dotfiles
 
-echo "*** Setup dotfiles"
+if [[ $OSTYPE = 'darwin'* ]]; then ./setup.mac.sh; fi
 
 echo '---------- Setting up ssh ---------- '
-if [[ ! -f "$HOME/.ssh/github.ssh" ]]; then
-  echo "github.ssh key not found"
+if grep -qi microsoft-standard-WSL2 /proc/version; then 
+	echo 'Use 1Password auth'
+	alias ssh='ssh.exe'
+	alias ssh-add='ssh-add.exe'; 
+	export GIT_SSH_COMMAND='ssh.exe'
 else
-  eval `keychain --agents ssh --eval github.ssh`
+	if [[ ! -f "$HOME/.ssh/github.ssh" ]]; then
+		echo "github.ssh key not found"
+		exit
+	else
+		echo 'keychain'
+		eval `keychain --agents ssh --eval github.ssh`
+	fi
 fi
+
+if [ -f /etc/lsb-release ]; then ./setup.ubuntu.sh; fi
+
+echo "*** Setup dotfiles"
 
 echo '---------- Setting up oh-my-zsh ----------'
 if [[ ! -d $HOME/.oh-my-zsh ]]; then 
@@ -48,6 +61,9 @@ echo '- created neovim'
 #echo '---------- unalias and source .zshrc ----------'
 #unalias -a; source $HOME/.zshrc
 
-echo '---------- DONE Setup dotfiles ----------'
+echo '---------- Default zsh ----------'
 
-echo '$ chsh -s zsh'
+chsh -s $(which zsh)
+
+echo '---------- Powerline on Windows ----------'
+echo 'https://gist.github.com/stramel/658d702f3af8a86a6fe8b588720e0e23'
