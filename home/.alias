@@ -1,9 +1,7 @@
 #! /usr/bin/bash
 
 unalias -a
-
 function exists() { command -v $1 >/dev/null 2>&1 }
-
 alias up.dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
@@ -21,90 +19,171 @@ nor=$(tput sgr0) # reset colors
 # tput setab for background
 # tput bold
 
-if grep -qi microsoft-standard-WSL2 /proc/version; then 
-	alias ssh='ssh.exe'
-	alias ssh-add='ssh-add.exe' 
-	export GIT_SSH_COMMAND='ssh.exe'
+if exists ssh; then
+  alias sshfurahadev='ssh arafatm@dev.furahasoftware.com'
+  alias sshkodi='ssh -oServerAliveInterval=60 kodi@192.168.0.100'
+  alias sshproxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
 fi
-if [[ $OSTYPE =~ "darwin" ]] then 
-	alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-	alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-	alias sed="gsed"
-	alias ls='ls --color=tty'
-else 
-	alias ls='ls --color=auto'
-fi
-if exists batcat; then alias c='batcat'; else alias c='cat'; fi
-if exists nvim; then alias :e='nvim'; fi
-if exists nvim; then alias v='nvim -R'; else alias v='vi -R'; fi
-if exists nvim; then alias vi='nvim'; fi
-if exists nvim; then alias vim='nvim'; fi
-if exists python3; then alias py='python3'; fi
-#if exists python3; then alias pip='pip3'; fi
-#if exists python3; then alias python='python3'; fi
 
-alias sys='sudo systemctl'
+if grep -qi microsoft-standard-WSL2 /proc/version; then 
+  alias expl='explorer.exe .' # windows WS
+  alias ssh-add='ssh-add.exe' 
+  alias ssh='ssh.exe'
+  export GIT_SSH_COMMAND='ssh.exe'
+fi
+
+if [[ $OSTYPE =~ 'darwin' ]] then 
+  alias brew='brew'
+  alias cask='brew cask'
+  alias ls='ls --color=tty'
+  alias maccamera='sudo killall VDCAssistant' # reset osx camera 
+  alias pg_start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+  alias pg_stop='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+  alias sed='gsed'
+else 
+  alias ls='ls --color=auto'
+fi
+
+if exists zsh; then
+  alias z="unalias -a; source $HOME/.zshrc"
+  alias zsrc='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
+fi
+
+if exists apt; then
+  alias aapt='alias | grep apt'
+  alias aptd='sudo apt dist-upgrade'
+  alias aptf='apt show'
+  alias apti='sudo apt install'
+  alias aptm='sudo apt-cache madison'
+  alias apts='apt search'
+  alias aptsh='apt show'
+  alias aptu='sudo apt update'
+fi
+
+if exists nvim; then 
+  alias :e='nvim'
+  alias v='nvim -R'
+  alias vi='nvim'
+  alias vim='nvim'
+else
+  alias v='vi -R'
+fi
+
+if exists postgres; then alias pgsql='sudo -u postgres psql'; fi
+
+if exists git; then
+  alias randmd='find . -type f |grep -v .git | shuf -n 1'
+
+  alias al.git='alias | grep git'
+  alias al.ggit='alias | grep ggit'
+
+  alias cdr='cd `git rev-parse --show-toplevel`'
+  alias vr='vim  $(git rev-parse --show-toplevel)/readme.md'
+
+  alias git.branch='git branch --color'
+  alias git.branchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
+  alias git.checkout='git checkout'
+  alias git.commitall='git commit -a'
+  alias git.conf='git config -l'
+  alias git.confl='git config -l --local'
+  alias git.d='git diff HEAD .'
+  alias git.dir="find . -type d -name .git -print -execdir git status --porcelain \;"
+  alias git.fetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
+  alias git.heroku='git pull; git push; git push heroku main'
+  alias git.hubclone='github_clone'
+  alias git.l='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+  alias git.la='git log --decorate'
+  alias git.ls='git ls-files'
+  alias git.merge='git merge'
+  alias git.mergemain='git merge main'
+  alias git.mkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
+  alias git.st='git status'
+  alias git.sync='( git pull && git push ) &'
+  alias git.tree='git log --oneline --decorate --all --graph'
+
+  alias ggit.addcommit='ggit_add_and_commit_all'
+  alias ggit.branchtrack='ggit_branch_and_track'
+  alias ggit.ca='ggit_commit_all'
+  alias ggit.checkoutremote='ggit_checkout_remote'
+  alias ggit.cleanhistory='ggit_clean_history'
+  alias ggit.commitlastcommand='ggit_commit_last_command'
+  alias ggit.commitwithdefaultmessage='ggit_commit'
+  alias ggit.note='ggit_note'
+
+  alias rgit.c='ggit_readme_append_last_command'
+  alias rgit.d='ggit_readme_append_diff'
+  alias rgit.l='ggit_readme_append_link'
+  alias rgit.n='ggit_readme_append_note'
+fi
+
+if exists ruby; then
+  alias al.bund='alias |grep bundle'
+  alias al.rake='alias |grep rake'
+  alias al.rail='alias |grep rails'
+  alias bund='bundle'                    # Vendor everything still applies
+  alias bund.exec='bundle exec'
+  alias bund.init='bundle_init'
+  alias bund.update='bundle update'
+  alias rake='bundle exec rake'
+  alias rake.dbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+  alias rake.fixtures='bundle exec rake db:fixtures:load'
+  alias rake.migrate='bundle exec rake db:migrate' 
+  alias rake.seed='bundle exec rake db:seed'
+  alias rake.test='bundle exec rake test'
+  alias rail='bundle exec rails'
+  alias rail.lc='bundle exec rails console'
+  alias rail.lcontroller='bundle exec rails generate controller'
+  alias rail.lg='bundle exec rails generate'
+  alias rail.lmodel='bundle exec rails generate model'
+  alias rail.ls='bundle exec rails s -b 0.0.0.0'
+  alias rail.lscaffold='bundle exec rails generate --skip scaffold'
+  alias rail.lt='bundle exec rails test'
+fi
+
+#if exists python3; 
+# then alias py='python3'
+# alias pip='pip3'
+# alias python='python3'
+#fi
+
+if exists terraform; then alias tf='terraform'; fi
+
+if exists docker; then
+  alias al.dok='alias | grep dok'
+  alias dok='docker'
+  alias dok.update.images='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
+  alias dok.restart='docker compose restart'
+  alias dok.compose="docker-compose"
+  alias dok.shell='docker_shell'
+fi
+
+if exists minikube; then
+  alias al.mk='alias | grep minikube'
+  alias mk='minikube'
+  alias mk.s='minikube start'
+fi
+
+if exists tmux; then
+  alias tma='tmux attach -t'
+  alias tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+  alias tml='tmux list-sessions'
+  alias tmm='tmux new-session -A -s main'
+  alias tmn='tmux new-window -c $PWD'
+  alias tms='tmux split-window -c $PWD'
+  alias tmx='tmux a -t `basename $PWD`'
+fi
+
+if exists batcat; then alias c='batcat'; else alias c='cat'; fi
 alias alg='alias | grep'
-alias aptd='sudo apt dist-upgrade'
-alias aptf='apt show'
-alias apti='sudo apt install'
-alias aptm='sudo apt-cache madison'
-alias apts='apt search'
-alias aptsh='apt show'
-alias aptu='sudo apt update'
 alias bkps='$HOME/bin/bkps.git.cron'
-alias brew='brew'
-alias bu="bundle"                    # Vendor everything still applies
-alias bue="bundle exec"
-alias buinit="bundle_init"
-alias buu="bundle update"
-alias cask='brew cask'
 alias cdc="cd $HOME/code"
-alias cdr='cd `git rev-parse --show-toplevel`'
 alias cdw='cd $HOME/code/work'
 alias cp='cp -i'
 alias df='df -h -x aufs -x tmpfs -x udev'
-alias dk-update-images='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
-alias dk='docker'
-alias dkc-restart='docker compose restart'
-alias dkc="docker-compose"
-alias dks='docker_shell'
 alias du='du -h'
-alias dud='directory_by_size'
-alias duds='directory_by_size_sorted'
-alias expl='explorer.exe .' # windows WS
-alias firedev='firefox -P dev -no-remote'
-alias firemisc='firefox -P misc -no-remote'
-alias flst='fly status'
-alias gaddcommit='ggit_add_and_commit_all'
-alias gbranch='git branch --color'
-alias gbranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
-alias gbranchtrack='ggit_branch_and_track'
-alias gca='ggit_commit_all'
-alias gcheckout='git checkout'
-alias gcheckoutremote='ggit_checkout_remote'
-alias gcleanhistory='ggit_clean_history'
-alias gcommitall='git commit -a'
-alias gcommitlastcommand='ggit_commit_last_command'
-alias gcommitwithdefaultmessage='ggit_commit'
-alias gconf='git config -l'
-alias gconfl='git config -l --local'
-alias gd='git diff HEAD .'
-alias gdir="find . -type d -name .git -print -execdir git status --porcelain \;"
-alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
-alias gheroku='git pull; git push; git push heroku main'
-alias ghubclone='github_clone'
-alias gl='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
-alias gla='git log --decorate'
-alias gls='git ls-files'
-alias gmerge='git merge'
-alias gmergemain='git merge main'
-alias gmkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
-alias gnote='ggit_note'
+alias du.size='directory_by_size'
+alias du.size.sorted='directory_by_size_sorted'
 alias grep='grep --color'       # show differences in colour
-alias gst='git status'
-alias gsync='( git pull && git push ) &'
-alias gtree='git log --oneline --decorate --all --graph'
 alias i3='cat $HOME/ca/notes/i3.md'
 alias i3g='cat $HOME/ca/notes/i3.md | grep -i '
 alias jc="journalctl -n 100 -f"
@@ -112,77 +191,25 @@ alias jcu="jc -u"
 alias l='ls -CF'                              #
 alias la='ls -A'                              # all but . and ..
 alias less='less -r'                          # raw control characters
-alias lgit='alias |grep git'
 alias ll='ls -l'                              # long list
 alias lla='ls -alh'                              # long list
 alias llt='ls -lt'
 alias lnk='greplinks'
 alias lt='ls -t'
-alias maccamera='sudo killall VDCAssistant' # reset osx camera 
-alias main='screen -xS main'
 alias mdcat="pandoc -f markdown -t plain"     # markdown
 alias more='less'
 alias mv='mv -i'
-alias pandora='pianobar'
-alias pgsql='sudo -u postgres psql'
 alias q='myquote'
-alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias rebash='exec $SHELL'
-alias rgc='ggit_readme_append_last_command'
-alias rgd='ggit_readme_append_diff'
-alias rgl='ggit_readme_append_link'
-alias rgn='ggit_readme_append_note'
-alias rk="bundle exec rake"
-alias rkaliases="alias |grep ' rk'"
-alias rkdbreload='rk db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
-alias rkfixtures='rk db:fixtures:load'
-alias rkmigrate='rk db:migrate' 
-alias rkseed='rk db:seed'
-alias rktest='rk test'
-alias rl="bundle exec rails"
-alias rlaliases="alias |grep ' rl'"
-alias rlc="rl console"
-alias rlcontroller='rl generate controller'
-alias rlg="rl generate"
-alias rlmodel='rl generate model'
-alias rls='rl s -b 0.0.0.0'
-alias rlscaffold='rl generate --skip scaffold'
-alias rlt="rl test"
 alias rm='rm -i'
-alias scl='screen -ls'
-alias scm='cd;screen -c ~/.screenrcmain'
-alias scr='screen -S `basename $PWD`'
-alias scs='screen -S'
-alias scx='screen -x `basename $PWD`'
-alias sshfurahadev='ssh arafatm@dev.furahasoftware.com'
-alias sshkodi='ssh -oServerAliveInterval=60 kodi@192.168.0.100'
-alias sshproxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
 alias standby='sudo /etc/acpi/sleep.sh'
 alias sudid='sudo -E !!'
 alias sudo='sudo -E'
 alias swp='setxkbmap -option caps:swapescape'
-alias t='todo'
-alias ta='todo :a:'
-alias tb='todo :b:'
-alias td='todo @'
-alias tdo='todo_mark_done'
-alias tf='terraform'
-alias th='todo | head'
-alias tma='tmux attach -t'
-alias tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
-alias tml='tmux list-sessions'
-alias tmm='tmux new-session -A -s main'
-alias tmn='tmux new-window -c $PWD'
-alias tms='tmux split-window -c $PWD'
-alias tmx='tmux a -t `basename $PWD`'
+alias sys='sudo systemctl'
 alias torr='aria2c -u40K --seed-time=0'
-alias tr='todo | tac'
-alias va='vault'
-alias vr='vim  $(git rev-parse --show-toplevel)/readme.md'
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias whence='type -a'                        # where, of a sort
-alias z="unalias -a; source $HOME/.zshrc"
-alias zsrc='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
 
 function bundle_init() { bundle install --path vendor && bundle package && if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then echo 'vendor/ruby' >> .gitignore; fi ; }
 
@@ -313,7 +340,7 @@ function ggit_readme_append_last_command() {
   echo "---\nlastcommand = $lastcommand\n---"
   flag_diff=1
   if [[ $(git status -s .) ]]; then 
-    git add . && git commit . -m  "`${lastcommand}`" 
+    git add . && git commit . -m  "\`${lastcommand}\`" 
   else 
     flag_diff=0 
     git commit --allow-empty --cleanup=whitespace -m "\`${lastcommand}\`" 
@@ -358,27 +385,6 @@ function herbr() {
     fi
   fi
 }
-
-function todo() {
-  local cmd='grep -inr --color=always "\- \[ ]" *.md' && local srch=""
-  if [[ -n "$@" ]]; then
-    args=$@ && echo -e "todos: $@" && srch=$1 && shift
-    while [[ -n $@  ]]; do
-      echo $@ && srch="$srch\|$1" && shift
-    done
-    cmd="$cmd | grep -i \"$srch\""
-  fi
-  echo "search $cmd"
-  cmd="$cmd | sed -e 's/\(:a:\)/$bgred\1$nor/'"
-  cmd="$cmd | sed -e 's/\(:b:\)/$yel\1$nor/'"
-  cmd="$cmd | sed -e 's/\( @\S\+\)/ $mag\1$nor/g'"
-  cmd="$cmd | sed -e 's/\( !\S\+\)/ $gre\1$nor/g'"
-  cmd="$cmd | sed -e 's/\( #\S\+\)/ $cya\1$nor/g'"
-  cmd="$cmd | sed -e 's/\(https\?:\S\+\)/$blu\1$nor/g'"
-  eval $cmd 
-}
-
-function todo_mark_done() { sed -i "$2s/@/./g" $1 && sed -i "$2s/:a:/A/g" $1 && sed -i "$2s/:b:/B/g" $1 && sed -i "$2s/- \[ ]/- [x] ~~$(date +%Y-%m-%d)~~/" $1 ; }
 
 # vim: set ft=zsh:
 # vim: set textwidth=0:
