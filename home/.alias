@@ -340,10 +340,10 @@ if exists git; then
     echo "---\nlastcommand = $lastcommand\n---"
     flag_diff=1
     if [[ $(git status -s .) ]]; then 
-      git add . && git commit . -m  "\`${lastcommand}\`" 
+      git add . && git commit . -m  "$ ${lastcommand}" 
     else 
       flag_diff=0 
-      git commit --allow-empty --cleanup=whitespace -m "\`${lastcommand}\`" 
+      git commit --allow-empty --cleanup=whitespace -m "$ ${lastcommand}" 
     fi
     commit=$(git log --oneline -n 1) && sha=${commit:0:7} 
     local repo_url="$(git config --get remote.origin.url)"
