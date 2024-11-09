@@ -2,7 +2,7 @@
 
 unalias -a
 function exists() { command -v $1 >/dev/null 2>&1 }
-alias ,dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
+alias ,al="alias | grep 'alias | grep'"
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bgred=$(tput setab 1)
@@ -69,8 +69,9 @@ else
 fi
 
 if exists git; then
-  alias cdr='cd `git rev-parse --show-toplevel`'
-  alias vr='vim  $(git rev-parse --show-toplevel)/readme.md'
+  alias ,dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
+  alias ,gcd='cd `git rev-parse --show-toplevel`'
+  alias ,gvr='vim  $(git rev-parse --show-toplevel)/readme.md'
 
   alias ,gi='alias | grep git'
   alias ,ggi='alias | grep ggit'
@@ -144,7 +145,7 @@ fi
 if exists terraform; then alias ,tf='terraform'; fi
 
 if exists docker; then
-  alias ,dk='alias | grep dok'
+  alias ,dk='alias | grep docker'
   alias ,dkupdateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
   alias ,dkcomposerestart='docker compose restart'
   alias ,dkcompose="docker-compose"
@@ -170,6 +171,8 @@ if exists tmux; then
   alias ,tmnewwindow='tmux new-window -c $PWD'
   alias ,tmsplitwindow='tmux split-window -c $PWD'
 fi
+
+
 
 if exists batcat; then alias c='batcat'; else alias c='cat'; fi
 alias ,alg='alias | grep'
