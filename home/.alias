@@ -155,8 +155,13 @@ if exists docker; then
 fi
 
 if exists minikube; then
-  alias ,mk='alias | grep minikube'
-  alias ,mks='minikube start'
+  alias ,mkube='alias | grep minikube'
+  alias ,mkubedashboard='minikube dashboard'
+  alias ,mkubedashboardenable='minikube addons enable dashboard'
+  alias ,mkubedelete='minikube delete'
+  alias ,mkubestart='minikube start'
+  alias ,mkubestatus='minikube status'
+  alias ,mkubestop='minikube stop'
 fi
 
 if exists tmux; then
