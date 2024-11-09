@@ -1,18 +1,18 @@
-LANG=en_US.UTF-8
-LC_CTYPE=en_US.UTF-8
+#export LANG=en_US.UTF-8
+#export LC_CTYPE=en_US.UTF-8
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 
 ZSH_TMUX_AUTOQUIT=false
-plugins=( asdf docker )
+#plugins=( )
 #plugins=( asdf keychain docker )
 #zstyle :omz:plugins:keychain agents gpg,ssh
 #zstyle :omz:plugins:keychain identities ssh.github
 
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # my paths
 PATH="$HOME/apps:$PATH"

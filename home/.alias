@@ -69,72 +69,69 @@ else
 fi
 
 if exists git; then
-  alias randmd='find . -type f |grep -v .git | shuf -n 1'
-
   alias cdr='cd `git rev-parse --show-toplevel`'
   alias vr='vim  $(git rev-parse --show-toplevel)/readme.md'
 
-  alias ,git='alias | grep git'
-  alias ,gitbranch='git branch --color'
-  alias ,gitbranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
-  alias ,gitcheckout='git checkout'
-  alias ,gitcommitall='git commit -a'
-  alias ,gitconfig='git config -l'
-  alias ,gitconfiglocal='git config -l --local'
-  alias ,gitdiff='git diff HEAD .'
-  alias ,gitdir="find . -type d -name .git -print -execdir git status --porcelain \;"
-  alias ,gitfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
-  alias ,githeroku='git pull; git push; git push heroku main'
-  alias ,githubclone='github_clone'
-  alias ,gitlogoneline='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
-  alias ,gitlog='git log --decorate'
-  alias ,gitls='git ls-files'
-  alias ,gitmerge='git merge'
-  alias ,gitmergemain='git merge main'
-  alias ,gitlogshort='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
-  alias ,gitstatus='git status'
-  alias ,gitsync='( git pull && git push ) &'
-  alias ,gittree='git log --oneline --decorate --all --graph'
+  alias ,gi='alias | grep git'
+  alias ,ggi='alias | grep ggit'
+  alias ,rg='alias | grep ggit_readme_'
 
-  alias ,ggit='alias | grep ggit'
-  alias ,ggitaddcommit='ggit_add_and_commit_all'
-  alias ,ggitbranchtrack='ggit_branch_and_track'
-  alias ,ggitca='ggit_commit_all'
-  alias ,ggitcheckoutremote='ggit_checkout_remote'
-  alias ,ggitcleanhistory='ggit_clean_history'
-  alias ,ggitcommitlastcommand='ggit_commit_last_command'
-  alias ,ggitcommitwithdefaultmessage='ggit_commit'
-  alias ,ggitnote='ggit_note'
-
-  alias ,rgit='alias | grep ggit'
-  alias ,rgitcommand='ggit_readme_append_last_command'
-  alias ,rgitdiff='ggit_readme_append_diff'
-  alias ,rgitlink='ggit_readme_append_link'
-  alias ,rgitnote='ggit_readme_append_note'
+  alias ,ghubclone='github_clone'
+  alias ,giaddcommit='ggit_add_and_commit_all'
+  alias ,gibranchtrack='ggit_branch_and_track'
+  alias ,gica='ggit_commit_all'
+  alias ,gicheckoutremote='ggit_checkout_remote'
+  alias ,gicleanhistory='ggit_clean_history'
+  alias ,gicommitlastcommand='ggit_commit_last_command'
+  alias ,gicommitwithdefaultmessage='ggit_commit'
+  alias ,gginote='ggit_note'
+  alias ,gibranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
+  alias ,gibranch='git branch --color'
+  alias ,gicheckout='git checkout'
+  alias ,gicommitall='git commit -a'
+  alias ,giconfig='git config -l'
+  alias ,giconfiglocal='git config -l --local'
+  alias ,gidiff='git diff HEAD .'
+  alias ,gidir="find . -type d -name .git -print -execdir git status --porcelain \;"
+  alias ,gifetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
+  alias ,gilog='git log --decorate'
+  alias ,gilogoneline='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+  alias ,gilogshort='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
+  alias ,gils='git ls-files'
+  alias ,gimerge='git merge'
+  alias ,gimergemain='git merge main'
+  alias ,gistatus='git status'
+  alias ,gisync='( git pull && git push ) &'
+  alias ,gitree='git log --oneline --decorate --all --graph'
+  alias ,rgicommand='ggit_readme_append_last_command'
+  alias ,rgidiff='ggit_readme_append_diff'
+  alias ,rgilink='ggit_readme_append_link'
+  alias ,rginote='ggit_readme_append_note'
 fi
 
-if exists postgres; then alias pgsql='sudo -u postgres psql'; fi
+if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
 
 if exists ruby; then
-  alias ,bund='alias |grep bundle'
-  alias ,bundexec='bundle exec'
-  alias ,bundinit='bundle_init'
-  alias ,bundupdate='bundle update'
-  alias ,rail='alias |grep rails'
-  alias ,railconsole='bundle exec rails console'
-  alias ,railcontroller='bundle exec rails generate controller'
-  alias ,railgenerate='bundle exec rails generate'
-  alias ,railmodel='bundle exec rails generate model'
-  alias ,railscaffold='bundle exec rails generate --skip scaffold'
-  alias ,railserver='bundle exec rails s -b 0.0.0.0'
-  alias ,railtest='bundle exec rails test'
-  alias ,rake='alias |grep rake'
-  alias ,rake='bundle exec rake'
-  alias ,rakedbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
-  alias ,rakefixtures='bundle exec rake db:fixtures:load'
-  alias ,rakemigrate='bundle exec rake db:migrate' 
-  alias ,rakeseed='bundle exec rake db:seed'
-  alias ,raketest='bundle exec rake test'
+  alias ,bu='alias |grep bundle'
+  alias ,buexec='bundle exec'
+  alias ,buinit='bundle_init'
+  alias ,buupdate='bundle update'
+  alias ,rak='alias |grep rake'
+  alias ,rak='bundle exec rake'
+  alias ,rakdbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+  alias ,rakfixtures='bundle exec rake db:fixtures:load'
+  alias ,rakmigrate='bundle exec rake db:migrate' 
+  alias ,rakseed='bundle exec rake db:seed'
+  alias ,raktest='bundle exec rake test'
+  alias ,ral='alias |grep rails'
+  alias ,ralconsole='bundle exec rails console'
+  alias ,ralcontroller='bundle exec rails generate controller'
+  alias ,ralgenerate='bundle exec rails generate'
+  alias ,ralmodel='bundle exec rails generate model'
+  alias ,ralscaffold='bundle exec rails generate --skip scaffold'
+  alias ,ralserver='bundle exec rails s -b 0.0.0.0'
+  alias ,raltest='bundle exec rails test'
+  function bundle_init() { bundle install --path vendor && bundle package && if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then echo 'vendor/ruby' >> .gitignore; fi ; }
 fi
 
 #if exists python3; 
@@ -146,38 +143,35 @@ fi
 if exists terraform; then alias ,tf='terraform'; fi
 
 if exists docker; then
-  alias ,dock='alias | grep dok'
-  alias ,dockupdateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
-  alias ,dockcomposerestart='docker compose restart'
-  alias ,dockcompose="docker-compose"
-  alias ,dockshell='docker_shell'
+  alias ,dk='alias | grep dok'
+  alias ,dkupdateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
+  alias ,dkcomposerestart='docker compose restart'
+  alias ,dkcompose="docker-compose"
+  alias ,dkshell='docker_shell'
   function docker_shell() { docker exec -it $1 bash ; }
 fi
 
 if exists minikube; then
-  alias ,mkube='alias | grep minikube'
-  alias ,mkubedashboard='minikube dashboard'
-  alias ,mkubedashboardenable='minikube addons enable dashboard'
-  alias ,mkubedelete='minikube delete'
-  alias ,mkubestart='minikube start'
-  alias ,mkubestatus='minikube status'
-  alias ,mkubestop='minikube stop'
+  alias ,mku='alias | grep minikube'
+  alias ,mkudashboard='minikube dashboard'
+  alias ,mkudashboardenable='minikube addons enable dashboard'
+  alias ,mkudelete='minikube delete'
+  alias ,mkustart='minikube start'
+  alias ,mkustatus='minikube status'
+  alias ,mkustop='minikube stop'
 fi
 
 if exists tmux; then
   alias ,tm='tmux'
-  alias ,tma='tmux attach -t'
-  alias ,tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
-  alias ,tml='tmux list-sessions'
-  alias ,tmm='tmux new-session -A -s main'
-  alias ,tmn='tmux new-window -c $PWD'
-  alias ,tms='tmux split-window -c $PWD'
-  alias ,tmx='tmux a -t `basename $PWD`'
+  alias ,tmattach='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+  alias ,tmlistsession='tmux list-sessions'
+  alias ,tmnewmain='tmux new-session -A -s main'
+  alias ,tmnewwindow='tmux new-window -c $PWD'
+  alias ,tmsplitwindow='tmux split-window -c $PWD'
 fi
 
 if exists batcat; then alias c='batcat'; else alias c='cat'; fi
-alias ,al='alias'
-alias ,algrep='alias | grep'
+alias ,alg='alias | grep'
 alias ,cdc="cd $HOME/code"
 alias ,cdw='cd $HOME/code/work'
 alias cp='cp -i'
@@ -188,11 +182,11 @@ alias du.size.sorted='directory_by_size_sorted'
 alias grep='grep --color'       # show differences in colour
 alias jc="journalctl -n 100 -f"
 alias jcu="jc -u"
-alias l='ls -CF'                              #
 alias la='ls -A'                              # all but . and ..
 alias less='less -r'                          # raw control characters
-alias ll='ls -l'                              # long list
 alias lla='ls -alh'                              # long list
+alias ll='ls -l'                              # long list
+alias l='ls -CF'                              #
 alias llt='ls -lt'
 alias lnk='greplinks'
 alias lt='ls -t'
@@ -200,6 +194,7 @@ alias mdcat="pandoc -f markdown -t plain"     # markdown
 alias more='less'
 alias mv='mv -i'
 alias q='myquote'
+alias randmd='find . -type f |grep -v .git | shuf -n 1'
 alias rebash='exec $SHELL'
 alias rm='rm -i'
 alias standby='sudo /etc/acpi/sleep.sh'
@@ -211,159 +206,10 @@ alias torr='aria2c -u40K --seed-time=0'
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias whence='type -a'                        # where, of a sort
 
-function bundle_init() { bundle install --path vendor && bundle package && if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then echo 'vendor/ruby' >> .gitignore; fi ; }
-
 function cleankernels() { echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge ; }
-
 function directory_by_size() { local arg1=${1:-.} && du -ahd 1 $arg1 ; }
-
 function directory_by_size_sorted() { directory_by_size $1 | sort -h ; }
-
 function em() { emacs $1 & ; }
-
-function ggit_note() {
-  git commit --allow-empty --cleanup=whitespace -m "$*" && git push
-}
-function ggit_pages() {
-  if [[ "$(basename $(pwd))" != "ghp" ]]; then
-    git pull
-    rm -rf ghp .gitmodules .git/modules .github
-    wget https://github.com/arafatm/ghp/tarball/main -O - | tar -xz --one-top-level=ghp --strip-components=1 
-    mkdir -p .github/workflows && cp ghp/.github/workflows/ghp.yml .github/workflows/ghp.yml
-    ghpArr=( "Gemfile" "_config.yml" "_includes" "_layouts" "favicon.ico" )
-    for item in ${ghpArr[@]}; do
-      rm -rf $item
-      cp -r ghp/$item .
-      echo "deleted and copied $item"
-    done
-    if [[ -n $(git status --short) ]]; then
-      git add .
-      git commit -am "Setting up Pages"
-      git push
-    fi
-    echo "--- Updated hash: $(git rev-parse HEAD)"
-    curl -L -X POST -H "Accept: application/vnd.github+json" \
-      -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" \
-      https://api.github.com/repos/arafatm/$(basename $(pwd))/pages -d '{"source":{"branch":"main"}}'
-  fi
-}
-
-function ggit_arafatm() {
-  git init; git add . ; git commit -m "init"
-  gh repo create $(basename $(pwd)) --source=. --remote=upstream --push --public
-  sleep 5
-  git branch -M main; git push -u origin main 
-}
-
-function ggit_add_and_commit_all() { git add . && git commit . -m "$*" && git push & ; }
-
-function ggit_branch_and_track() { git branch $1 && git push origin $1:$1 && git co $1 && git branch --set-upstream-to=origin/$1 $1 ; }
-
-function ggit_checkout_remote() { git checkout --track -b $1 origin/$1 ; }
-
-function ggit_clean_history() { 
-  git checkout --orphan latest_branch
-  git add -A
-  git commit -am "init"
-  git branch -D main
-  git branch -m main
-  git push -f origin main
-}
-
-function ggit_commit() {
-  array=( $@ ) && len=${#array[@]} && _file=${array[0]} && _args=${array[@]:1:$len-1}
-  git add $_file && git commit $_file -m "$_args"
-  #echo "adding $_file" && echo "commit msg $_args"
-}
-function ggit_commit_all() { git add . && git commit -a -m "$*" ; }
-
-function ggit_commit_last_command() { HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//') && git add . && git commit . -m "\$ $HIS" ; }
-
-function ggit_readme_append_commit() {
-  url=$(git config --get remote.origin.url) && url=${url:15:-4} && url="https://github.com/$url"
-  commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
-  msg="$* [$msg]($url)\n" && echo "commit: $msg"
-  gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
-}
-
-function ggit_parse_gh_url() {
-  local repo=$1
-  repo=${repo%%.git}
-  repo=${repo##*:}
-  repo="https://github.com/$repo"
-  echo $repo
-}
-
-function ggit_readme_append_link() {
-  msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
-  git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
-  commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
-  local repo_url="$(git config --get remote.origin.url)"
-  repo_url=$(ggit_parse_gh_url "$repo_url")
-  echo "repo: $repo_url"
-  local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
-  echo "mgs: $msg"
-  sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md 
-  git push &
-}
-
-function ggit_readme_append_diff() {
-  local msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
-  git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
-  commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
-  local repo_url="$(git config --get remote.origin.url)"
-  repo_url=$(ggit_parse_gh_url "$repo_url")
-  echo "repo: $repo_url"
-  local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
-  echo "mgs: $msg"
-  sed -z -i "s^xxx^${msg}\nxxx^" $gitroot/readme.md 
-  sed -z -i "s^xxx^\`\`\`diff\nxxx^" $gitroot/readme.md 
-  while IFS= read -r line; do 
-    skip=false
-    if [[ "$line" =~ "^index [0-9a-z]{7}\.\..*" ]]; then skip=true; fi
-    if [[ "$line" =~ "^--- [ab/].*" ]]; then skip=true; fi
-    if [[ "$line" =~ "^\+\+\+ [ab/].*" ]]; then skip=true; fi
-    if [[ "$line" =~ "^diff --git a.*" ]]; then 
-      sed -z -i "s^xxx^\nxxx^" $gitroot/readme.md
-      line=$(echo "$line" | sed 's$\(diff --git a/.*\) b/.*$\1$'); 
-    fi
-    if [[ "$skip" = false ]]; then sed -z -i "s^xxx^$line\nxxx^" $gitroot/readme.md; fi
-  done <<< "$gitdif"
-  sed -z -i "s^xxx^\`\`\`\n\nxxx^" $gitroot/readme.md 
-  git push &
-}
-
-function ggit_readme_append_last_command() {
-  lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
-  echo "---\nlastcommand = $lastcommand\n---"
-  flag_diff=1
-  if [[ $(git status -s .) ]]; then 
-    git add . && git commit . -m  "\`${lastcommand}\`" 
-  else 
-    flag_diff=0 
-    git commit --allow-empty --cleanup=whitespace -m "\`${lastcommand}\`" 
-  fi
-  commit=$(git log --oneline -n 1) && sha=${commit:0:7} 
-  local repo_url="$(git config --get remote.origin.url)"
-  repo_url=$(ggit_parse_gh_url "$repo_url")
-  echo "repo: $repo_url"
-  msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n\`\`\`bash\n${lastcommand}\n\`\`\`"
-  #if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${repo_url})/commit/${sha}"; fi
-  gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md && git push &
-}
-
-function ggit_readme_append_note() { 
-  git commit --allow-empty --cleanup=whitespace -m "$*" 
-  url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)" 
-  commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
-  msg=":bulb: __${msg}__" 
-  gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\n\nxxx^" $gitroot/readme.md && git push &
-}
-
-function gio() { mv $* $HOME/code/$USER/$USER.github.io/_new/$* ; }
-
-function github_clone() { git clone git@github.com:$1 ; }
-
 function greplinks() {
   lnks="grep '\[\S.\+](' *.md"
   lnks="$links | sed -e 's/^.*\(\[\S.\+](.*)\)/\1/'"
@@ -372,17 +218,145 @@ function greplinks() {
   eval $lnks && echo -e $lnks
 }
 
-function herbr() {
-  if [ -z "$1" ]; then echo "Please provide the name of the heroku app";
-  else
-    BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-    echo "Deploying branch $BRANCH to $1" && read -p "Are you sure? " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      git pull && git merge origin/main && git push && git push heroku $BRANCH:main
-      heroku pg:reset DATABASE_URL --confirm $1 && heroku run rake db:schema:load && heroku run rake db:seed
+if exists git; then
+  function github_clone() { git clone git@github.com:$1 ; }
+  function herbr() {
+    if [ -z "$1" ]; then echo "Please provide the name of the heroku app";
+    else
+      BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+      echo "Deploying branch $BRANCH to $1" && read -p "Are you sure? " -n 1 -r
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        git pull && git merge origin/main && git push && git push heroku $BRANCH:main
+        heroku pg:reset DATABASE_URL --confirm $1 && heroku run rake db:schema:load && heroku run rake db:seed
+      fi
     fi
-  fi
-}
+  }
+  function ggit_note() {
+    git commit --allow-empty --cleanup=whitespace -m "$*" && git push
+  }
+  function ggit_pages() {
+    if [[ "$(basename $(pwd))" != "ghp" ]]; then
+      git pull
+      rm -rf ghp .gitmodules .git/modules .github
+      wget https://github.com/arafatm/ghp/tarball/main -O - | tar -xz --one-top-level=ghp --strip-components=1 
+      mkdir -p .github/workflows && cp ghp/.github/workflows/ghp.yml .github/workflows/ghp.yml
+      ghpArr=( "Gemfile" "_config.yml" "_includes" "_layouts" "favicon.ico" )
+      for item in ${ghpArr[@]}; do
+        rm -rf $item
+        cp -r ghp/$item .
+        echo "deleted and copied $item"
+      done
+      if [[ -n $(git status --short) ]]; then
+        git add .
+        git commit -am "Setting up Pages"
+        git push
+      fi
+      echo "--- Updated hash: $(git rev-parse HEAD)"
+      curl -L -X POST -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/arafatm/$(basename $(pwd))/pages -d '{"source":{"branch":"main"}}'
+    fi
+  }
+  function ggit_arafatm() {
+    git init; git add . ; git commit -m "init"
+    gh repo create $(basename $(pwd)) --source=. --remote=upstream --push --public
+    sleep 5
+    git branch -M main; git push -u origin main 
+  }
+  function ggit_add_and_commit_all() { git add . && git commit . -m "$*" && git push & ; }
+  function ggit_branch_and_track() { git branch $1 && git push origin $1:$1 && git co $1 && git branch --set-upstream-to=origin/$1 $1 ; }
+  function ggit_checkout_remote() { git checkout --track -b $1 origin/$1 ; }
+  function ggit_clean_history() { 
+    git checkout --orphan latest_branch
+    git add -A
+    git commit -am "init"
+    git branch -D main
+    git branch -m main
+    git push -f origin main
+  }
+  function ggit_commit() {
+    array=( $@ ) && len=${#array[@]} && _file=${array[0]} && _args=${array[@]:1:$len-1}
+      git add $_file && git commit $_file -m "$_args"
+      #echo "adding $_file" && echo "commit msg $_args"
+    }
+    function ggit_commit_all() { git add . && git commit -a -m "$*" ; }
+    function ggit_commit_last_command() { HIS=$(history|tail -n 2|head -n 1|sed 's/ *[0-9]* *//') && git add . && git commit . -m "\$ $HIS" ; }
+    function ggit_readme_append_commit() {
+      url=$(git config --get remote.origin.url) && url=${url:15:-4} && url="https://github.com/$url"
+      commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
+      msg="$* [$msg]($url)\n" && echo "commit: $msg"
+      gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
+    }
+    function ggit_parse_gh_url() {
+      local repo=$1
+      repo=${repo%%.git}
+      repo=${repo##*:}
+      repo="https://github.com/$repo"
+      echo $repo
+    }
+    function ggit_readme_append_link() {
+      msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
+      git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
+      commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
+      local repo_url="$(git config --get remote.origin.url)"
+      repo_url=$(ggit_parse_gh_url "$repo_url")
+      echo "repo: $repo_url"
+      local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
+      echo "mgs: $msg"
+      sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md 
+      git push &
+    }
+    function ggit_readme_append_diff() {
+      local msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
+      git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
+      commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
+      local repo_url="$(git config --get remote.origin.url)"
+      repo_url=$(ggit_parse_gh_url "$repo_url")
+      echo "repo: $repo_url"
+      local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
+      echo "mgs: $msg"
+      sed -z -i "s^xxx^${msg}\nxxx^" $gitroot/readme.md 
+      sed -z -i "s^xxx^\`\`\`diff\nxxx^" $gitroot/readme.md 
+      while IFS= read -r line; do 
+        skip=false
+        if [[ "$line" =~ "^index [0-9a-z]{7}\.\..*" ]]; then skip=true; fi
+        if [[ "$line" =~ "^--- [ab/].*" ]]; then skip=true; fi
+        if [[ "$line" =~ "^\+\+\+ [ab/].*" ]]; then skip=true; fi
+        if [[ "$line" =~ "^diff --git a.*" ]]; then 
+          sed -z -i "s^xxx^\nxxx^" $gitroot/readme.md
+          line=$(echo "$line" | sed 's$\(diff --git a/.*\) b/.*$\1$'); 
+        fi
+        if [[ "$skip" = false ]]; then sed -z -i "s^xxx^$line\nxxx^" $gitroot/readme.md; fi
+      done <<< "$gitdif"
+      sed -z -i "s^xxx^\`\`\`\n\nxxx^" $gitroot/readme.md 
+      git push &
+    }
+    function ggit_readme_append_last_command() {
+      lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
+      echo "---\nlastcommand = $lastcommand\n---"
+      flag_diff=1
+      if [[ $(git status -s .) ]]; then 
+        git add . && git commit . -m  "\`${lastcommand}\`" 
+      else 
+        flag_diff=0 
+        git commit --allow-empty --cleanup=whitespace -m "\`${lastcommand}\`" 
+      fi
+      commit=$(git log --oneline -n 1) && sha=${commit:0:7} 
+      local repo_url="$(git config --get remote.origin.url)"
+      repo_url=$(ggit_parse_gh_url "$repo_url")
+      echo "repo: $repo_url"
+      msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n\`\`\`bash\n${lastcommand}\n\`\`\`"
+      #if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${repo_url})/commit/${sha}"; fi
+      gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md && git push &
+    }
+    function ggit_readme_append_note() { 
+      git commit --allow-empty --cleanup=whitespace -m "$*" 
+      url="https://github.com/$(git config --get remote.origin.url | cut -d':' -f 2)" 
+      commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
+      msg=":bulb: __${msg}__" 
+      gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\n\nxxx^" $gitroot/readme.md && git push &
+    }
+fi
 
 # vim: set ft=zsh:
 # vim: set textwidth=0:
