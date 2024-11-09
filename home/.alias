@@ -2,7 +2,7 @@
 
 unalias -a
 function exists() { command -v $1 >/dev/null 2>&1 }
-alias up.dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
+alias ,dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bgred=$(tput setab 1)
@@ -20,9 +20,9 @@ nor=$(tput sgr0) # reset colors
 # tput bold
 
 if exists ssh; then
-  alias sshfurahadev='ssh arafatm@dev.furahasoftware.com'
-  alias sshkodi='ssh -oServerAliveInterval=60 kodi@192.168.0.100'
-  alias sshproxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
+  alias ,sshfurahadev='ssh arafatm@dev.furahasoftware.com'
+  alias ,sshkodi='ssh -oServerAliveInterval=60 kodi@192.168.0.100'
+  alias ,sshproxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
 fi
 
 if grep -qi microsoft-standard-WSL2 /proc/version; then 
@@ -36,28 +36,27 @@ if [[ $OSTYPE =~ 'darwin' ]] then
   alias brew='brew'
   alias cask='brew cask'
   alias ls='ls --color=tty'
-  alias maccamera='sudo killall VDCAssistant' # reset osx camera 
-  alias pg_start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
-  alias pg_stop='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+  alias ,maccamera='sudo killall VDCAssistant' # reset osx camera 
+  alias ,pg_start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+  alias ,pg_stop='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
   alias sed='gsed'
 else 
   alias ls='ls --color=auto'
 fi
 
 if exists zsh; then
-  alias z="unalias -a; source $HOME/.zshrc"
-  alias zsrc='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
+  alias ,z="unalias -a; source $HOME/.zshrc"
+  alias ,zsrc='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
 fi
 
 if exists apt; then
-  alias aapt='alias | grep apt'
-  alias aptd='sudo apt dist-upgrade'
-  alias aptf='apt show'
-  alias apti='sudo apt install'
-  alias aptm='sudo apt-cache madison'
-  alias apts='apt search'
-  alias aptsh='apt show'
-  alias aptu='sudo apt update'
+  alias ,apt='alias | grep apt'
+  alias ,aptdistupgrade='sudo apt dist-upgrade'
+  alias ,aptshow='apt show'
+  alias ,aptinstall='sudo apt install'
+  alias ,aptmadison='sudo apt-cache madison' # show available versions of a package
+  alias ,aptsearch='apt search'
+  alias ,aptupdate='sudo apt update'
 fi
 
 if exists nvim; then 
@@ -69,75 +68,73 @@ else
   alias v='vi -R'
 fi
 
-if exists postgres; then alias pgsql='sudo -u postgres psql'; fi
-
 if exists git; then
   alias randmd='find . -type f |grep -v .git | shuf -n 1'
-
-  alias al.git='alias | grep git'
-  alias al.ggit='alias | grep ggit'
 
   alias cdr='cd `git rev-parse --show-toplevel`'
   alias vr='vim  $(git rev-parse --show-toplevel)/readme.md'
 
-  alias git.branch='git branch --color'
-  alias git.branchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
-  alias git.checkout='git checkout'
-  alias git.commitall='git commit -a'
-  alias git.conf='git config -l'
-  alias git.confl='git config -l --local'
-  alias git.d='git diff HEAD .'
-  alias git.dir="find . -type d -name .git -print -execdir git status --porcelain \;"
-  alias git.fetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
-  alias git.heroku='git pull; git push; git push heroku main'
-  alias git.hubclone='github_clone'
-  alias git.l='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
-  alias git.la='git log --decorate'
-  alias git.ls='git ls-files'
-  alias git.merge='git merge'
-  alias git.mergemain='git merge main'
-  alias git.mkd='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
-  alias git.st='git status'
-  alias git.sync='( git pull && git push ) &'
-  alias git.tree='git log --oneline --decorate --all --graph'
+  alias ,git='alias | grep git'
+  alias ,gitbranch='git branch --color'
+  alias ,gitbranchclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
+  alias ,gitcheckout='git checkout'
+  alias ,gitcommitall='git commit -a'
+  alias ,gitconfig='git config -l'
+  alias ,gitconfiglocal='git config -l --local'
+  alias ,gitdiff='git diff HEAD .'
+  alias ,gitdir="find . -type d -name .git -print -execdir git status --porcelain \;"
+  alias ,gitfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
+  alias ,githeroku='git pull; git push; git push heroku main'
+  alias ,githubclone='github_clone'
+  alias ,gitlogoneline='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+  alias ,gitlog='git log --decorate'
+  alias ,gitls='git ls-files'
+  alias ,gitmerge='git merge'
+  alias ,gitmergemain='git merge main'
+  alias ,gitlogshort='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date"'
+  alias ,gitstatus='git status'
+  alias ,gitsync='( git pull && git push ) &'
+  alias ,gittree='git log --oneline --decorate --all --graph'
 
-  alias ggit.addcommit='ggit_add_and_commit_all'
-  alias ggit.branchtrack='ggit_branch_and_track'
-  alias ggit.ca='ggit_commit_all'
-  alias ggit.checkoutremote='ggit_checkout_remote'
-  alias ggit.cleanhistory='ggit_clean_history'
-  alias ggit.commitlastcommand='ggit_commit_last_command'
-  alias ggit.commitwithdefaultmessage='ggit_commit'
-  alias ggit.note='ggit_note'
+  alias ,ggit='alias | grep ggit'
+  alias ,ggitaddcommit='ggit_add_and_commit_all'
+  alias ,ggitbranchtrack='ggit_branch_and_track'
+  alias ,ggitca='ggit_commit_all'
+  alias ,ggitcheckoutremote='ggit_checkout_remote'
+  alias ,ggitcleanhistory='ggit_clean_history'
+  alias ,ggitcommitlastcommand='ggit_commit_last_command'
+  alias ,ggitcommitwithdefaultmessage='ggit_commit'
+  alias ,ggitnote='ggit_note'
 
-  alias rgit.c='ggit_readme_append_last_command'
-  alias rgit.d='ggit_readme_append_diff'
-  alias rgit.l='ggit_readme_append_link'
-  alias rgit.n='ggit_readme_append_note'
+  alias ,rgit='alias | grep ggit'
+  alias ,rgitcommand='ggit_readme_append_last_command'
+  alias ,rgitdiff='ggit_readme_append_diff'
+  alias ,rgitlink='ggit_readme_append_link'
+  alias ,rgitnote='ggit_readme_append_note'
 fi
 
+if exists postgres; then alias pgsql='sudo -u postgres psql'; fi
+
 if exists ruby; then
-  alias al.bund='alias |grep bundle'
-  alias al.rake='alias |grep rake'
-  alias al.rail='alias |grep rails'
-  alias bund='bundle'                    # Vendor everything still applies
-  alias bund.exec='bundle exec'
-  alias bund.init='bundle_init'
-  alias bund.update='bundle update'
-  alias rake='bundle exec rake'
-  alias rake.dbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
-  alias rake.fixtures='bundle exec rake db:fixtures:load'
-  alias rake.migrate='bundle exec rake db:migrate' 
-  alias rake.seed='bundle exec rake db:seed'
-  alias rake.test='bundle exec rake test'
-  alias rail='bundle exec rails'
-  alias rail.lc='bundle exec rails console'
-  alias rail.lcontroller='bundle exec rails generate controller'
-  alias rail.lg='bundle exec rails generate'
-  alias rail.lmodel='bundle exec rails generate model'
-  alias rail.ls='bundle exec rails s -b 0.0.0.0'
-  alias rail.lscaffold='bundle exec rails generate --skip scaffold'
-  alias rail.lt='bundle exec rails test'
+  alias ,bund='alias |grep bundle'
+  alias ,bundexec='bundle exec'
+  alias ,bundinit='bundle_init'
+  alias ,bundupdate='bundle update'
+  alias ,rail='alias |grep rails'
+  alias ,railconsole='bundle exec rails console'
+  alias ,railcontroller='bundle exec rails generate controller'
+  alias ,railgenerate='bundle exec rails generate'
+  alias ,railmodel='bundle exec rails generate model'
+  alias ,railscaffold='bundle exec rails generate --skip scaffold'
+  alias ,railserver='bundle exec rails s -b 0.0.0.0'
+  alias ,railtest='bundle exec rails test'
+  alias ,rake='alias |grep rake'
+  alias ,rake='bundle exec rake'
+  alias ,rakedbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+  alias ,rakefixtures='bundle exec rake db:fixtures:load'
+  alias ,rakemigrate='bundle exec rake db:migrate' 
+  alias ,rakeseed='bundle exec rake db:seed'
+  alias ,raketest='bundle exec rake test'
 fi
 
 #if exists python3; 
@@ -146,46 +143,44 @@ fi
 # alias python='python3'
 #fi
 
-if exists terraform; then alias tf='terraform'; fi
+if exists terraform; then alias ,tf='terraform'; fi
 
 if exists docker; then
-  alias al.dok='alias | grep dok'
-  alias dok='docker'
-  alias dok.update.images='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
-  alias dok.restart='docker compose restart'
-  alias dok.compose="docker-compose"
-  alias dok.shell='docker_shell'
+  alias ,dock='alias | grep dok'
+  alias ,dockupdateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
+  alias ,dockcomposerestart='docker compose restart'
+  alias ,dockcompose="docker-compose"
+  alias ,dockshell='docker_shell'
+  function docker_shell() { docker exec -it $1 bash ; }
 fi
 
 if exists minikube; then
-  alias al.mk='alias | grep minikube'
-  alias mk='minikube'
-  alias mk.s='minikube start'
+  alias ,mk='alias | grep minikube'
+  alias ,mks='minikube start'
 fi
 
 if exists tmux; then
-  alias tma='tmux attach -t'
-  alias tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
-  alias tml='tmux list-sessions'
-  alias tmm='tmux new-session -A -s main'
-  alias tmn='tmux new-window -c $PWD'
-  alias tms='tmux split-window -c $PWD'
-  alias tmx='tmux a -t `basename $PWD`'
+  alias ,tm='tmux'
+  alias ,tma='tmux attach -t'
+  alias ,tmc='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+  alias ,tml='tmux list-sessions'
+  alias ,tmm='tmux new-session -A -s main'
+  alias ,tmn='tmux new-window -c $PWD'
+  alias ,tms='tmux split-window -c $PWD'
+  alias ,tmx='tmux a -t `basename $PWD`'
 fi
 
 if exists batcat; then alias c='batcat'; else alias c='cat'; fi
-alias alg='alias | grep'
-alias bkps='$HOME/bin/bkps.git.cron'
-alias cdc="cd $HOME/code"
-alias cdw='cd $HOME/code/work'
+alias ,al='alias'
+alias ,algrep='alias | grep'
+alias ,cdc="cd $HOME/code"
+alias ,cdw='cd $HOME/code/work'
 alias cp='cp -i'
 alias df='df -h -x aufs -x tmpfs -x udev'
 alias du='du -h'
 alias du.size='directory_by_size'
 alias du.size.sorted='directory_by_size_sorted'
 alias grep='grep --color'       # show differences in colour
-alias i3='cat $HOME/ca/notes/i3.md'
-alias i3g='cat $HOME/ca/notes/i3.md | grep -i '
 alias jc="journalctl -n 100 -f"
 alias jcu="jc -u"
 alias l='ls -CF'                              #
@@ -218,8 +213,6 @@ function cleankernels() { echo $(dpkg --list | grep linux-image | awk '{ print $
 function directory_by_size() { local arg1=${1:-.} && du -ahd 1 $arg1 ; }
 
 function directory_by_size_sorted() { directory_by_size $1 | sort -h ; }
-
-function docker_shell() { docker exec -it $1 bash ; }
 
 function em() { emacs $1 & ; }
 
