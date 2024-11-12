@@ -2,6 +2,7 @@
 
 unalias -a
 function exists() { command -v $1 >/dev/null 2>&1 }
+function echolog() { echo "---\n$1\n${@:2}\n----------" }
 alias ,al="alias | grep 'alias | grep'"
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
@@ -75,7 +76,7 @@ if exists git; then
 
   alias ,gi='alias | grep git'
   alias ,ggi='alias | grep ggit'
-  alias ,rg='alias | grep ggit_readme_'
+  alias ,gr='alias | grep ggit_readme_'
   alias ,ghubclone='github_clone'
 
   alias ,gd='git diff HEAD .'
@@ -104,10 +105,10 @@ if exists git; then
   alias ,gstdir="find . -type d -name .git -print -execdir git status --porcelain \;"
   alias ,gsync='( git pull && git push ) &'
   alias ,gtree='git log --oneline --decorate --all --graph'
-  alias ,rgcommand='ggit_readme_append_last_command'
-  alias ,rgdiff='ggit_readme_append_diff'
-  alias ,rglink='ggit_readme_append_link'
-  alias ,rgnote='ggit_readme_append_note'
+  alias ,grc='ggit_readme_append_last_command'
+  alias ,grd='ggit_readme_append_diff'
+  alias ,grl='ggit_readme_append_link'
+  alias ,grn='ggit_readme_append_note'
 fi
 
 if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
@@ -154,12 +155,29 @@ fi
 
 if exists minikube; then
   alias ,mk='alias | grep minikube'
-  alias ,mkdashboard='minikube dashboard'
+  alias ,mkdaddonsenable='minikube addons enable' # metrics-server
+  alias ,mkdaddonslist='minikube addons list'
   alias ,mkdashboardenable='minikube addons enable dashboard'
-  alias ,mkdelete='minikube delete'
+  alias ,mkdashboard='minikube dashboard'
+  alias ,mkdelete='minikube delete' # "service hello-node" "deployment hello-node"
+  alias ,mkservice='minikube service' # hello-node
   alias ,mkstart='minikube start'
   alias ,mkstatus='minikube status'
   alias ,mkstop='minikube stop'
+fi
+if exists kubectl; then
+  alias ,kc='alias | grep kubectl'
+  alias ,kcconfigview='kubectl config view'
+  alias ,kccreatdeployment='kubectl create deployment'
+  alias ,kcexposedeployment='kubectl expose deployment' # hello-node --type=LoadBalancer --port=8080
+  alias ,kcgetdeployments='kubectl get deployments'
+  alias ,kcgetevents='kubectl get events'
+  alias ,kcget='kubectl get'
+  alias ,kcgetpods='kubectl get pods'
+  alias ,kcgetpodsvc='kubectl get pod,svc -n' # kube-system
+  alias ,kcgetservices='kubectl get services'
+  alias ,kclogs='kubectl logs'
+  alias ,kctoppods='kubectl top pods'
 fi
 
 if exists tmux; then
@@ -247,14 +265,14 @@ if exists git; then
       for item in ${ghpArr[@]}; do
         rm -rf $item
         cp -r ghp/$item .
-        echo "deleted and copied $item"
+        echolog "deleted and copied $item"
       done
       if [[ -n $(git status --short) ]]; then
         git add .
         git commit -am "Setting up Pages"
         git push
       fi
-      echo "--- Updated hash: $(git rev-parse HEAD)"
+      echolog "Updated hash" "$(git rev-parse HEAD)"
       curl -L -X POST -H "Accept: application/vnd.github+json" \
         -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" \
         https://api.github.com/repos/arafatm/$(basename $(pwd))/pages -d '{"source":{"branch":"main"}}'
@@ -288,7 +306,7 @@ if exists git; then
   function ggit_readme_append_commit() {
     url=$(git config --get remote.origin.url) && url=${url:15:-4} && url="https://github.com/$url"
     commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
-    msg="$* [$msg]($url)\n" && echo "commit: $msg"
+    msg="$* [$msg]($url)\n" && echolog "commit" "$msg"
     gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
   }
   function ggit_parse_gh_url() {
@@ -296,17 +314,22 @@ if exists git; then
     repo=${repo%%.git}
     repo=${repo##*:}
     repo="https://github.com/$repo"
-    echo $repo
+    echolog "github url" "$repo"
   }
   function ggit_readme_append_link() {
-    msg="$*"; if [[ -z $msg ]]; then echo "No commit message" && return 1; else echo "Committing with $msg"; fi
+    msg="$*"
+    if [[ -z $msg ]]; then 
+      echolog "No commit message" 
+      return 1
+    else 
+      echo "Committing with msg" "$msg"
+    fi
     git add . && gitdif=$(git diff HEAD .) && git commit . -m  $msg && gitroot=$(git rev-parse --show-toplevel)
     commit=$(git log --oneline -n 1) ; sha=${commit:0:7} ; msg=${commit:8} ; bt='```'
     local repo_url="$(git config --get remote.origin.url)"
     repo_url=$(ggit_parse_gh_url "$repo_url")
-    echo "repo: $repo_url"
     local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
-    echo "mgs: $msg"
+    echolog "appending to readme" "$msg"
     sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md 
     git push &
   }
@@ -318,7 +341,7 @@ if exists git; then
     repo_url=$(ggit_parse_gh_url "$repo_url")
     echo "repo: $repo_url"
     local msg="🚢 [${sha}](${repo_url}/commit/${sha}) \n${msg}"
-    echo "mgs: $msg"
+    echolog "appending to readme" "$msg"
     sed -z -i "s^xxx^${msg}\nxxx^" $gitroot/readme.md 
     sed -z -i "s^xxx^\`\`\`diff\nxxx^" $gitroot/readme.md 
     while IFS= read -r line; do 
@@ -338,7 +361,7 @@ if exists git; then
   function ggit_readme_append_last_command() {
     local msg="$*"
     lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//')
-    echo "---\nlastcommand = $lastcommand\n---"
+    echolog "lastcommand" "$lastcommand"
     flag_diff=1
     if [[ $(git status -s .) ]]; then 
       git add . && git commit . -m  "$ ${lastcommand}" 
@@ -352,6 +375,7 @@ if exists git; then
     echo "repo: $repo_url"
     if (( ${#msg} > 0 )); then msg="\n${msg}"; fi
     msg="🚢 [${sha}](${repo_url}/commit/${sha})${msg}\n\`\`\`bash\n${lastcommand}\n\`\`\`"
+    echolog "appending to readme" "${msg}"
     #if [[ $flag_diff == 1 ]]; then msg="${msg} # [diff](${repo_url})/commit/${sha}"; fi
     gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^${msg}\n\nxxx^" $gitroot/readme.md && git push &
   }
