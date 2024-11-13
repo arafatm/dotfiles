@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#'alias' | grep "! /usr/bin/bash
 
 unalias -a
 function exists() { command -v $1 >/dev/null 2>&1 }
@@ -71,8 +71,8 @@ fi
 
 if exists git; then
   alias ,dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
-  alias ,gcd='cd `git rev-parse --show-toplevel`'
-  alias ,gvr='vim  $(git rev-parse --show-toplevel)/readme.md'
+  alias ,gcdroot='cd `git rev-parse --show-toplevel`'
+  alias ,gvireadme='vim  $(git rev-parse --show-toplevel)/readme.md'
 
   alias ,gi='alias | grep git'
   alias ,gt='alias | grep git'
