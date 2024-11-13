@@ -117,6 +117,7 @@ if exists ruby; then
   alias ,bu='alias |grep bundle'
   alias ,buexec='bundle exec'
   alias ,buinit='bundle_init'
+  alias ,buinstall='bundle install'
   alias ,buupdate='bundle update'
   alias ,rak='alias |grep rake'
   alias ,rak='bundle exec rake'
