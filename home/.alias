@@ -3,7 +3,7 @@
 unalias -a
 function exists() { command -v $1 >/dev/null 2>&1 }
 function echolog() { echo "---\n$1\n${@:2}\n----------" }
-alias ,al="alias | grep 'alias | grep'"
+alias ,al="alias | grep "
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bgred=$(tput setab 1)
@@ -75,6 +75,8 @@ if exists git; then
   alias ,gvr='vim  $(git rev-parse --show-toplevel)/readme.md'
 
   alias ,gi='alias | grep git'
+  alias ,gt='alias | grep git'
+  alias ,git='alias | grep git'
   alias ,ggi='alias | grep ggit'
   alias ,gr='alias | grep ggit_readme_'
   alias ,ghubclone='github_clone'
