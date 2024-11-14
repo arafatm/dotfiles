@@ -107,10 +107,10 @@ if exists git; then
   alias ,gstdir="find . -type d -name .git -print -execdir git status --porcelain \;"
   alias ,gsync='( git pull && git push ) &'
   alias ,gtree='git log --oneline --decorate --all --graph'
-  alias ,grc='ggit_readme_append_last_command'
-  alias ,grd='ggit_readme_append_diff'
-  alias ,grl='ggit_readme_append_link'
-  alias ,grn='ggit_readme_append_note'
+  alias ,greadmecommand='ggit_readme_append_last_command'
+  alias ,greadmediff='ggit_readme_append_diff'
+  alias ,greadmelink='ggit_readme_append_link'
+  alias ,greadmenote='ggit_readme_append_note'
 fi
 
 if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
