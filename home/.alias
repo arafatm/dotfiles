@@ -51,7 +51,7 @@ if exists zsh; then
 fi
 
 if exists apt; then
-  alias ,apt='alias | grep apt'
+  alias ,alapt='alias | grep apt'
   alias ,aptdistupgrade='sudo apt dist-upgrade'
   alias ,aptshow='apt show'
   alias ,aptinstall='sudo apt install'
@@ -74,11 +74,11 @@ if exists git; then
   alias ,gcdroot='cd `git rev-parse --show-toplevel`'
   alias ,gvireadme='vim  $(git rev-parse --show-toplevel)/readme.md'
 
-  alias ,gi='alias | grep git'
-  alias ,gt='alias | grep git'
-  alias ,git='alias | grep git'
-  alias ,ggi='alias | grep ggit'
-  alias ,gr='alias | grep ggit_readme_'
+  alias ,algi='alias | grep git'
+  alias ,algt='alias | grep git'
+  alias ,algit='alias | grep git'
+  alias ,alggi='alias | grep ggit'
+  alias ,algr='alias | grep ggit_readme_'
   alias ,ghubclone='github_clone'
 
   alias ,gd='git diff HEAD .'
@@ -116,9 +116,9 @@ fi
 if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
 
 if exists ruby; then
-  alias ,abrk='alias |grep rake'
-  alias ,abrl='alias |grep rails'
-  alias ,abu='alias |grep bundle'
+  alias ,albrk='alias |grep rake'
+  alias ,albrl='alias |grep rails'
+  alias ,albu='alias |grep bundle'
 
   alias ,brk='bundle exec rake'
   alias ,brkdbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
@@ -149,7 +149,7 @@ fi
 if exists terraform; then alias ,tf='terraform'; fi
 
 if exists docker; then
-  alias ,dk='alias | grep docker'
+  alias ,aldk='alias | grep docker'
   alias ,dkupdateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
   alias ,dkcomposerestart='docker compose restart'
   alias ,dkcompose="docker-compose"
@@ -158,7 +158,7 @@ if exists docker; then
 fi
 
 if exists minikube; then
-  alias ,mk='alias | grep minikube'
+  alias ,almk='alias | grep minikube'
   alias ,mkdaddonsenable='minikube addons enable' # metrics-server
   alias ,mkdaddonslist='minikube addons list'
   alias ,mkdashboardenable='minikube addons enable dashboard'
@@ -170,7 +170,7 @@ if exists minikube; then
   alias ,mkstop='minikube stop'
 fi
 if exists kubectl; then
-  alias ,kc='alias | grep kubectl'
+  alias ,alkc='alias | grep kubectl'
   alias ,kcconfigview='kubectl config view'
   alias ,kccreatdeployment='kubectl create deployment'
   alias ,kcexposedeployment='kubectl expose deployment' # hello-node --type=LoadBalancer --port=8080
