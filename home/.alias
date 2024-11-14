@@ -116,26 +116,27 @@ fi
 if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
 
 if exists ruby; then
-  alias ,bu='alias |grep bundle'
+  alias ,abrk='alias |grep rake'
+  alias ,abrl='alias |grep rails'
+  alias ,abu='alias |grep bundle'
+
+  alias ,brk='bundle exec rake'
+  alias ,brkdbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+  alias ,brkfixtures='bundle exec rake db:fixtures:load'
+  alias ,brkmigrate='bundle exec rake db:migrate' 
+  alias ,brkseed='bundle exec rake db:seed'
+  alias ,brktest='bundle exec rake test'
+  alias ,brlconsole='bundle exec rails console'
+  alias ,brlcontroller='bundle exec rails generate controller'
+  alias ,brlgenerate='bundle exec rails generate'
+  alias ,brlmodel='bundle exec rails generate model'
+  alias ,brlscaffold='bundle exec rails generate --skip scaffold'
+  alias ,brlserver='bundle exec rails s -b 0.0.0.0'
+  alias ,brltest='bundle exec rails test'
   alias ,buexec='bundle exec'
   alias ,buinit='bundle_init'
   alias ,buinstall='bundle install'
   alias ,buupdate='bundle update'
-  alias ,rak='alias |grep rake'
-  alias ,rak='bundle exec rake'
-  alias ,rakdbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
-  alias ,rakfixtures='bundle exec rake db:fixtures:load'
-  alias ,rakmigrate='bundle exec rake db:migrate' 
-  alias ,rakseed='bundle exec rake db:seed'
-  alias ,raktest='bundle exec rake test'
-  alias ,ral='alias |grep rails'
-  alias ,ralconsole='bundle exec rails console'
-  alias ,ralcontroller='bundle exec rails generate controller'
-  alias ,ralgenerate='bundle exec rails generate'
-  alias ,ralmodel='bundle exec rails generate model'
-  alias ,ralscaffold='bundle exec rails generate --skip scaffold'
-  alias ,ralserver='bundle exec rails s -b 0.0.0.0'
-  alias ,raltest='bundle exec rails test'
   function bundle_init() { bundle install --path vendor && bundle package && if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then echo 'vendor/ruby' >> .gitignore; fi ; }
 fi
 
