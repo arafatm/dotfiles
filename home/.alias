@@ -81,10 +81,10 @@ if exists git; then
   alias ,algr='alias | grep ggit_readme_'
   alias ,ghubclone='github_clone'
 
-  alias ,gd='git diff HEAD .'
-  alias ,gst='git status'
-  alias ,gac='ggit_add_and_commit_all'
+  alias ,gdiff='git diff HEAD .'
+  alias ,gstatus='git status'
 
+  alias ,gaddcommit='ggit_add_and_commit_all'
   alias ,gbrclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
   alias ,gbr='git branch --color'
   alias ,gbrtrack='ggit_branch_and_track'
@@ -97,14 +97,14 @@ if exists git; then
   alias ,gconfig='git config -l'
   alias ,gconfiglocal='git config -l --local'
   alias ,gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
-  alias ,glf='git ls-files'
-  alias ,gl='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
-  alias ,gll='git log --decorate'
-  alias ,gls='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date" | grep -v -e "^$"'
+  alias ,glsfiles='git ls-files'
+  alias ,glog='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+  alias ,glogdecorate='git log --decorate'
+  alias ,glogshort='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date" | grep -v -e "^$"'
   alias ,gmerge='git merge'
   alias ,gmergemain='git merge main'
   alias ,gnote='ggit_note'
-  alias ,gstdir="find . -type d -name .git -print -execdir git status --porcelain \;"
+  alias ,gstatusdir="find . -type d -name .git -print -execdir git status --porcelain \;"
   alias ,gsync='( git pull && git push ) &'
   alias ,gtree='git log --oneline --decorate --all --graph'
   alias ,greadmecommand='ggit_readme_append_last_command'
