@@ -14,29 +14,27 @@ function echolog() {
   echo "----------------" >&2
 }
 
-alias ,al="alias | grep "
 function ,dotfiles() { 
   local dotfiles=$HOME/dotfiles
-  if [[ -d $dotfiles/.git ]]; then
+  if [[ -d $DOTFILES/.git ]]; then
     echolog "Updating dotfiles git repo"
     local curdir=$(pwd)
-    cd $dotfiles && git pull && unalias -a && source ~/.zshrc 
+    cd $DOTFILES && git pull && unalias -a && source ~/.zshrc 
     cd $curdir 
-  elif [[ -d $dotfiles ]]; then
+  elif [[ -d $DOTFILES ]]; then
     echolog "Updating dotfiles (not a git repo)"
     if [[ ! -d $HOME/tmp ]]; then mkdir $HOME/tmp; fi
     local curdir=$(pwd)
     cd $HOME/tmp 
     wget https://github.com/arafatm/dotfiles/tarball/main -O - | tar -xz --one-top-level=dotfiles --strip-components=1;
-    if [[ -d $dotfiles ]]; then rm -rf $dotfiles; mv $HOME/tmp/dotfiles $HOME; fi 
+    if [[ -d $DOTFILES ]]; then rm -rf $DOTFILES; mv $HOME/tmp/dotfiles $HOME; fi 
     unalias -a && source ~/.zshrc 
     cd $curdir
   fi
+  for f in `ls -A $DOTFILES/home`; do rm -rf $HOME/$f && ln -s $DOTFILES/home/$f $HOME/; done
 }
-if exists zsh; then
-  alias ,z="unalias -a; source $HOME/.zshrc"
-fi
-
+alias ,al="alias | grep "
+if exists zsh; then alias ,z="unalias -a; source $HOME/.zshrc"; fi
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bgred=$(tput setab 1)
