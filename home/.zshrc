@@ -2,7 +2,7 @@
 #export LC_CTYPE=en_US.UTF-8
 
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="avit"
+ZSH_THEME="bira"
 plugins=( asdf docker globalias )
 source $ZSH/oh-my-zsh.sh
 ZSH_TMUX_AUTOQUIT=false
