@@ -1,17 +1,11 @@
 #export LANG=en_US.UTF-8
 #export LC_CTYPE=en_US.UTF-8
 
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(globalias asdf docker) # keychain
-ZSH_THEME="agnoster"
-
+ZSH_THEME="avit"
+plugins=( asdf docker globalias )
+source $ZSH/oh-my-zsh.sh
 ZSH_TMUX_AUTOQUIT=false
-#zstyle :omz:plugins:keychain agents gpg,ssh
-#zstyle :omz:plugins:keychain identities ssh.github
-
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
-#source $ZSH/oh-my-zsh.sh
 
 # my paths
 PATH="$HOME/apps:$PATH"
@@ -32,7 +26,9 @@ if [[ -f $HOME/.alias.priv ]]; then source $HOME/.alias.priv; fi
 if [[ -f $HOME/.alias.work ]]; then source $HOME/.alias.work; fi
 
 # Dev stuff
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi       # rbenv
 if [[ -f  "$HOME/.asdf/asdf.sh" ]]; then source "$HOME/.asdf/asdf.sh"; else echo "asdf not installed"; fi; 
+export FLYCTL_INSTALL="/home/arafatm/.fly"; PATH="$HOME/.fly/bin:$PATH"
 
 find $HOME/.ssh -type f -name "*.ssh" -exec bash -c 'eval `keychain --agents ssh -q --eval $0`' {} \;
 
