@@ -5,7 +5,7 @@ function curdate() { echo "$(date '+%y%m%d')" }
 function curtime() { echo "$(date '+%H%M%S')" }
 function exists() { command -v $1 >/dev/null 2>&1 }
 function echolog() { 
-  echo "###### $1" >&2
+  echo "\n###### $1" >&2
   if [[ -n $2 ]]; then 
     # replace all newlines with newline followed by 2 spaces then "- "
     local echomsg=$(echo "$2" | sed ':a;N;$!ba;s/\n/\n  > /g')
@@ -22,7 +22,7 @@ function ,dotfiles() {
     pushd $dotfiles && git pull && unalias -a && source ~/.zshrc && popd
   elif [[ -d $dotfiles ]]; then
     echolog "Updating dotfiles (not a git repo)"
-    if [[ ! -d $tmp ]]; then mkdir $HOME/tmp; fi
+    if [[ ! -d $HOME/tmp ]]; then mkdir $HOME/tmp; fi
     pushd $HOME/tmp
     wget https://github.com/arafatm/dotfiles/tarball/main -O - | tar -xz --one-top-level=dotfiles --strip-components=1;
     if [[ -d $dotfiles ]]; then rm -rf $dotfiles; mv $HOME/tmp/dotfiles $HOME; fi 
@@ -270,7 +270,7 @@ function greplinks() {
 }
 
 if exists git; then
-  function github_clone() { git clone git@github.com:$1 ; }
+  function github_clone() { echolog "Cloning git@github.com:$1"; git clone git@github.com:$1 ; }
   function herbr() {
     if [ -z "$1" ]; then echo "Please provide the name of the heroku app";
     else
