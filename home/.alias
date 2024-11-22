@@ -15,6 +15,24 @@ function echolog() {
 }
 
 alias ,al="alias | grep "
+function ,dotfiles() { 
+  local dotfiles=$HOME/dotfiles
+  if [[ -d $dotfiles/.git ]]; then
+    echolog "Updating dotfiles git repo"
+    pushd $dotfiles && git pull && unalias -a && source ~/.zshrc && popd
+  elif [[ -d $dotfiles ]]; then
+    echolog "Updating dotfiles (not a git repo)"
+    if [[ ! -d $tmp ]]; then mkdir $HOME/tmp; fi
+    pushd $HOME/tmp
+    wget https://github.com/arafatm/dotfiles/tarball/main -O - | tar -xz --one-top-level=dotfiles --strip-components=1;
+    if [[ -d $dotfiles ]]; then rm -rf $dotfiles; mv $HOME/tmp/dotfiles $HOME; fi 
+    unalias -a && source ~/.zshrc && popd 
+  fi
+}
+if exists zsh; then
+  alias ,z="unalias -a; source $HOME/.zshrc"
+fi
+
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
 bgred=$(tput setab 1)
@@ -56,11 +74,6 @@ else
   alias ls='ls --color=auto'
 fi
 
-if exists zsh; then
-  alias ,z="unalias -a; source $HOME/.zshrc"
-  alias ,zsrc='unalias -a; pushd $HOME/dotfiles; git pull; source ~/.zshrc; popd'
-fi
-
 if exists apt; then
   alias ,alapt='alias | grep apt'
   alias ,aptdistupgrade='sudo apt dist-upgrade'
@@ -81,7 +94,6 @@ else
 fi
 
 if exists git; then
-  alias ,dotfiles='mkdir $HOME/code; rm -rf $HOME/code/dotfiles && git clone  https://github.com/arafatm/dotfiles.git $HOME/code/dotfiles && unalias -a && source $HOME/.zshrc'
   alias ,gcdroot='cd `git rev-parse --show-toplevel`'
   alias ,gvireadme='vim  $(git rev-parse --show-toplevel)/readme.md'
 
