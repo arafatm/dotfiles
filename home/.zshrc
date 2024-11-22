@@ -3,16 +3,15 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+plugins=(globalias asdf docker) # keychain
 ZSH_THEME="agnoster"
 
 ZSH_TMUX_AUTOQUIT=false
-#plugins=(globalias)
-#plugins=( asdf keychain docker )
 #zstyle :omz:plugins:keychain agents gpg,ssh
 #zstyle :omz:plugins:keychain identities ssh.github
 
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # my paths
 PATH="$HOME/apps:$PATH"

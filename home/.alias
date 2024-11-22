@@ -153,6 +153,7 @@ if exists ruby; then
   alias ,brkmigrate='bundle exec rake db:migrate' 
   alias ,brkseed='bundle exec rake db:seed'
   alias ,brktest='bundle exec rake test'
+  alias ,brl='bundle exec rails'
   alias ,brlconsole='bundle exec rails console'
   alias ,brldbmigrate='bundle exec rails db:migrate'
   alias ,brlgenerate='bundle exec rails generate'
