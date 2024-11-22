@@ -15,7 +15,7 @@ function echolog() {
 }
 
 function ,dotfiles() { 
-  local dotfiles=$HOME/dotfiles
+  local DOTFILES=$HOME/dotfiles
   if [[ -d $DOTFILES/.git ]]; then
     echolog "Updating dotfiles git repo"
     local curdir=$(pwd)
