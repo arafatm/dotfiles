@@ -19,14 +19,18 @@ function ,dotfiles() {
   local dotfiles=$HOME/dotfiles
   if [[ -d $dotfiles/.git ]]; then
     echolog "Updating dotfiles git repo"
-    pushd $dotfiles && git pull && unalias -a && source ~/.zshrc && popd
+    local curdir=$(pwd)
+    cd $dotfiles && git pull && unalias -a && source ~/.zshrc 
+    cd $curdir 
   elif [[ -d $dotfiles ]]; then
     echolog "Updating dotfiles (not a git repo)"
     if [[ ! -d $HOME/tmp ]]; then mkdir $HOME/tmp; fi
-    pushd $HOME/tmp
+    local curdir=$(pwd)
+    cd $HOME/tmp 
     wget https://github.com/arafatm/dotfiles/tarball/main -O - | tar -xz --one-top-level=dotfiles --strip-components=1;
     if [[ -d $dotfiles ]]; then rm -rf $dotfiles; mv $HOME/tmp/dotfiles $HOME; fi 
-    unalias -a && source ~/.zshrc && popd 
+    unalias -a && source ~/.zshrc 
+    cd $curdir
   fi
 }
 if exists zsh; then
