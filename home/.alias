@@ -8,8 +8,8 @@ function echolog() {
   echo "\n###### $1" >&2
   if [[ -n $2 ]]; then 
     # replace all newlines with newline followed by 2 spaces then "- "
-    local echomsg=$(echo "$2" | sed ':a;N;$!ba;s/\n/\n  > /g')
-    echo "  > $echomsg\n" >&2
+    local echomsg=$(echo "$2" | sed ':a;N;$!ba;s/\n/\n  /g')
+    echo "  $echomsg\n" >&2
   fi
   echo "----------------" >&2
 }
@@ -109,7 +109,7 @@ if exists git; then
   alias ,gdiff='git diff HEAD .'
   alias ,gdiffshow='git diff HEAD^ HEAD'
   alias ,gshow='git show HEAD .'
-  alias ,gstatus='git status'
+  alias ,gstatus='git status -s'
 
   alias ,gaddcommit='ggit_add_and_commit_all'
   alias ,gbrclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
@@ -134,7 +134,7 @@ if exists git; then
   alias ,gstatusdir="find . -type d -name .git -print -execdir git status --porcelain \;"
   alias ,gsync='( git pull && git push ) &'
   alias ,gtree='git log --oneline --decorate --all --graph'
-  alias ,greadmecommand='ggit_readme_append_last_command'
+  alias ,greadmecommand='ggit_readme_append_command'
   alias ,greadmediff='ggit_readme_append_diff'
   alias ,greadmelink='ggit_readme_append_link'
   alias ,greadmenote='ggit_readme_append_note'
@@ -362,10 +362,11 @@ if exists git; then
   }
 
   function ggit_readme_append_commit() {
-    url=$(git config --get remote.origin.url) && url=${url:15:-4} && url="https://github.com/$url"
-    commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
-    msg="$* [$msg]($url)\n" && echolog "commit" "$msg"
-    gitroot=$(git rev-parse --show-toplevel) && sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
+    local url=$(git config --get remote.origin.url) && url=${url:15:-4} && url="https://github.com/$url"
+    local commit=$(git log --oneline -n 1) && sha=${commit:0:7} && msg=${commit:8} && url="$url/commit/$sha"
+    local msg="$* [$msg]($url)\n" && echolog "commit" "$msg"
+    local gitroot=$(git rev-parse --show-toplevel) 
+    sed -z -i "s^xxx^$msg\nxxx^" $gitroot/readme.md && git push &
   }
 
   function ggit_readme_append_link() {
@@ -416,19 +417,35 @@ if exists git; then
     git push
   }
 
-  function ggit_readme_append_last_command() {
-    #echolog "ggit_readme_append_last_command"
-    local commit_msg="$*" #; echolog "commit_msg" "$commit_msg"
-    if [[ -n $commit_msg ]]; then commit_msg="${commit_msg}\n"; fi
-    local lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//') # && echolog "lastcommand" $lastcommand
-    commit_msg="${commit_msg}\`\`\`bash\n${lastcommand}\n\`\`\`" #; echolog "commit_msg" "$commit_msg"
-    git add . && git commit . --allow-empty --cleanup=whitespace -m  "${commit_msg}" 
-    local repo=$(ggit_parse_gh_url) #; echolog "repo" "repo: ${repo}"
+  function ggit_readme_append_command() {
+    local command_input="$*"
+    echolog "ggit_readme_append_last_command" $command_input
+    local command_output=$(bash -c "$command_input" 2>&1)
+    echolog "command output" "$command_output"
+    git add . && git commit --allow-empty --cleanup=whitespace . -m "$command_input"
     local git_sha=$(git log --oneline -n 1 | cut -c1-7) #; echolog "git_sha" "git_sha: ${git_sha}"
-    local readme_msg="🚢 [${git_sha}](${repo}/commit/${git_sha})\n${commit_msg}" ; echolog "readme msg" $commit_msg
-    sed -z -i -e "s^xxx^${readme_msg}\n\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
-    git push
-    echo "====="
+    #local commit_msg="$*" #; echolog "commit_msg" "$commit_msg"
+    #if [[ -n $commit_msg ]]; then commit_msg="${commit_msg}\n"; fi
+    #local lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//') # && echolog "lastcommand" $lastcommand
+    #git add . && git commit . --allow-empty --cleanup=whitespace -m  "${commit_msg}" 
+    local repo=$(ggit_parse_gh_url) #; echolog "repo" "repo: ${repo}"
+    local commit_msg=$(git log --oneline -n 1 | cut -c9-) #; echolog "commit_msg" "commit_msg: ${commit_msg}"
+    local readme_msg="🚢 [${git_sha}](${repo}/commit/${git_sha})\n" ; echolog "commit sha" "$readme_msg"
+    sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+    if [[ -n "$command_output" ]]; then
+      readme_msg="\`\`\`bash\n${commit_msg}\n\`\`\`" ; echolog "readme_msg" "$readme_msg"
+      sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+      sed -z -i -e "s^xxx^\`\`\`\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+      while IFS= read -r line; do 
+        sed -z -i -e "s^xxx^  ${line}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+      done <<< "$command_output"
+      sed -z -i -e "s^xxx^\`\`\`\n\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+    else
+      readme_msg="\`\`\`bash\n${commit_msg}\n\n\`\`\`" ; echolog "readme_msg" "$readme_msg"
+      sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+    fi
+    #git push
+    #echo "====="
   }
 
   function ggit_readme_append_note() { 
