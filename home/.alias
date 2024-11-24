@@ -419,21 +419,18 @@ if exists git; then
 
   function ggit_readme_append_command() {
     local command_input="$*"
-    echolog "ggit_readme_append_last_command" $command_input
+    #echolog "ggit_readme_append_last_command" $command_input
     local command_output=$(bash -c "$command_input" 2>&1)
-    echolog "command output" "$command_output"
+    #echolog "command output" "$command_output"
+    find . -mindepth 2 -type d -name .git -exec rm -rf {} \; # rails new automatically creates .git directory 
     git add . && git commit --allow-empty --cleanup=whitespace . -m "$command_input"
     local git_sha=$(git log --oneline -n 1 | cut -c1-7) #; echolog "git_sha" "git_sha: ${git_sha}"
-    #local commit_msg="$*" #; echolog "commit_msg" "$commit_msg"
-    #if [[ -n $commit_msg ]]; then commit_msg="${commit_msg}\n"; fi
-    #local lastcommand=$(history | tail -n 1 | sed 's/ *[0-9]* *//') # && echolog "lastcommand" $lastcommand
-    #git add . && git commit . --allow-empty --cleanup=whitespace -m  "${commit_msg}" 
     local repo=$(ggit_parse_gh_url) #; echolog "repo" "repo: ${repo}"
     local commit_msg=$(git log --oneline -n 1 | cut -c9-) #; echolog "commit_msg" "commit_msg: ${commit_msg}"
-    local readme_msg="🚢 [${git_sha}](${repo}/commit/${git_sha})\n" ; echolog "commit sha" "$readme_msg"
+    local readme_msg="🚢 [${git_sha}](${repo}/commit/${git_sha})\n" #; echolog "commit sha" "$readme_msg"
     sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
     if [[ -n "$command_output" ]]; then
-      readme_msg="\`\`\`bash\n${commit_msg}\n\`\`\`" ; echolog "readme_msg" "$readme_msg"
+      readme_msg="\`\`\`bash${commit_msg}\n\`\`\`" #; echolog "readme_msg" "$readme_msg"
       sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
       sed -z -i -e "s^xxx^\`\`\`\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
       while IFS= read -r line; do 
@@ -441,7 +438,7 @@ if exists git; then
       done <<< "$command_output"
       sed -z -i -e "s^xxx^\`\`\`\n\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
     else
-      readme_msg="\`\`\`bash\n${commit_msg}\n\n\`\`\`" ; echolog "readme_msg" "$readme_msg"
+      readme_msg="\`\`\`bash\n${commit_msg}\n\n\`\`\`" #; echolog "readme_msg" "$readme_msg"
       sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
     fi
     #git push
@@ -453,12 +450,12 @@ if exists git; then
     if [[ -n $* ]]; then git commit --allow-empty --cleanup=whitespace -m "💡 $*" 
     else git commit --allow-empty --cleanup=whitespace . 
     fi
-    local repo=$(ggit_parse_gh_url) ; echolog "repo" "repo: ${repo}"
+    local repo=$(ggit_parse_gh_url) #; echolog "repo" "repo: ${repo}"
     local git_log=$(git log --oneline -n 1)
-    local git_sha=$(echo $git_log | cut -c1-7) ; echolog "git_sha" "git_sha: ${git_sha}"
-    local git_msg=$(echo $git_log | cut -c9-) ; echolog "git_msg" "git_msg: ${git_msg}"
-    repo="${repo}/commit/${git_sha}" ; echolog "remote repo" "repo: ${repo}"
-    git_msg="🚢 [${git_sha}](${repo})\n${git_msg}" ; echolog "readme msg" $git_msg
+    local git_sha=$(echo $git_log | cut -c1-7) #; echolog "git_sha" "git_sha: ${git_sha}"
+    local git_msg=$(echo $git_log | cut -c9-) #; echolog "git_msg" "git_msg: ${git_msg}"
+    repo="${repo}/commit/${git_sha}" #; echolog "remote repo" "repo: ${repo}"
+    git_msg="🚢 [${git_sha}](${repo})\n${git_msg}" #; echolog "readme msg" $git_msg
     sed -z -i -e "s^xxx^${git_msg}\n\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
     git push 
   }
