@@ -1,6 +1,43 @@
 #'alias' | grep "! /usr/bin/bash
 
 unalias -a
+alias ,al="alias | grep \"'alias | grep\""
+alias ,ala='alias | grep'
+alias ,cdc="cd $HOME/code"
+alias ,cdw='cd $HOME/code/work'
+alias cp='cp -i'
+alias df='df -h -x aufs -x tmpfs -x udev'
+alias du='du -h'
+alias du.size='directory_by_size'
+alias du.size.sorted='directory_by_size_sorted'
+alias grep='grep --color'       # show differences in colour
+alias jc="journalctl -n 100 -f"
+alias jcu="jc -u"
+alias la='ls -A'                              # all but . and ..
+alias less='less -r'                          # raw control characters
+alias lla='ls -alh'                              # long list
+alias ll='ls -l'                              # long list
+alias l='ls -CF'                              #
+alias llt='ls -lt'
+alias lnk='greplinks'
+alias lt='ls -t'
+alias mdcat="pandoc -f markdown -t plain"     # markdown
+alias more='less'
+alias mv='mv -i'
+alias q='myquote'
+alias randmd='find . -type f |grep -v .git | shuf -n 1'
+alias rebash='exec $SHELL'
+alias rm='rm -i'
+alias standby='sudo /etc/acpi/sleep.sh'
+alias sudid='sudo -E !!'
+alias sudo='sudo -E'
+alias swp='setxkbmap -option caps:swapescape'
+alias sys='sudo systemctl'
+alias torr='aria2c -u40K --seed-time=0'
+alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias whence='type -a'                        # where, of a sort
+if exists batcat; then alias c='batcat'; else alias c='cat'; fi
+
 function curdate() { echo "$(date '+%y%m%d')" }
 function curtime() { echo "$(date '+%H%M%S')" }
 function exists() { command -v $1 >/dev/null 2>&1 }
@@ -33,7 +70,6 @@ function ,dotfiles() {
   fi
   for f in `ls -A $DOTFILES/home`; do rm -rf $HOME/$f && ln -s $DOTFILES/home/$f $HOME/; done
 }
-alias ,al="alias | grep "
 if exists zsh; then alias ,z="unalias -a; source $HOME/.zshrc"; fi
 
 # From https://fam.tuwien.ac.at/~schamane/_/mycolorize
@@ -142,6 +178,14 @@ fi
 
 if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
 
+if exists asdf; then
+  alias ,asdf='alias | grep asdf'
+  alias ,asdf.plugin.add='asdf plugin add'
+  alias ,asdf.listall='asdf plugin list-all'
+  alias ,asdf.install='asdf install'
+  alias ,asdf.global='asdf global'
+fi
+
 if exists ruby; then
   alias ,albrk='alias |grep rake'
   alias ,albrl='alias |grep rails'
@@ -221,44 +265,6 @@ if exists tmux; then
   alias ,tmnewwindow='tmux new-window -c $PWD'
   alias ,tmsplitwindow='tmux split-window -c $PWD'
 fi
-
-
-
-if exists batcat; then alias c='batcat'; else alias c='cat'; fi
-alias ,alg='alias | grep'
-alias ,cdc="cd $HOME/code"
-alias ,cdw='cd $HOME/code/work'
-alias cp='cp -i'
-alias df='df -h -x aufs -x tmpfs -x udev'
-alias du='du -h'
-alias du.size='directory_by_size'
-alias du.size.sorted='directory_by_size_sorted'
-alias grep='grep --color'       # show differences in colour
-alias jc="journalctl -n 100 -f"
-alias jcu="jc -u"
-alias la='ls -A'                              # all but . and ..
-alias less='less -r'                          # raw control characters
-alias lla='ls -alh'                              # long list
-alias ll='ls -l'                              # long list
-alias l='ls -CF'                              #
-alias llt='ls -lt'
-alias lnk='greplinks'
-alias lt='ls -t'
-alias mdcat="pandoc -f markdown -t plain"     # markdown
-alias more='less'
-alias mv='mv -i'
-alias q='myquote'
-alias randmd='find . -type f |grep -v .git | shuf -n 1'
-alias rebash='exec $SHELL'
-alias rm='rm -i'
-alias standby='sudo /etc/acpi/sleep.sh'
-alias sudid='sudo -E !!'
-alias sudo='sudo -E'
-alias swp='setxkbmap -option caps:swapescape'
-alias sys='sudo systemctl'
-alias torr='aria2c -u40K --seed-time=0'
-alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias whence='type -a'                        # where, of a sort
 
 function cleankernels() { echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge ; }
 function directory_by_size() { local arg1=${1:-.} && du -ahd 1 $arg1 ; }
@@ -433,6 +439,7 @@ if exists git; then
       readme_msg="\`\`\`bash\n${commit_msg}\n\`\`\`" #; echolog "readme_msg" "$readme_msg"
       sed -z -i -e "s^xxx^${readme_msg}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
       sed -z -i -e "s^xxx^\`\`\`\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
+      echolog "output" "$command_output"
       while IFS= read -r line; do 
         sed -z -i -e "s^xxx^  ${line}\nxxx^" $(git rev-parse --show-toplevel)/readme.md # append the commit message to the readme and push
       done <<< "$command_output"
