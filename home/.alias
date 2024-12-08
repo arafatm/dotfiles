@@ -1,10 +1,10 @@
 #'alias' | grep "! /usr/bin/bash
 
 unalias -a
-alias ,al="alias | grep \"'alias | grep\""
-alias ,ala='alias | grep'
-alias ,cdc="cd $HOME/code"
-alias ,cdw='cd $HOME/code/work'
+alias al.="alias | grep \"'alias | grep\""
+alias ,al.a='alias | grep'
+alias cd.c="cd $HOME/code"
+alias cd.w='cd $HOME/code/work'
 alias cp='cp -i'
 alias df='df -h -x aufs -x tmpfs -x udev'
 alias du='du -h'
@@ -88,9 +88,9 @@ nor=$(tput sgr0) # reset colors
 # tput bold
 
 if exists ssh; then
-  alias ,sshfurahadev='ssh arafatm@dev.furahasoftware.com'
-  alias ,sshkodi='ssh -oServerAliveInterval=60 kodi@192.168.1.2'
-  alias ,sshproxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
+  alias ,ssh.furahadev='ssh arafatm@dev.furahasoftware.com'
+  alias ,ssh.kodi='ssh -oServerAliveInterval=60 kodi@192.168.1.2'
+  alias ,ssh.proxy='ssh -oServerAliveInterval=60 -D 1234 arafatm@leanfolio.com'
 fi
 
 if grep -qi microsoft-standard-WSL2 /proc/version; then 
@@ -104,22 +104,22 @@ if [[ $OSTYPE =~ 'darwin' ]] then
   alias brew='brew'
   alias cask='brew cask'
   alias ls='ls --color=tty'
-  alias ,maccamera='sudo killall VDCAssistant' # reset osx camera 
-  alias ,pg_start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
-  alias ,pg_stop='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+  alias ,mac.camera='sudo killall VDCAssistant' # reset osx camera 
+  alias ,pg.start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+  alias ,pg.stop='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
   alias sed='gsed'
 else 
   alias ls='ls --color=auto'
 fi
 
 if exists apt; then
-  alias ,alapt='alias | grep apt'
-  alias ,aptdistupgrade='sudo apt dist-upgrade'
-  alias ,aptshow='apt show'
-  alias ,aptinstall='sudo apt install'
-  alias ,aptmadison='sudo apt-cache madison' # show available versions of a package
-  alias ,aptsearch='apt search'
-  alias ,aptupdate='sudo apt update'
+  alias ,al.apt='alias | grep apt'
+  alias apt.distupgrade='sudo apt dist-upgrade'
+  alias apt.show='apt show'
+  alias apt.install='sudo apt install'
+  alias apt.madison='sudo apt-cache madison' # show available versions of a package
+  alias apt.search='apt search'
+  alias apt.update='sudo apt update'
 fi
 
 if exists nvim; then 
@@ -132,84 +132,83 @@ else
 fi
 
 if exists git; then
-  alias ,gcdroot='cd `git rev-parse --show-toplevel`'
-  alias ,gvireadme='vim  $(git rev-parse --show-toplevel)/readme.md'
+  alias al.g='alias |grep git'
+  alias al.gr='alias | grep ggit_readme_'
+  alias g.cdroot='cd `git rev-parse --show-toplevel`'
+  alias g.vireadme='vim  $(git rev-parse --show-toplevel)/readme.md'
+  alias ghub.clone='github_clone'
 
-  alias ,algi='alias | grep git'
-  alias ,algt='alias | grep git'
-  alias ,algit='alias | grep git'
-  alias ,alggi='alias | grep ggit'
-  alias ,algr='alias | grep ggit_readme_'
-  alias ,ghubclone='github_clone'
+  alias g.diff='git diff HEAD .'
+  alias g.diffshow='git diff HEAD^ HEAD'
+  alias g.show='git show HEAD .'
+  alias g.status='git status -s'
 
-  alias ,gdiff='git diff HEAD .'
-  alias ,gdiffshow='git diff HEAD^ HEAD'
-  alias ,gshow='git show HEAD .'
-  alias ,gstatus='git status -s'
-
-  alias ,gaddcommit='ggit_add_and_commit_all'
-  alias ,gbrclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
-  alias ,gbr='git branch --color'
-  alias ,gbrtrack='ggit_branch_and_track'
-  alias ,gcheckout='git checkout'
-  alias ,gcheckoutremote='ggit_checkout_remote'
-  alias ,gcleanhistory='ggit_clean_history'
-  alias ,gcommitall='git commit -a'
-  alias ,gcommitlastcommand='ggit_commit_last_command'
-  alias ,gcommitwithdefaultmessage='ggit_commit'
-  alias ,gconfig='git config -l'
-  alias ,gconfiglocal='git config -l --local'
-  alias ,gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
-  alias ,glsfiles='git ls-files'
-  alias ,glog='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
-  alias ,glogdecorate='git log --decorate'
-  alias ,glogshort='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date" | grep -v -e "^$"'
-  alias ,gmerge='git merge'
-  alias ,gmergemain='git merge main'
-  alias ,gnote='ggit_note'
-  alias ,gstatusdir="find . -type d -name .git -print -execdir git status --porcelain \;"
-  alias ,gsync='( git pull && git push ) &'
-  alias ,gtree='git log --oneline --decorate --all --graph'
-  alias ,greadmecommand='ggit_readme_append_command'
-  alias ,greadmediff='ggit_readme_append_diff'
-  alias ,greadmelink='ggit_readme_append_link'
-  alias ,greadmenote='ggit_readme_append_note'
+  alias g.addcommit='ggit_add_and_commit_all'
+  alias g.brclean='git branch --merged main | grep -v "main" | xargs -n 1 git branch -d'
+  alias g.br='git branch --color'
+  alias g.brtrack='ggit_branch_and_track'
+  alias g.checkout='git checkout'
+  alias g.checkoutremote='ggit_checkout_remote'
+  alias g.cleanhistory='ggit_clean_history'
+  alias g.commitall='git commit -a'
+  alias g.commitlastcommand='ggit_commit_last_command'
+  alias g.commitwithdefaultmessage='ggit_commit'
+  alias g.config='git config -l'
+  alias g.configlocal='git config -l --local'
+  alias g.fetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin main \;'
+  alias g.lsfiles='git ls-files'
+  alias g.log='git log --graph --decorate --pretty=oneline --abbrev-commit --all'
+  alias g.logdecorate='git log --decorate'
+  alias g.logshort='git log --reverse | grep -v "^commit" | grep -v "^Author" | grep -v "^Date" | grep -v -e "^$"'
+  alias g.merge='git merge'
+  alias g.mergemain='git merge main'
+  alias g.note='ggit_note'
+  alias g.statusdir="find . -type d -name .git -print -execdir git status --porcelain \;"
+  alias g.sync='( git pull && git push ) &'
+  alias g.tree='git log --oneline --decorate --all --graph'
+  alias g.readmecommand='ggit_readme_append_command'
+  alias g.readmediff='ggit_readme_append_diff'
+  alias g.readmelink='ggit_readme_append_link'
+  alias g.readmenote='ggit_readme_append_note'
 fi
 
 if exists postgres; then alias ,pg='sudo -u postgres psql'; fi
 
 if exists asdf; then
-  alias ,asdf='alias | grep asdf'
-  alias ,asdf.plugin.add='asdf plugin add'
-  alias ,asdf.listall='asdf plugin list-all'
-  alias ,asdf.install='asdf install'
-  alias ,asdf.global='asdf global'
+  alias asdf.='alias | grep asdf'
+  alias asdf.current='asdf current'
+  alias asdf.global='asdf global'
+  alias asdf.install='asdf install'
+  alias asdf.listall='asdf list-all'
+  alias asdf.list='asdf list'
+  alias asdf.local='asdf local'
+  alias asdf.plugin.add='asdf plugin add'
 fi
 
 if exists ruby; then
-  alias ,albrk='alias |grep rake'
-  alias ,albrl='alias |grep rails'
-  alias ,albu='alias |grep bundle'
+  alias bu.='alias |grep bundle'
+  alias bu.rk.='alias |grep rake'
+  alias bu.rl.='alias |grep rails'
 
-  alias ,brk='bundle exec rake'
-  alias ,brkdbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
-  alias ,brkfixtures='bundle exec rake db:fixtures:load'
-  alias ,brkmigrate='bundle exec rake db:migrate' 
-  alias ,brkseed='bundle exec rake db:seed'
-  alias ,brktest='bundle exec rake test'
-  alias ,brl='bundle exec rails'
-  alias ,brlconsole='bundle exec rails console'
-  alias ,brldbmigrate='bundle exec rails db:migrate'
-  alias ,brlgenerate='bundle exec rails generate'
-  alias ,brlgeneratecontroller='bundle exec rails generate controller'
-  alias ,brlgeneratemodel='bundle exec rails generate model'
-  alias ,brlgeneratescaffold='bundle exec rails generate --skip scaffold'
-  alias ,brlserver='bundle exec rails s -b 0.0.0.0'
-  alias ,brltest='bundle exec rails test'
-  alias ,buexec='bundle exec'
-  alias ,buinit='bundle_init'
-  alias ,buinstall='bundle install'
-  alias ,buupdate='bundle update'
+  alias bu.exec='bundle exec'
+  alias bu.init='bundle_init'
+  alias bu.install='bundle install'
+  alias bu.rk.='bundle exec rake'
+  alias bu.rk.dbreload='bundle exec rake db:drop && rk db:create && rk db:schema:load && rk db:fixtures:load'
+  alias bu.rk.fixtures='bundle exec rake db:fixtures:load'
+  alias bu.rk.migrate='bundle exec rake db:migrate' 
+  alias bu.rk.seed='bundle exec rake db:seed'
+  alias bu.rk.test='bundle exec rake test'
+  alias bu.rl.='bundle exec rails'
+  alias bu.rl.console='bundle exec rails console'
+  alias bu.rl.dbmigrate='bundle exec rails db:migrate'
+  alias bu.rl.generate='bundle exec rails generate'
+  alias bu.rl.generatecontroller='bundle exec rails generate controller'
+  alias bu.rl.generatemodel='bundle exec rails generate model'
+  alias bu.rl.generatescaffold='bundle exec rails generate --skip scaffold'
+  alias bu.rl.server='bundle exec rails s -b 0.0.0.0'
+  alias bu.rl.test='bundle exec rails test'
+  alias bu.update='bundle update'
   function bundle_init() { bundle install --path vendor && bundle package && if [[ ! $(grep "vendor/ruby" .gitignore) ]]; then echo 'vendor/ruby' >> .gitignore; fi ; }
 fi
 
@@ -222,48 +221,49 @@ fi
 if exists terraform; then alias ,tf='terraform'; fi
 
 if exists docker; then
-  alias ,aldk='alias | grep docker'
-  alias ,dkupdateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
-  alias ,dkcomposerestart='docker compose restart'
-  alias ,dkcompose="docker-compose"
-  alias ,dkshell='docker_shell'
+  alias dk.='alias | grep docker'
+  alias dk.updateimages='docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull'
+  alias dk.composerestart='docker compose restart'
+  alias dk.compose="docker-compose"
+  alias dk.shell='docker_shell'
   function docker_shell() { docker exec -it $1 bash ; }
 fi
 
 if exists minikube; then
-  alias ,almk='alias | grep minikube'
-  alias ,mkdaddonsenable='minikube addons enable' # metrics-server
-  alias ,mkdaddonslist='minikube addons list'
-  alias ,mkdashboardenable='minikube addons enable dashboard'
-  alias ,mkdashboard='minikube dashboard'
-  alias ,mkdelete='minikube delete' # "service hello-node" "deployment hello-node"
-  alias ,mkservice='minikube service' # hello-node
-  alias ,mkstart='minikube start'
-  alias ,mkstatus='minikube status'
-  alias ,mkstop='minikube stop'
+  alias mk.='alias | grep minikube'
+  alias mk.addons.enable='minikube addons enable' # metrics-server
+  alias mk.addons.list='minikube addons list'
+  alias mk.addons.dashboard.enable='minikube addons enable dashboard'
+  alias mk.dashboard='minikube dashboard'
+  alias mk.delete='minikube delete' # "service hello-node" "deployment hello-node"
+  alias mk.service='minikube service' # hello-node
+  alias mk.start='minikube start'
+  alias mk.status='minikube status'
+  alias mk.stop='minikube stop'
 fi
 if exists kubectl; then
-  alias ,alkc='alias | grep kubectl'
-  alias ,kcconfigview='kubectl config view'
-  alias ,kccreatdeployment='kubectl create deployment'
-  alias ,kcexposedeployment='kubectl expose deployment' # hello-node --type=LoadBalancer --port=8080
-  alias ,kcgetdeployments='kubectl get deployments'
-  alias ,kcgetevents='kubectl get events'
-  alias ,kcget='kubectl get'
-  alias ,kcgetpods='kubectl get pods'
-  alias ,kcgetpodsvc='kubectl get pod,svc -n' # kube-system
-  alias ,kcgetservices='kubectl get services'
-  alias ,kclogs='kubectl logs'
-  alias ,kctoppods='kubectl top pods'
+  alias kc.='alias | grep kubectl'
+  alias kc.configview='kubectl config view'
+  alias kc.creatdeployment='kubectl create deployment'
+  alias kc.exposedeployment='kubectl expose deployment' # hello-node --type=LoadBalancer --port=8080
+  alias kc.getdeployments='kubectl get deployments'
+  alias kc.getevents='kubectl get events'
+  alias kc.get='kubectl get'
+  alias kc.getpods='kubectl get pods'
+  alias kc.getpodsvc='kubectl get pod,svc -n' # kube-system
+  alias kc.getservices='kubectl get services'
+  alias kc.logs='kubectl logs'
+  alias kc.toppods='kubectl top pods'
 fi
 
 if exists tmux; then
-  alias ,tm='tmux'
-  alias ,tmattach='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
-  alias ,tmlistsession='tmux list-sessions'
-  alias ,tmnewmain='tmux new-session -A -s main'
-  alias ,tmnewwindow='tmux new-window -c $PWD'
-  alias ,tmsplitwindow='tmux split-window -c $PWD'
+  alias tm.='alias | grep tmux'
+  alias tm.a='tmux'
+  alias tm.attach='tmux attach -t `basename $PWD` || tmux new -s `basename $PWD`'
+  alias tm.list.session='tmux list-sessions'
+  alias tm.new.main='tmux new-session -A -s main'
+  alias tm.new.window='tmux new-window -c $PWD'
+  alias tm.split.window='tmux split-window -c $PWD'
 fi
 
 function cleankernels() { echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge ; }
