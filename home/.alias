@@ -1,5 +1,18 @@
 #'alias' | grep "! /usr/bin/bash
 
+function curdate() { echo "$(date '+%y%m%d')" }
+function curtime() { echo "$(date '+%H%M%S')" }
+function exists() { command -v $1 >/dev/null 2>&1 }
+function echolog() { 
+  echo "\n###### $1" >&2
+  if [[ -n $2 ]]; then 
+    # replace all newlines with newline followed by 2 spaces then "- "
+    local echomsg=$(echo "$2" | sed ':a;N;$!ba;s/\n/\n  /g')
+    echo "  $echomsg\n" >&2
+  fi
+  echo "----------------" >&2
+}
+
 unalias -a
 alias al.="alias | grep \"'alias | grep\""
 alias ,al.a='alias | grep'
@@ -37,19 +50,6 @@ alias torr='aria2c -u40K --seed-time=0'
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias whence='type -a'                        # where, of a sort
 if exists batcat; then alias c='batcat'; else alias c='cat'; fi
-
-function curdate() { echo "$(date '+%y%m%d')" }
-function curtime() { echo "$(date '+%H%M%S')" }
-function exists() { command -v $1 >/dev/null 2>&1 }
-function echolog() { 
-  echo "\n###### $1" >&2
-  if [[ -n $2 ]]; then 
-    # replace all newlines with newline followed by 2 spaces then "- "
-    local echomsg=$(echo "$2" | sed ':a;N;$!ba;s/\n/\n  /g')
-    echo "  $echomsg\n" >&2
-  fi
-  echo "----------------" >&2
-}
 
 function ,dotfiles() { 
   local DOTFILES=$HOME/dotfiles
